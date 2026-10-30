@@ -87,6 +87,8 @@ const pt = {
 
   // Editor
   noteContent: 'Conteúdo da nota',
+  /** First line of an empty note (D44). */
+  notePlaceholder: 'Escreva algo…',
   saved: 'Salvo',
 
   // Updates (D42)
@@ -172,6 +174,7 @@ const en: Strings = {
   tableHint: 'Right-click for options',
 
   noteContent: 'Note content',
+  notePlaceholder: 'Write something…',
   saved: 'Saved',
 
   updateReady: (version) => `Version ${version} ready`,

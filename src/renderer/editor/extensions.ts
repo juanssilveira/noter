@@ -4,12 +4,20 @@ import type { AnyExtension } from '@tiptap/core';
 import Highlight from '@tiptap/extension-highlight';
 import { TaskItem, TaskList } from '@tiptap/extension-list';
 import { Table, TableCell, TableHeader, TableKit } from '@tiptap/extension-table';
+import { Placeholder } from '@tiptap/extensions';
 import StarterKit from '@tiptap/starter-kit';
 import { PreserveHtml, PreserveImages, RawBlock, RawInline, SmallText } from './custom-nodes';
 import { TableBehavior, type TableBehaviorOptions } from './table-behavior';
 
-/** `tableHint` is only needed by the editor; the Markdown conversion uses the schema alone. */
-export function noteExtensions(options: { tableHint?: TableBehaviorOptions['hintText'] } = {}): AnyExtension[] {
+type NoteExtensionsOptions = {
+  tableHint?: TableBehaviorOptions['hintText'];
+  /** Text on the first line of an empty note (D44). */
+  placeholder?: () => string;
+};
+
+/** The options are only needed by the editor; the Markdown conversion uses the schema alone. */
+export function noteExtensions(options: NoteExtensionsOptions = {}): AnyExtension[] {
+  const { placeholder } = options;
   return [
     StarterKit.configure({
       // 1–4 are the writing styles; 5 and 6 exist so notes edited elsewhere keep their headings.
@@ -35,5 +43,7 @@ export function noteExtensions(options: { tableHint?: TableBehaviorOptions['hint
     RawBlock,
     PreserveImages,
     PreserveHtml,
+    // A decoration: never in the document. The CSS only shows it while the whole note is empty.
+    ...(placeholder ? [Placeholder.configure({ placeholder })] : []),
   ];
 }

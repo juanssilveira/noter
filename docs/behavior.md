@@ -175,6 +175,7 @@ Os atalhos do editor (negrito, itálico e afins) seguem o padrão do Tiptap.
 - Usa o container `.note` com os estilos de `design/note-styles.css`.
 - O cursor é preto (`caret-color: var(--text-strong)`), no editor e no campo de renomear. O azul só aparece no foco por teclado.
 - Rolagem vertical, com a scrollbar fina que só aparece no hover (CSS do canvas).
+- **Placeholder (D44):** com a nota inteira vazia (uma nota nova, ou depois de apagar tudo), a primeira linha mostra "Escreva algo…" bem apagado. Some com o primeiro caractere e não vai pro arquivo.
 
 ### Atalhos de Markdown ao digitar **D21**
 | Digitar no começo da linha | Vira |

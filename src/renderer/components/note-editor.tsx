@@ -51,6 +51,8 @@ export function NoteEditor({ entry }: NoteEditorProps) {
   // The table hint reads this when drawn: the editor keeps the extensions it was created with.
   const tableHint = useRef(s.tableHint);
   tableHint.current = s.tableHint;
+  const placeholder = useRef(s.notePlaceholder);
+  placeholder.current = s.notePlaceholder;
   const [tableMenu, setTableMenu] = useState<TableMenu>(null);
   const closeTableMenu = useCallback(() => setTableMenu(null), []);
   const [formatMenu, setFormatMenu] = useState<FormatMenuState>(null);
@@ -58,7 +60,7 @@ export function NoteEditor({ entry }: NoteEditorProps) {
   const { id } = entry;
 
   const editor = useEditor({
-    extensions: noteExtensions({ tableHint: () => tableHint.current }),
+    extensions: noteExtensions({ tableHint: () => tableHint.current, placeholder: () => placeholder.current }),
     content: markdownToDoc(entry.note.body),
     // Back to where the cursor was (D12); new notes start at the end.
     autofocus: useAppStore.getState().cursorFor(entry.note.file) ?? 'end',

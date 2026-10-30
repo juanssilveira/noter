@@ -131,6 +131,18 @@
   border-radius: 4px;
 }
 
+/* Empty note (D44): a quiet hint on the first line, like Notion's. Zero height and floated, so the
+   caret stays at the start of the line. A decoration, never part of the note. */
+.note p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  color: var(--text-muted);
+  opacity: 0.55;
+  pointer-events: none;
+  user-select: none;
+}
+
 /* Hint under a new table; a decoration, never part of the note (table-behavior.ts). */
 .note .table-hint {
   margin: -10px 0 12px;

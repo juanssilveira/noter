@@ -95,6 +95,7 @@ Os canais de nota validam que `file` é um nome simples dentro da pasta de notas
   - StarterKit: parágrafo, títulos 1 a 3, listas, citação, bloco de código, divisor, negrito, itálico, sublinhado, tachado, código e link.
   - Highlight, TaskList/TaskItem (aninhável) e TableKit. As células aceitam exatamente um parágrafo.
   - Nós próprios em `custom-nodes.ts`: `smallText` (Pequeno), `rawInline` e `rawBlock` (conteúdo preservado).
+  - Só no editor, via opções do `noteExtensions`: a dica da tabela nova (`TableBehavior`) e o placeholder da nota vazia (`Placeholder` do `@tiptap/extensions`, D44). São decorações, fora do schema da conversão.
 - **Markdown** (`src/renderer/editor/markdown.ts`): usa o `MarkdownManager` do `@tiptap/markdown` diretamente, sem a extensão `Markdown` no editor.
   - `markdownToDoc` lê o corpo pro editor e coloca dentro de parágrafo qualquer nó inline que tenha ficado solto, como uma imagem sozinha numa linha.
   - `docToMarkdown` grava o corpo, sempre terminando com uma única quebra de linha (ou vazio).

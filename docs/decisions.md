@@ -193,6 +193,11 @@ Formato: **decisão**, depois o motivo e, quando houver, as alternativas descart
 - Pedido do usuário. O rodapé da sidebar mostra "Ctrl + T para nova nota" ("Ctrl + T for a new note" em inglês), pequeno e apagado.
 - Quando há uma versão pronta (D42), o aviso de atualização ocupa o lugar da dica, pra o rodapé continuar com uma linha só.
 
+### D44. Placeholder na nota vazia
+- Pedido do usuário, no estilo do Notion. Com a nota inteira vazia, a primeira linha mostra "Escreva algo…" ("Write something…" em inglês) bem apagado, e o texto some com o primeiro caractere.
+- Só na nota vazia: uma linha vazia no meio de uma nota com conteúdo não mostra nada.
+- É uma decoração do editor (extensão Placeholder do Tiptap), nunca vai pro arquivo.
+
 ## Convenções
 
 ### D28. Código e arquivos em inglês; interface em pt-BR e inglês

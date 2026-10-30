@@ -54,7 +54,7 @@
   padding: var(--note-pad-y) var(--note-pad-x);
   font-family: var(--font-sans);
   font-size: 15.5px;
-  line-height: 24px;
+  line-height: 155%;
   color: var(--text);
 }
 .note > :first-child { margin-top: 0; }

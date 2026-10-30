@@ -5,12 +5,18 @@
   display: flex;
 }
 
+/* min-width: 0, or as a flex item it is at least as wide as its longest word: a long run of letters
+   with no space would stretch the note sideways (with a scrollbar) instead of breaking at the edge.
+   break-all, at the user's request: such a run starts right after the previous word and breaks where
+   the line ends, instead of leaving the line before it empty. Any word may be cut at a line end, too.
+   Code blocks and tables scroll on their own. */
 .note.ProseMirror {
   flex: 1 1 auto;
+  min-width: 0;
   min-height: 100%;
   box-sizing: border-box;
   outline: none;
-  word-wrap: break-word;
+  word-break: break-all;
   white-space: pre-wrap;
 }
 

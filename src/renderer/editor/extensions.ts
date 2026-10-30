@@ -1,12 +1,12 @@
 // Editor schema, shared by the editor and the Markdown conversion. Mapping: docs/note-format.md.
 
 import type { AnyExtension } from '@tiptap/core';
-import Highlight from '@tiptap/extension-highlight';
 import { TaskItem, TaskList } from '@tiptap/extension-list';
 import { Table, TableCell, TableHeader, TableKit } from '@tiptap/extension-table';
 import { Placeholder } from '@tiptap/extensions';
 import StarterKit from '@tiptap/starter-kit';
 import { PreserveHtml, PreserveImages, RawBlock, RawInline, SmallText } from './custom-nodes';
+import { NoteHighlight } from './highlight';
 import { TableBehavior, type TableBehaviorOptions } from './table-behavior';
 
 type NoteExtensionsOptions = {
@@ -24,7 +24,7 @@ export function noteExtensions(options: NoteExtensionsOptions = {}): AnyExtensio
       heading: { levels: [1, 2, 3, 4, 5, 6] },
       link: { openOnClick: false, autolink: true, linkOnPaste: true },
     }),
-    Highlight,
+    NoteHighlight,
     TaskList,
     TaskItem.configure({ nested: true }),
     // GFM cells hold a single line of inline text, so a cell holds exactly one paragraph.

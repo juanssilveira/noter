@@ -184,7 +184,7 @@ Formato: **decisão**, depois o motivo e, quando houver, as alternativas descart
 - Pedido do usuário. Só no app instalado: em desenvolvimento, o updater não roda.
 - **Onde:** nas releases do repositório público `juanssilveira/noter`, o mesmo do código. Público porque, num repositório privado, o app precisaria levar um token dentro dele.
 - **Como:** o `electron-updater` procura uma versão nova ao abrir o app e a cada 6 h, e baixa em segundo plano. Quando termina, o rodapé da sidebar mostra "Versão X pronta" com o botão **Reiniciar**, que grava o que estiver pendente, fecha, instala sem perguntar nada e abre o app de novo. Sem o clique, a versão nova é instalada quando o app fechar. Sem internet, nada aparece.
-- **Publicar:** subir a `version` do `package.json` e rodar `npm run release`. O app só atualiza pra uma versão maior. O token vem do `GH_TOKEN` ou do GitHub CLI logado.
+- **Publicar:** subir a `version` do `package.json`, fazer o commit e o push, e rodar `npm run release`. O app só atualiza pra uma versão maior. O token vem do `GH_TOKEN` ou do GitHub CLI logado.
 - **Sem assinatura de código:** o certificado é pago, e desde 2024 nem ele tira o alerta do SmartScreen de cara (a reputação se forma com os downloads). O alerta só aparece em instalador baixado pelo navegador. A atualização é baixada pelo próprio app, então não passa por ele.
 - A D33 não muda: o Reiniciar passa pelo mesmo cuidado de gravar antes de sair.
 - **Descartado:** repositório separado só pras releases; aviso numa notificação ou no menu de opções; perguntar antes de baixar.

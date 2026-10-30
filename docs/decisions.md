@@ -174,7 +174,7 @@ Formato: **decisão**, depois o motivo e, quando houver, as alternativas descart
 
 ### D41. Interface em português e inglês
 - Pedido do usuário. Traduz todo texto da interface: menus, barra, lista, nomes dos grupos, datas, dicas e rótulos de acessibilidade. O conteúdo das notas, os nomes dos arquivos e a pasta `Documentos\Notas` não mudam.
-- **Idioma:** Sistema (padrão: português se o Windows estiver em `pt-*`, inglês em qualquer outro caso), Português ou English. Fica no menu de opções, seção Aparência, numa linha que abre as opções embaixo, como o Tema, e é salvo nas preferências. Português leva a bandeira do Brasil e English a dos EUA (o padrão das datas), em SVG, porque o Windows mostra emoji de bandeira como duas letras.
+- **Idioma:** Sistema (padrão: português se o Windows estiver em `pt-*`, inglês em qualquer outro caso), Português ou English. Fica no menu de opções, seção Aparência, numa linha que abre as opções embaixo, como o Tema, e é salvo nas preferências. Português leva a bandeira do Brasil e English a dos EUA (o padrão das datas), nas imagens do emoji do Android (Noto Emoji, onduladas e com sombreado), porque a fonte de emoji do Windows mostra bandeira como duas letras.
 - **Datas em inglês:** padrão americano com hora de 24 h: "Fri, Oct 30 · 17:51", "Fri, October 30 · 17:51", "Oct 24 – 28", "September", "December 2025".
 - Os textos ficam num dicionário próprio e tipado em `src/renderer/i18n/strings.ts`, sem biblioteca. O tipo vem da tabela em português, então uma chave que falte em inglês não compila.
 - Os nomes dos idiomas aparecem sempre na própria língua ("Português", "English"), pra serem achados de qualquer um dos dois.

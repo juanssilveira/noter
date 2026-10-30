@@ -1,5 +1,8 @@
 // Stroke icons copied from the design screens (docs/design/screens/).
 
+import flagBrazil from '../assets/flags/br.png';
+import flagUs from '../assets/flags/us.png';
+
 const stroke = {
   fill: 'none',
   stroke: 'currentColor',
@@ -229,53 +232,13 @@ export function SpellcheckIcon() {
   );
 }
 
-// Language flags (D41). SVG, because Windows shows flag emoji as two letters. A faint edge keeps the
-// light parts visible on a light menu.
+// Language flags (D41): the Noto Emoji flags, as on Android, waved and shaded (googlefonts/noto-emoji,
+// 3D/png/72, Apache 2.0). Images, since Windows' emoji font draws flags as two letters.
 
 export function FlagBrazilIcon() {
-  return (
-    <svg className="flag" width="16" height="12" viewBox="0 0 16 12" aria-hidden="true">
-      <rect width="16" height="12" rx="2" fill="#009C3B" />
-      <path d="M8 1.6 14.4 6 8 10.4 1.6 6Z" fill="#FFDF00" />
-      <circle cx="8" cy="6" r="2.5" fill="#002776" />
-      <rect
-        x="0.25"
-        y="0.25"
-        width="15.5"
-        height="11.5"
-        rx="1.75"
-        fill="none"
-        stroke="rgba(0,0,0,0.12)"
-        strokeWidth="0.5"
-      />
-    </svg>
-  );
+  return <img src={flagBrazil} width={16} height={16} alt="" draggable={false} />;
 }
 
 export function FlagUsIcon() {
-  const stripe = 12 / 7;
-  return (
-    <svg className="flag" width="16" height="12" viewBox="0 0 16 12" aria-hidden="true">
-      <clipPath id="flag-us-clip">
-        <rect width="16" height="12" rx="2" />
-      </clipPath>
-      <g clipPath="url(#flag-us-clip)">
-        <rect width="16" height="12" fill="#FFFFFF" />
-        {[0, 2, 4, 6].map((row) => (
-          <rect key={row} y={row * stripe} width="16" height={stripe} fill="#B22234" />
-        ))}
-        <rect width="7" height={stripe * 4} fill="#3C3B6E" />
-      </g>
-      <rect
-        x="0.25"
-        y="0.25"
-        width="15.5"
-        height="11.5"
-        rx="1.75"
-        fill="none"
-        stroke="rgba(0,0,0,0.12)"
-        strokeWidth="0.5"
-      />
-    </svg>
-  );
+  return <img src={flagUs} width={16} height={16} alt="" draggable={false} />;
 }

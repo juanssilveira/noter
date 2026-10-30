@@ -572,6 +572,7 @@ button {
 
 /* A row that expands its options below it (Tema, Idioma): the whole row is the button, like .menu-switch. */
 .menu-cycle {
+  position: relative;
   height: 30px;
   display: flex;
   align-items: center;
@@ -609,22 +610,45 @@ button {
   display: flex;
   flex-direction: column;
   padding: 0 0 4px;
-  animation: menu-subitems-in 120ms ease-out;
+  /* Opening grows the menu from 0 to the options' height, and closing shrinks it back, instead of
+     jumping. Clipped meanwhile; display flips to none only at the end of the closing. */
+  overflow: hidden;
+  interpolate-size: allow-keywords;
+  transition:
+    height 180ms var(--ui-ease-out),
+    opacity 180ms var(--ui-ease-out),
+    display 180ms allow-discrete;
+}
+.menu-subitems[hidden] {
+  display: none;
+  height: 0;
+  opacity: 0;
+}
+@starting-style {
+  .menu-subitems {
+    height: 0;
+    opacity: 0;
+  }
 }
 .menu-subitems::before {
   content: "";
   position: absolute;
-  top: -5px;
+  top: 0;
   bottom: 32px; /* the top of the last option: 4 px padding + 28 */
   left: 17px;
   width: 1px;
   background: var(--ui-tree);
 }
-@keyframes menu-subitems-in {
-  from {
-    opacity: 0;
-    transform: translateY(-3px);
-  }
+/* The first 5 px of the trunk, from just under the row's icon: on the row, so the clipped options
+   don't cut it off. */
+.menu-cycle[aria-expanded="true"]::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 17px;
+  width: 1px;
+  height: 5px;
+  background: var(--ui-tree);
 }
 .menu-subitems .menu-item {
   position: relative;
@@ -681,16 +705,43 @@ button {
 /* Read-only, on the footer band: no icon, a step lighter than the rows above, no hover. 3 px less on
    the right: the outlined keycaps looked farther from the edge than the text. */
 .menu-shortcut {
+  position: relative;
   height: 28px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 0 7px 0 10px;
+  padding: 0 7px 0 28px;
   color: var(--ui-label);
   font-size: 12.5px;
   white-space: nowrap;
   cursor: default;
+}
+/* A quieter version of the Tema and Idioma branches: a trunk from under the "S" of the label (13 px
+   in) and a rounded branch out to each shortcut. */
+.menu-shortcut::before,
+.menu-shortcut:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 13px;
+  box-sizing: border-box;
+  border-left: 1px solid color-mix(in srgb, var(--ui-tree) 60%, transparent);
+}
+.menu-shortcut::before {
+  top: 0;
+  width: 11px;
+  height: 50%;
+  border-bottom: 1px solid color-mix(in srgb, var(--ui-tree) 60%, transparent);
+  border-bottom-left-radius: 5px;
+}
+/* The first one starts right under the label. */
+.menu-section-label + .menu-shortcut::before {
+  top: -4px;
+  height: calc(50% + 4px);
+}
+.menu-shortcut:not(:last-child)::after {
+  top: 50%;
+  bottom: 0;
 }
 
 .menu-shortcut-keys {

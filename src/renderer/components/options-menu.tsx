@@ -57,7 +57,10 @@ function languageName(language: Language, s: Strings): string {
 
 /** Rows the arrow keys move between, the options of an open section included, in screen order. */
 function menuItems(menu: HTMLElement | null): HTMLElement[] {
-  return Array.from(menu?.querySelectorAll<HTMLElement>('[data-menu-item]') ?? []);
+  // Closed sections stay in the page (inert) while they animate out.
+  return Array.from(menu?.querySelectorAll<HTMLElement>('[data-menu-item]') ?? []).filter(
+    (item) => !item.closest('[inert]'),
+  );
 }
 
 // Screen: docs/design/screens/menu-options.html. Switches apply at once and are saved.
@@ -292,13 +295,20 @@ function ExpandableItem<T extends string>({
           <ChevronRightIcon />
         </span>
       </button>
-      {open && (
-        <div ref={list} className="menu-subitems" role="menu" aria-label={label} onKeyDown={onListKeyDown}>
-          {optionButton(system)}
-          <div className="menu-separator" role="separator" />
-          {options.map(optionButton)}
-        </div>
-      )}
+      {/* Always there, so closing can animate too; hidden and inert while closed. */}
+      <div
+        ref={list}
+        className="menu-subitems"
+        role="menu"
+        aria-label={label}
+        hidden={!open}
+        inert={!open}
+        onKeyDown={onListKeyDown}
+      >
+        {optionButton(system)}
+        <div className="menu-separator" role="separator" />
+        {options.map(optionButton)}
+      </div>
     </>
   );
 }

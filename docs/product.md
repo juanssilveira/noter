@@ -23,6 +23,7 @@ Um app de notas pessoal pra Windows, inspirado no Notes do Mac. Serve tanto pra 
 - Salvamento automático em arquivos `.md` em `Documentos\Notas`, com um "Salvo" discreto no canto.
 - Tema claro e escuro, seguindo o Windows ou escolhido no menu de opções (D39), e efeito acrílico opcional na sidebar (D40).
 - Interface em português e inglês, seguindo o Windows ou escolhida no menu de opções (D41).
+- Atualização automática pelas releases do GitHub, com o aviso "Versão X pronta" no rodapé da sidebar (D42).
 
 ## Fora do v1
 

@@ -42,7 +42,7 @@ export function TitleBar() {
           type="button"
           className="icon-button"
           aria-label={s.showList}
-          title={s.showListTitle}
+          data-tooltip={s.showListTitle}
           onClick={toggleSidebar}
         >
           <SidebarIcon />
@@ -63,7 +63,7 @@ export function TitleBar() {
             type="button"
             className="new-note-button"
             aria-label={s.newNote}
-            title={s.newNoteTitle}
+            data-tooltip={s.newNoteTitle}
             onClick={newNote}
           >
             <PlusIcon />

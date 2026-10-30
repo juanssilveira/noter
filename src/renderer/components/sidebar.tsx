@@ -87,7 +87,7 @@ export function Sidebar() {
           type="button"
           className="icon-button"
           aria-label={s.hideList}
-          title={s.hideListTitle}
+          data-tooltip={s.hideListTitle}
           onClick={toggleSidebar}
         >
           <SidebarIcon />

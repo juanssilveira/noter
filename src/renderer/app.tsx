@@ -3,6 +3,7 @@ import { NoteEditor } from './components/note-editor';
 import { SaveIndicator } from './components/save-indicator';
 import { Sidebar } from './components/sidebar';
 import { TitleBar } from './components/title-bar';
+import { TooltipLayer } from './components/tooltip-layer';
 import { useDocumentTheme } from './hooks/use-theme';
 import { useLocale } from './i18n/use-strings';
 import { confirmClose, onCloseRequested, setWindowAppearance, showWindow } from './services/app-window';
@@ -113,6 +114,7 @@ export default function App() {
         </main>
         <SaveIndicator />
       </div>
+      <TooltipLayer />
     </div>
   );
 }

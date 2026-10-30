@@ -453,6 +453,36 @@ button {
 }
 
 /* --ui-border-window, not --ui-border-soft: in the dark theme the soft border is the menu's own color. */
+/* Tooltip (tooltip-layer.tsx): a small box in the menus' colors, over everything. Placed while hidden,
+   then fades in. */
+.tooltip {
+  position: fixed;
+  z-index: 20;
+  left: 0;
+  top: 0;
+  visibility: hidden;
+  padding: 4px 8px;
+  border: 1px solid var(--ui-tree);
+  border-radius: 7px;
+  background: var(--ui-tooltip);
+  box-shadow: var(--ui-shadow-menu);
+  color: var(--ui-label);
+  font-size: 12px;
+  line-height: 16px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.tooltip.is-shown {
+  visibility: visible;
+  animation: tooltip-in 120ms var(--ui-ease-out);
+}
+@keyframes tooltip-in {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+}
+
 .menu-separator {
   height: 1px;
   margin: 6px 4px;
@@ -491,9 +521,9 @@ button {
     transform: translateY(-4px) scale(0.98);
   }
 }
-/* Aa menu: its items have no icon, so they sit 8 px in from the section label to read as a group.
-   The options menu doesn't need it: the row icons already set the items apart. */
-.format-menu .menu-item {
+/* Aa menu: the text styles have no icon, so they sit 8 px in from the section label to read as a
+   group. The blocks don't need it: their icons already set them apart, as in the options menu. */
+.format-menu .menu-item[role="menuitemradio"] {
   padding-left: 18px;
 }
 /* The marks row follows: the "B" lines up with the item text (6 + ~12 px inside its button). */
@@ -609,7 +639,8 @@ button {
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 0 0 4px;
+  /* 4 px on top too: without it the first option touched the row's hover background. */
+  padding: 4px 0;
   /* Opening grows the menu from 0 to the options' height, and closing shrinks it back, instead of
      jumping. Clipped meanwhile; display flips to none only at the end of the closing. */
   overflow: hidden;
@@ -648,7 +679,8 @@ button {
   left: 17px;
   width: 1px;
   height: 5px;
-  background: var(--ui-tree);
+  /* Always on the path to the chosen option, so in its color (below). */
+  background: color-mix(in srgb, var(--ui-muted) 45%, var(--ui-tree));
 }
 .menu-subitems .menu-item {
   position: relative;
@@ -669,6 +701,13 @@ button {
   border-left: 1px solid var(--ui-tree);
   border-bottom: 1px solid var(--ui-tree);
   border-bottom-left-radius: 6px;
+}
+/* The path to the chosen option, a little stronger than the other branches: its branch reaches up the
+   trunk to the top of the options (clipped there), and the piece under the row's icon follows. */
+.menu-subitems .menu-item[aria-checked="true"]::before {
+  top: -999px;
+  height: calc(50% + 999px);
+  border-color: color-mix(in srgb, var(--ui-muted) 45%, var(--ui-tree));
 }
 .menu-subitems .menu-separator {
   margin: 4px 4px 4px 36px;
@@ -693,7 +732,8 @@ button {
   padding: 2px 6px 6px;
   border-top: 1px solid var(--ui-border-soft);
   border-radius: 0 0 13px 13px;
-  background: var(--ui-sidebar-bg);
+  /* Halfway between the menu and the sidebar color: the sidebar color alone was too strong. */
+  background: color-mix(in srgb, var(--ui-sidebar-bg) 50%, var(--ui-raised));
 }
 .menu-cycle-value {
   display: flex;
@@ -729,7 +769,7 @@ button {
 }
 .menu-shortcut::before {
   top: 0;
-  width: 11px;
+  width: 8px;
   height: 50%;
   border-bottom: 1px solid color-mix(in srgb, var(--ui-tree) 60%, transparent);
   border-bottom-left-radius: 5px;
@@ -789,6 +829,10 @@ button {
 /* ---------- Format menu (screen: menu-formatting) ---------- */
 .format-menu {
   width: 264px;
+}
+/* Edge to edge: past the menu's 6 px padding. */
+.format-menu .menu-separator {
+  margin: 6px -6px;
 }
 
 .format-menu .menu-item[role="menuitemradio"] {

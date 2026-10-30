@@ -23,6 +23,7 @@
   --ui-switch-off: #D4D4D4;
   --ui-switch-thumb: #FFFFFF;
   --ui-tree: #DEDEDE;     /* branch lines of the options under Tema and Idioma */
+  --ui-tooltip: #FFFFFF;  /* tooltip box: a step above the menus, which it often covers */
   --ui-selection: #E6E6E6;
   --ui-row-hover: rgba(24, 24, 24, 0.04);
   --ui-scrollbar: rgba(24, 24, 24, 0.16);
@@ -63,6 +64,7 @@
   --ui-switch-off: #404040;
   --ui-switch-thumb: #181818;
   --ui-tree: #333333;
+  --ui-tooltip: #2A2A2A;
   --ui-selection: rgba(137, 137, 137, 0.32);
   --ui-row-hover: rgba(255, 255, 255, 0.04);
   --ui-scrollbar: rgba(255, 255, 255, 0.14);

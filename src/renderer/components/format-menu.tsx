@@ -101,7 +101,7 @@ export function FormatMenu({ editor, x, y, onClose, onInsertTable }: FormatMenuP
       type="button"
       className={`menu-icon-button ${className}`}
       aria-label={label}
-      title={label}
+      data-tooltip={label}
       aria-pressed={isActive}
       onClick={run}
     >
@@ -135,16 +135,7 @@ export function FormatMenu({ editor, x, y, onClose, onInsertTable }: FormatMenuP
       // Keep the focus (and the selection) in the editor while clicking the menu.
       onMouseDown={(event) => event.preventDefault()}
     >
-      <div className="menu-section-label">{s.text}</div>
-      {textStyle('Heading 1', active.h1, () => chain().setHeading({ level: 1 }).run(), 'format-h1')}
-      {textStyle('Heading 2', active.h2, () => chain().setHeading({ level: 2 }).run(), 'format-h2')}
-      {textStyle('Heading 3', active.h3, () => chain().setHeading({ level: 3 }).run(), 'format-h3')}
-      {textStyle('Heading 4', active.h4, () => chain().setHeading({ level: 4 }).run(), 'format-h4')}
-      {textStyle(s.body, active.body, () => chain().setParagraph().run(), '')}
-      {textStyle(s.small, active.small, () => chain().setNode('smallText').run(), 'format-small')}
-
-      <div className="menu-separator" role="separator" />
-
+      {/* The marks first: the menu opens at the mouse, so the quick actions are right under it. */}
       <div className="menu-icon-row">
         {mark(s.bold, active.bold, () => chain().toggleBold().run(), 'B', 'format-bold')}
         {mark(s.italic, active.italic, () => chain().toggleItalic().run(), 'I', 'format-italic')}
@@ -154,6 +145,16 @@ export function FormatMenu({ editor, x, y, onClose, onInsertTable }: FormatMenuP
         {mark(s.link, active.link, () => setLinkMode(true), <LinkIcon />)}
         {mark(s.highlight, active.highlight, () => chain().toggleHighlight().run(), <HighlightIcon />)}
       </div>
+
+      <div className="menu-separator" role="separator" />
+
+      <div className="menu-section-label">{s.text}</div>
+      {textStyle('Heading 1', active.h1, () => chain().setHeading({ level: 1 }).run(), 'format-h1')}
+      {textStyle('Heading 2', active.h2, () => chain().setHeading({ level: 2 }).run(), 'format-h2')}
+      {textStyle('Heading 3', active.h3, () => chain().setHeading({ level: 3 }).run(), 'format-h3')}
+      {textStyle('Heading 4', active.h4, () => chain().setHeading({ level: 4 }).run(), 'format-h4')}
+      {textStyle(s.body, active.body, () => chain().setParagraph().run(), '')}
+      {textStyle(s.small, active.small, () => chain().setNode('smallText').run(), 'format-small')}
 
       <div className="menu-separator" role="separator" />
 

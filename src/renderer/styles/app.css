@@ -178,6 +178,20 @@ button {
   user-select: none !important;
 }
 
+/* Shortcut hint in the sidebar footer (D43): small and quiet, lined up with the group labels. */
+.sidebar-hint {
+  flex-shrink: 0;
+  margin: 0;
+  padding: 8px 18px 12px;
+  color: var(--ui-muted);
+  font-size: 11.5px;
+  line-height: 16px;
+  opacity: 0.8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* Update ready (D42): a footer at the bottom of the sidebar, like its header line, with a quiet button. */
 .update-notice {
   flex-shrink: 0;

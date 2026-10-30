@@ -8,6 +8,8 @@ const pt = {
   allNotes: 'Todas as notas',
   notesList: 'Notas',
   hideList: 'Esconder lista',
+  /** Sidebar footer hint (D43). */
+  newNoteHint: 'Ctrl + T para nova nota',
   hideListTitle: 'Esconder lista (Ctrl \\)',
   showList: 'Mostrar lista de notas',
   showListTitle: 'Mostrar lista (Ctrl \\)',
@@ -98,6 +100,7 @@ const en: Strings = {
   allNotes: 'All notes',
   notesList: 'Notes',
   hideList: 'Hide list',
+  newNoteHint: 'Ctrl + T for a new note',
   hideListTitle: 'Hide list (Ctrl \\)',
   showList: 'Show notes list',
   showListTitle: 'Show list (Ctrl \\)',

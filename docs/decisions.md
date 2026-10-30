@@ -189,6 +189,10 @@ Formato: **decisão**, depois o motivo e, quando houver, as alternativas descart
 - A D33 não muda: o Reiniciar passa pelo mesmo cuidado de gravar antes de sair.
 - **Descartado:** repositório separado só pras releases; aviso numa notificação ou no menu de opções; perguntar antes de baixar.
 
+### D43. Dica do atalho no rodapé da sidebar
+- Pedido do usuário. O rodapé da sidebar mostra "Ctrl + T para nova nota" ("Ctrl + T for a new note" em inglês), pequeno e apagado.
+- Quando há uma versão pronta (D42), o aviso de atualização ocupa o lugar da dica, pra o rodapé continuar com uma linha só.
+
 ## Convenções
 
 ### D28. Código e arquivos em inglês; interface em pt-BR e inglês

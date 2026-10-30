@@ -22,6 +22,7 @@ export function Sidebar() {
   const startRename = useAppStore((state) => state.startRename);
   const deleteNote = useAppStore((state) => state.deleteNote);
   const width = useAppStore((state) => state.sidebarWidth);
+  const updateVersion = useAppStore((state) => state.updateVersion);
   const locale = useLocale();
   const s = useStrings();
   const [menu, setMenu] = useState<MenuState>(null);
@@ -110,7 +111,8 @@ export function Sidebar() {
       {menu && menuEntry && (
         <ContextMenu x={menu.x} y={menu.y} label={s.noteActions} items={menuItems(menuEntry)} onClose={closeMenu} />
       )}
-      <UpdateNotice />
+      {/* The footer: a shortcut hint, or the update notice in its place (D43). */}
+      {updateVersion ? <UpdateNotice /> : <p className="sidebar-hint">{s.newNoteHint}</p>}
       <SidebarResizer />
     </aside>
   );

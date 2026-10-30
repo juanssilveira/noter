@@ -2,16 +2,21 @@ import { describe, expect, it } from 'vitest';
 import { isAllowedExternalUrl, isAppUrl } from './external-url.js';
 
 describe('isAllowedExternalUrl', () => {
-  it.each(['http://a.com', 'https://a.com/x?y=1', 'mailto:a@b.com'])('allows %s', (url) => {
+  it.each(['http://a.com', 'https://a.com/x?y=1', 'mailto:a@b.com', 'ms-settings:colors'])('allows %s', (url) => {
     expect(isAllowedExternalUrl(url)).toBe(true);
   });
 
-  it.each(['file:///C:/x.exe', 'javascript:alert(1)', 'data:text/html,hi', 'ms-settings:', 'nope', ''])(
-    'rejects %s',
-    (url) => {
-      expect(isAllowedExternalUrl(url)).toBe(false);
-    },
-  );
+  it.each([
+    'file:///C:/x.exe',
+    'javascript:alert(1)',
+    'data:text/html,hi',
+    'ms-settings:',
+    'ms-settings:windowsupdate',
+    'nope',
+    '',
+  ])('rejects %s', (url) => {
+    expect(isAllowedExternalUrl(url)).toBe(false);
+  });
 });
 
 describe('isAppUrl', () => {

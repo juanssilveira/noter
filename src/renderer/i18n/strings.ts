@@ -43,6 +43,8 @@ const pt = {
   themeDark: 'Escuro',
   language: 'Idioma',
   acrylic: 'Efeito acrílico',
+  /** Under Efeito acrílico when it is on but Windows transparency effects are off. Opens the settings. */
+  acrylicNeedsTransparency: 'Ative a transparência do Windows',
   layout: 'Layout',
   showNewNoteButton: 'Mostrar botão nova nota',
   editor: 'Editor',
@@ -133,6 +135,7 @@ const en: Strings = {
   themeDark: 'Dark',
   language: 'Language',
   acrylic: 'Acrylic effect',
+  acrylicNeedsTransparency: 'Turn on transparency in Windows',
   layout: 'Layout',
   showNewNoteButton: 'Show new note button',
   editor: 'Editor',

@@ -45,6 +45,7 @@ const api: NoterApi = {
     onMaximizedChange: (listener) => listen('window:maximized-changed', listener),
     applyMinSize: (sidebarOpen) => invoke('window:apply-min-size', sidebarOpen),
     setAppearance: (theme, acrylic) => invoke('window:set-appearance', theme, acrylic),
+    transparencyEnabled: () => invoke('window:transparency-enabled'),
   },
   app: {
     onCloseRequested: (listener) => listen('app:close-requested', listener),

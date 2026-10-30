@@ -3,6 +3,7 @@ import {
   type ReactNode,
   type RefObject,
   useEffect,
+  useId,
   useLayoutEffect,
   useRef,
   useState,
@@ -12,6 +13,7 @@ import type { Theme } from '../domain/theme';
 import { useDismiss } from '../hooks/use-dismiss';
 import { LANGUAGE_NAMES, type Strings } from '../i18n/strings';
 import { useStrings } from '../i18n/use-strings';
+import { openExternal } from '../services/shell';
 import { useAppStore } from '../state/app-store';
 import {
   AcrylicIcon,
@@ -80,6 +82,8 @@ export function OptionsMenu({ anchor, onClose }: OptionsMenuProps) {
   const s = useStrings();
   const [right, setRight] = useState(0);
   const [section, setSection] = useState<OpenSection>(null);
+  // Read by the app before the menu opens, so the acrylic warning is there from the first frame.
+  const transparency = useAppStore((state) => state.transparencyEnabled);
   useDismiss(ref, onClose, [anchor]);
 
   // Right-aligned with the button.
@@ -161,7 +165,27 @@ export function OptionsMenu({ anchor, onClose }: OptionsMenuProps) {
         selected={language}
         onSelect={setLanguage}
       />
-      <Switch icon={<AcrylicIcon />} label={s.acrylic} checked={acrylic} onChange={setAcrylic} />
+      <Switch
+        icon={<AcrylicIcon />}
+        label={s.acrylic}
+        checked={acrylic}
+        onChange={setAcrylic}
+        warning={
+          acrylic && !transparency ? (
+            <button
+              type="button"
+              className="menu-warning"
+              onClick={(event) => {
+                // Only the link: the switch must not toggle with it.
+                event.preventDefault();
+                void openExternal('ms-settings:colors');
+              }}
+            >
+              {s.acrylicNeedsTransparency}
+            </button>
+          ) : null
+        }
+      />
 
       <div className="menu-separator" role="separator" />
 
@@ -318,19 +342,28 @@ function Switch({
   label,
   checked,
   onChange,
+  warning,
 }: {
   icon: ReactNode;
   label: string;
   checked: boolean;
   onChange: (checked: boolean) => void;
+  /** A line under the label, when the setting doesn't take effect. */
+  warning?: ReactNode;
 }) {
+  // Tied to the input: a label without it acts on its first control, which would be the warning link.
+  const id = useId();
   return (
-    <label className="menu-switch">
+    <label className="menu-switch" htmlFor={id}>
       <span className="menu-row-label">
         {icon}
-        {label}
+        <span className="menu-row-text">
+          {label}
+          {warning}
+        </span>
       </span>
       <input
+        id={id}
         type="checkbox"
         role="switch"
         aria-checked={checked}

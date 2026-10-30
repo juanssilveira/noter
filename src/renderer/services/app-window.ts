@@ -13,6 +13,16 @@ export async function setWindowAppearance(theme: AppTheme, acrylic: boolean): Pr
   await platform.window.setAppearance(theme, acrylic);
 }
 
+/** Whether Windows transparency effects are on: off, the acrylic shows solid (D40). True when unknown. */
+// Async with a catch, like setWindowAppearance: an old dev preload has no such call.
+export async function isTransparencyEnabled(): Promise<boolean> {
+  try {
+    return await platform.window.transparencyEnabled();
+  } catch {
+    return true;
+  }
+}
+
 export function minimizeWindow(): Promise<void> {
   return platform.window.minimize();
 }

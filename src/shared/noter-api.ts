@@ -42,6 +42,8 @@ export type WindowApi = {
   applyMinSize(sidebarOpen: boolean): Promise<void>;
   /** Theme of the native parts (and of the acrylic tint), and the acrylic material behind the page (D40). */
   setAppearance(theme: AppTheme, acrylic: boolean): Promise<void>;
+  /** Whether Windows transparency effects are on: off, the acrylic shows solid (D40). */
+  transparencyEnabled(): Promise<boolean>;
 };
 
 export type AppApi = {
@@ -58,7 +60,8 @@ export type UpdaterApi = {
 };
 
 export type ShellApi = {
-  /** Opens an http(s) or mailto link in the default browser. Other protocols are ignored. */
+  /** Opens an http(s) or mailto link in the default browser, or the Windows color settings
+   * (ms-settings:colors). Anything else is ignored. */
   openExternal(url: string): Promise<void>;
 };
 
@@ -89,6 +92,7 @@ export type InvokeChannels = {
   'window:is-maximized': { args: []; result: boolean };
   'window:apply-min-size': { args: [sidebarOpen: boolean]; result: undefined };
   'window:set-appearance': { args: [theme: AppTheme, acrylic: boolean]; result: undefined };
+  'window:transparency-enabled': { args: []; result: boolean };
   'shell:open-external': { args: [url: string]; result: undefined };
   'updater:install': { args: []; result: undefined };
 };

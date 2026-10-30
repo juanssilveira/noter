@@ -31,6 +31,7 @@ export default function App() {
   const acrylic = useAppStore((state) => state.acrylic);
   const locale = useLocale();
   const setUpdateReady = useAppStore((state) => state.setUpdateReady);
+  const refreshTransparency = useAppStore((state) => state.refreshTransparency);
 
   useEffect(() => {
     void init();
@@ -41,6 +42,15 @@ export default function App() {
 
   // A new version finished downloading in the background (D42).
   useEffect(() => onUpdateReady(setUpdateReady), [setUpdateReady]);
+
+  // Windows transparency effects, known before the options menu opens (its acrylic warning shows at
+  // once). Read again on focus: the user may have changed it in the settings meanwhile.
+  useEffect(() => {
+    void refreshTransparency();
+    const onFocus = () => void refreshTransparency();
+    window.addEventListener('focus', onFocus);
+    return () => window.removeEventListener('focus', onFocus);
+  }, [refreshTransparency]);
 
   // Screen readers and the spell checker read the page language (D41).
   useEffect(() => {

@@ -370,7 +370,9 @@ button {
   transition:
     background-color var(--ui-fade),
     color var(--ui-fade),
-    box-shadow var(--ui-fade);
+    box-shadow var(--ui-fade),
+    height 180ms var(--ui-ease-out),
+    padding 180ms var(--ui-ease-out);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -531,20 +533,66 @@ button {
   padding-left: 6px;
 }
 
+/* Held to the top, not centered: 6 px + the 18 px label line + 6 px make the 30 px, and a warning under
+   the label only grows the row downwards (smoothly, while it fades in), never moving the label. */
 .menu-switch {
   position: relative;
+  box-sizing: border-box;
   height: 30px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
-  padding: 0 10px;
+  padding: 6px 10px;
   border-radius: 8px;
   font-size: 13.5px;
   cursor: pointer;
+  interpolate-size: allow-keywords;
 }
 .menu-switch:hover {
   background: var(--ui-hover);
+}
+.menu-switch:has(.menu-warning) {
+  height: auto;
+}
+.menu-warning {
+  transition: opacity 180ms var(--ui-ease-out);
+}
+@starting-style {
+  .menu-warning {
+    opacity: 0;
+  }
+}
+.menu-row-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  line-height: 18px;
+}
+/* The icon and the switch sit on the label line (18 px line, 16 px tall each). */
+.menu-switch .menu-row-label {
+  align-items: flex-start;
+}
+.menu-switch .menu-row-label svg,
+.menu-switch .menu-switch-track {
+  margin-top: 1px;
+}
+/* Under a setting that doesn't take effect: orange, small, and a link to where it is fixed. */
+.menu-warning {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ui-warning);
+  font: inherit;
+  font-size: 11.5px;
+  line-height: 16px;
+  text-align: left;
+  cursor: pointer;
+}
+.menu-warning:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 .menu-switch input {
   position: absolute;

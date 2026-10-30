@@ -9,6 +9,7 @@ import { isBlankBody, type Note, type NoteMeta } from '../domain/note';
 import { pickInitialNote } from '../domain/selection';
 import { clampSidebarWidth, SIDEBAR_WIDTH_DEFAULT } from '../domain/sidebar-width';
 import { isTheme, type Theme } from '../domain/theme';
+import { isTransparencyEnabled } from '../services/app-window';
 import {
   createNote,
   type LoadedNote,
@@ -52,6 +53,8 @@ type AppState = {
   focusToken: number;
   /** A downloaded version waiting for a restart (D42), or null. */
   updateVersion: string | null;
+  /** Windows transparency effects: off, the acrylic shows solid and the options menu warns (D40). */
+  transparencyEnabled: boolean;
   /** Bumped after every successful write: drives the "Salvo" indicator. */
   saveCount: number;
   /** Editor of the open note, used by the title bar menus. */
@@ -70,6 +73,8 @@ type AppState = {
   setAcrylic: (value: boolean) => void;
   setLanguage: (language: Language) => void;
   setUpdateReady: (version: string) => void;
+  /** Reads the Windows transparency switch again (at startup and when the window gets focus). */
+  refreshTransparency: () => Promise<void>;
   /** Saves what is pending, then quits into the installer of the downloaded version. */
   restartToUpdate: () => Promise<void>;
   /** Records an edit; `readBody` serializes the editor and is called only when saving. */
@@ -189,6 +194,7 @@ export const useAppStore = create<AppState>()((set, get) => {
     focusToken: 0,
     saveCount: 0,
     updateVersion: null,
+    transparencyEnabled: true,
     editor: null,
 
     init: async () => {
@@ -294,6 +300,10 @@ export const useAppStore = create<AppState>()((set, get) => {
 
     setUpdateReady: (version) => {
       set({ updateVersion: version });
+    },
+
+    refreshTransparency: async () => {
+      set({ transparencyEnabled: await isTransparencyEnabled() });
     },
 
     restartToUpdate: async () => {

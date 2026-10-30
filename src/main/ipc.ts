@@ -8,6 +8,7 @@ import { minWindowSize, sizeToGrowTo } from './core/min-window-size.js';
 import type { MainWindow } from './main-window.js';
 import { createNotesFiles } from './notes-files.js';
 import type { SettingsFile } from './settings-file.js';
+import { readTransparencyEnabled } from './system-transparency.js';
 import type { Updater } from './updater.js';
 
 type InvokeResult<C extends keyof InvokeChannels> = InvokeChannels[C]['result'] extends undefined
@@ -114,6 +115,7 @@ export function registerIpc(deps: { main: MainWindow; settings: SettingsFile; up
     },
     (theme, acrylic) => main.setAppearance(theme, acrylic),
   );
+  handle('window:transparency-enabled', noArgs, () => readTransparencyEnabled());
 
   handle(
     'shell:open-external',

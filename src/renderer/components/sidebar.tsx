@@ -7,6 +7,7 @@ import { useLocale, useStrings } from '../i18n/use-strings';
 import { useAppStore } from '../state/app-store';
 import { ContextMenu, type ContextMenuItem } from './context-menu';
 import { SidebarIcon } from './icons';
+import { SidebarHint } from './sidebar-hint';
 import { SidebarResizer } from './sidebar-resizer';
 import { UpdateNotice } from './update-notice';
 
@@ -112,7 +113,7 @@ export function Sidebar() {
         <ContextMenu x={menu.x} y={menu.y} label={s.noteActions} items={menuItems(menuEntry)} onClose={closeMenu} />
       )}
       {/* The footer: a shortcut hint, or the update notice in its place (D43). */}
-      {updateVersion ? <UpdateNotice /> : <p className="sidebar-hint">{s.newNoteHint}</p>}
+      {updateVersion ? <UpdateNotice /> : <SidebarHint />}
       <SidebarResizer />
     </aside>
   );

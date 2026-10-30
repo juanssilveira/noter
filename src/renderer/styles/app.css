@@ -178,16 +178,25 @@ button {
   user-select: none !important;
 }
 
-/* Shortcut hint in the sidebar footer (D43): small and quiet, lined up with the group labels. */
+/* Shortcut hint in the sidebar footer (D43): small and quiet, lined up with the group labels. The
+   keycaps are the options menu ones (.menu-shortcut kbd), a size down. */
 .sidebar-hint {
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
   margin: 0;
   padding: 8px 18px 12px;
   color: var(--ui-muted);
   font-size: 11.5px;
-  line-height: 16px;
+  line-height: 18px;
   opacity: 0.8;
   white-space: nowrap;
+  overflow: hidden;
+}
+.sidebar-hint-text {
+  min-width: 0;
+  margin-left: 2px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -690,7 +699,8 @@ button {
 }
 
 /* A keycap: raised off the footer band, with a heavier bottom edge. */
-.menu-shortcut kbd {
+.menu-shortcut kbd,
+.sidebar-hint kbd {
   min-width: 20px;
   box-sizing: border-box;
   padding: 0 6px;
@@ -704,6 +714,25 @@ button {
   font-weight: 600;
   line-height: 18px;
   text-align: center;
+}
+.sidebar-hint kbd {
+  min-width: 18px;
+  padding: 0 5px;
+  color: var(--ui-muted);
+  font-size: 10.5px;
+  line-height: 16px;
+  transition:
+    color var(--ui-fade),
+    border-color var(--ui-fade),
+    box-shadow var(--ui-fade),
+    transform var(--ui-fade);
+}
+/* Held down (sidebar-hint.tsx): a little brighter, and pressed into the band. */
+.sidebar-hint kbd.is-held {
+  border-color: color-mix(in srgb, var(--ui-muted) 45%, var(--ui-border-window));
+  box-shadow: inset 0 -0.5px 0 var(--ui-border-window);
+  color: var(--ui-text);
+  transform: translateY(1px);
 }
 
 /* ---------- Format menu (screen: menu-formatting) ---------- */

@@ -117,7 +117,8 @@ Colisão de nome no mesmo segundo: acrescentar um sufixo (`_2`, `_3`…). É rar
 - Se a janela ficar estreita, a sidebar encolhe sozinha pra área da nota manter pelo menos 560 px, sem passar do mínimo de 240. A largura salva não muda: ela volta quando a janela crescer.
 
 ### Dica do atalho **D43**
-- O rodapé da sidebar mostra "Ctrl + T para nova nota". É só texto, sem clique.
+- O rodapé da sidebar mostra as teclas Ctrl + T e "para nova nota". É só texto, sem clique.
+- Enquanto o Ctrl está pressionado, a tecla Ctrl acende. Com o Ctrl seguro, o T acende enquanto estiver pressionado. Soltar a tecla, ou a janela perder o foco, apaga.
 - Com uma versão pronta pra instalar, o aviso de atualização aparece no lugar dela.
 
 ### Aviso de atualização **D42**

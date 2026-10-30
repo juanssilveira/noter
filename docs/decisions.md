@@ -190,8 +190,9 @@ Formato: **decisão**, depois o motivo e, quando houver, as alternativas descart
 - **Descartado:** repositório separado só pras releases; aviso numa notificação ou no menu de opções; perguntar antes de baixar.
 
 ### D43. Dica do atalho no rodapé da sidebar
-- Pedido do usuário. O rodapé da sidebar mostra "Ctrl + T para nova nota" ("Ctrl + T for a new note" em inglês), pequeno e apagado.
+- Pedido do usuário. O rodapé da sidebar mostra as teclas Ctrl + T, no estilo das do menu de opções, seguidas de "para nova nota" ("for a new note" em inglês), tudo pequeno e apagado.
 - Quando há uma versão pronta (D42), o aviso de atualização ocupa o lugar da dica, pra o rodapé continuar com uma linha só.
+- As teclas acendem de leve enquanto estão pressionadas, também a pedido do usuário. O T só acende com o Ctrl seguro, pra não piscar a cada "t" digitado na nota. É uma mudança de estado, então segue a D31.
 
 ### D44. Placeholder na nota vazia
 - Pedido do usuário, no estilo do Notion. Com a nota inteira vazia, a primeira linha mostra "Escreva algo…" ("Write something…" em inglês) bem apagado, e o texto some com o primeiro caractere.

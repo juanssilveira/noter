@@ -1,0 +1,26 @@
+appId: com.noter.app
+productName: Noter
+directories:
+  output: release
+  buildResources: build
+files:
+  - dist/**
+  - "!dist/**/*.test.js"
+  - package.json
+# Chromium UI strings: only the app language and the fallback.
+electronLanguages:
+  - pt-BR
+  - en-US
+win:
+  target: nsis
+  icon: build/icon.ico
+nsis:
+  oneClick: true
+  perMachine: false
+# Automatic updates (D42): `npm run release` uploads the installer and latest.yml here, and the
+# installed app reads them from the releases of this (public) repository.
+publish:
+  provider: github
+  owner: juanssilveira
+  repo: noter
+  releaseType: release

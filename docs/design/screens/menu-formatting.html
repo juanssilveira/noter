@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Notas — formatação (Aa)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F4F4F5}
+a{color:#1D4FC4}a:hover{color:#163C96}
+button{font:inherit;cursor:pointer}
+.ck{position:relative;display:flex;align-items:center;gap:10px;cursor:pointer}
+.ck input{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
+.ck-box{width:16px;height:16px;flex-shrink:0;box-sizing:border-box;display:flex;align-items:center;justify-content:center;border:1.5px solid #D4D4D8;border-radius:5px;background:#FFFFFF}
+.ck-box svg{width:10px;height:10px;fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:0}
+.ck input:checked+.ck-box{background:#18181B;border-color:#18181B}
+.ck input:checked+.ck-box svg{opacity:1}
+.ck:has(input:checked){color:#6B6B73}
+.mi{display:flex;align-items:center;gap:10px;width:100%;height:32px;padding:0 10px;border:0;border-radius:8px;background:transparent;color:#18181B;font-size:13.5px;text-align:left;box-sizing:border-box}
+.mi:hover{background:#F4F4F5}
+.ib{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:0;border-radius:8px;background:transparent;color:#3F3F46;font-size:14px}
+.ib:hover{background:#F4F4F5}
+</style>
+</helmet>
+<div style="position: relative; width: 100%; height: 780px; display: flex; flex-direction: column; background: #FFFFFF; color: #18181B; font-family: Geist, 'Segoe UI', system-ui, sans-serif; font-size: 14px; box-sizing: border-box; overflow: hidden; border: 1px solid #E4E4E7; border-radius: 14px">
+
+  <header style="height: 48px; flex-shrink: 0; display: flex; align-items: center; gap: 6px; padding-left: 12px">
+    <button aria-label="Mostrar lista de notas" style="width: 36px; height: 34px; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 10px; background: transparent; color: #52525B">
+      <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="3.5"></rect><path d="M7.5 3.5v13"></path></svg>
+    </button>
+    <div style="display: flex; align-items: center; gap: 2px; padding: 3px; margin-left: 4px; background: #F4F4F5; border-radius: 999px">
+      <button aria-label="Formatação de texto" aria-expanded="true" style="height: 30px; padding: 0 12px; border: 0; border-radius: 999px; background: #FFFFFF; color: #18181B; font-size: 14px; font-weight: 500; box-shadow: 0 1px 2px rgba(24,24,27,0.1), 0 0 0 1px rgba(24,24,27,0.04)">Aa</button>
+      <button aria-label="Checklist" style="width: 34px; height: 30px; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 999px; background: transparent; color: #52525B"><svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 5 1.5 1.5L7 4"></path><path d="M10 5.5h7"></path><path d="m3 12 1.5 1.5L7 11"></path><path d="M10 12.5h7"></path></svg></button>
+      <button aria-label="Tabela" style="width: 34px; height: 30px; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 999px; background: transparent; color: #52525B"><svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="14" height="12" rx="3"></rect><path d="M3 8.5h14M8 4v12"></path></svg></button>
+    </div>
+    <span style="font-size: 12.5px; color: #6B6B73; margin-left: 12px; white-space: nowrap">Sex, 30 de outubro · 12:29</span>
+    <div style="flex: 1 1 0"></div>
+    <div style="display: flex; align-items: center; gap: 2px; margin-right: 14px">
+      <button aria-label="Fixar nota" style="width: 36px; height: 34px; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 10px; background: transparent; color: #52525B"><svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h6l-1 5 3 3H5l3-3z"></path><path d="M10 11v6"></path></svg></button>
+      <button aria-label="Mais opções" style="width: 36px; height: 34px; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 10px; background: transparent; color: #52525B"><svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><circle cx="5" cy="10" r="1.3" fill="currentColor"></circle><circle cx="10" cy="10" r="1.3" fill="currentColor"></circle><circle cx="15" cy="10" r="1.3" fill="currentColor"></circle></svg></button>
+      <button aria-label="Nova nota" title="Nova nota (Ctrl T)" style="width: 32px; height: 32px; margin-left: 8px; display: flex; align-items: center; justify-content: center; padding: 0; border: 0; border-radius: 999px; background: #18181B; color: #FFFFFF"><svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M10 4.5v11M4.5 10h11"></path></svg></button>
+    </div>
+    <div style="display: flex; align-self: stretch">
+      <button aria-label="Minimizar" style="width: 46px; border: 0; background: transparent; color: #18181B; display: flex; align-items: center; justify-content: center"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="M3 10h14"></path></svg></button>
+      <button aria-label="Maximizar" style="width: 46px; border: 0; background: transparent; color: #18181B; display: flex; align-items: center; justify-content: center"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="3.5" y="3.5" width="13" height="13" rx="3"></rect></svg></button>
+      <button aria-label="Fechar" style="width: 46px; border: 0; background: transparent; color: #18181B; display: flex; align-items: center; justify-content: center"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="m4 4 12 12M16 4 4 16"></path></svg></button>
+    </div>
+  </header>
+
+  <div style="flex: 1 1 0; min-height: 0; overflow: auto">
+    <article style="padding: 36px 48px; box-sizing: border-box; font-size: 15.5px; line-height: 26px; color: #27272A">
+      <p style="margin: 0 0 12px">Um app de notas que <span style="background: #DCE7FD; border-radius: 2px">abre na hora e não atrapalha</span>. Sem título obrigatório: se eu não escrever um, a nota leva a data e a hora.</p>
+      <div style="display: flex; flex-direction: column; gap: 2px; margin-bottom: 12px">
+        <label class="ck"><input type="checkbox" checked="{{yes}}"><span class="ck-box" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 6.2 5 8.5l4.5-5"></path></svg></span>White mode primeiro</label>
+        <label class="ck"><input type="checkbox"><span class="ck-box" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 6.2 5 8.5l4.5-5"></path></svg></span>Notas sem título usam data e hora</label>
+        <label class="ck"><input type="checkbox"><span class="ck-box" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 6.2 5 8.5l4.5-5"></path></svg></span>Lista organizada por semana, sozinha</label>
+      </div>
+    </article>
+  </div>
+
+  <div role="menu" aria-label="Formatação" style="position: absolute; top: 50px; left: 56px; width: 264px; box-sizing: border-box; padding: 6px; background: #FFFFFF; border: 1px solid #E4E4E7; border-radius: 14px; box-shadow: 0 16px 40px rgba(24,24,27,0.12), 0 2px 6px rgba(24,24,27,0.05)">
+    <div style="padding: 6px 10px 2px; font-size: 12px; font-weight: 500; color: #6B6B73">Texto</div>
+    <button class="mi" role="menuitem" style="font-size: 17px; font-weight: 600; letter-spacing: -0.02em">Título 1</button>
+    <button class="mi" role="menuitem" style="font-size: 15.5px; font-weight: 600; letter-spacing: -0.015em">Título 2</button>
+    <button class="mi" role="menuitem" style="font-size: 14px; font-weight: 600">Título 3</button>
+    <button class="mi" role="menuitem" aria-checked="true" style="justify-content: space-between; background: #F4F4F5">Corpo<svg width="14" height="14" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.2 5 8.5l4.5-5"></path></svg></button>
+    <button class="mi" role="menuitem" style="font-size: 12.5px; color: #6B6B73">Pequeno</button>
+
+    <div style="height: 1px; margin: 6px 4px; background: #EFEFF1"></div>
+
+    <div style="display: flex; justify-content: space-between; padding: 0 2px">
+      <button class="ib" aria-label="Negrito" style="font-weight: 700">B</button>
+      <button class="ib" aria-label="Itálico" style="font-style: italic; font-family: Georgia, serif; font-size: 15px">I</button>
+      <button class="ib" aria-label="Sublinhado" style="text-decoration: underline; text-underline-offset: 3px">U</button>
+      <button class="ib" aria-label="Tachado" style="text-decoration: line-through">S</button>
+      <button class="ib" aria-label="Código"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 6-4 4 4 4M13 6l4 4-4 4"></path></svg></button>
+      <button class="ib" aria-label="Link"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 11.5a3 3 0 0 0 4.2 0l3-3a3 3 0 0 0-4.2-4.2l-.8.8"></path><path d="M11.5 8.5a3 3 0 0 0-4.2 0l-3 3a3 3 0 0 0 4.2 4.2l.8-.8"></path></svg></button>
+      <button class="ib" aria-label="Destacar"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3.5 4.5 4.5-7 7H5v-4.5z"></path><path d="M3 17.5h14"></path></svg></button>
+    </div>
+
+    <div style="height: 1px; margin: 6px 4px; background: #EFEFF1"></div>
+
+    <div style="padding: 6px 10px 2px; font-size: 12px; font-weight: 500; color: #6B6B73">Blocos</div>
+    <button class="mi" role="menuitem"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="#52525B" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="4.5" cy="6" r="1" fill="#52525B"></circle><circle cx="4.5" cy="14" r="1" fill="#52525B"></circle><path d="M8.5 6h8M8.5 14h8"></path></svg>Lista com marcadores</button>
+    <button class="mi" role="menuitem"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="#52525B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 4.5h1.5v4M3.5 8.5h3M3.5 12.5h3l-3 3.5h3"></path><path d="M9.5 6h7M9.5 14h7"></path></svg>Lista numerada</button>
+    <button class="mi" role="menuitem"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="#52525B" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 4v12M8.5 6h8M8.5 10h8M8.5 14h5"></path></svg>Citação</button>
+    <button class="mi" role="menuitem"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="#52525B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="3"></rect><path d="m7 8.5-2 1.5 2 1.5M13 8.5l2 1.5-2 1.5"></path></svg>Bloco de código</button>
+    <button class="mi" role="menuitem"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="#52525B" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M3 10h14"></path></svg>Divisor</button>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":780}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { yes: true };
+  }
+}
+</script>
+</body>
+</html>

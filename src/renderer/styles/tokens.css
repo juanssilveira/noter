@@ -1,0 +1,75 @@
+/* UI tokens (title bar, sidebar, menus). Note content tokens live in note-styles.css.
+   Source: docs/design.md, "Tokens da interface". The dark theme (D39) redefines the colors below. */
+
+:root {
+  color-scheme: light;
+  --ui-bg: #FFFFFF;
+  --ui-raised: #FFFFFF;   /* menus, keycaps, the selected note in the list: one step above --ui-bg */
+  --ui-sidebar-bg: #F7F7F7;
+  /* Over the acrylic material (D40): everything in the sidebar is translucent, like the glass. */
+  --ui-sidebar-acrylic: rgba(247, 247, 247, 0.82);
+  --ui-acrylic-item: rgba(255, 255, 255, 0.55);   /* selected note */
+  --ui-acrylic-ring: 0 0 0 1px rgba(0, 0, 0, 0.05);
+  --ui-acrylic-border: rgba(0, 0, 0, 0.06);       /* header line and right edge */
+  --ui-border-window: #E4E4E4;
+  --ui-border-soft: #EFEFEF;
+  --ui-hover: #F4F4F4;
+  --ui-text: #181818;
+  --ui-title: #272727;    /* note titles in the sidebar: a touch lighter than --ui-text */
+  --ui-icon: #535353;
+  --ui-label: #404040;
+  --ui-muted: #6C6C6C;
+  --ui-placeholder: #7D7D7D;
+  --ui-switch-off: #D4D4D4;
+  --ui-switch-thumb: #FFFFFF;
+  --ui-tree: #DEDEDE;     /* branch lines of the options under Tema and Idioma */
+  --ui-selection: #E6E6E6;
+  --ui-row-hover: rgba(24, 24, 24, 0.04);
+  --ui-scrollbar: rgba(24, 24, 24, 0.16);
+  --ui-scrollbar-hover: rgba(24, 24, 24, 0.3);
+
+  --ui-shadow-raised: 0 1px 2px rgba(24, 24, 24, 0.1), 0 0 0 1px rgba(24, 24, 24, 0.04);
+  --ui-shadow-list-item: 0 1px 2px rgba(24, 24, 24, 0.06), 0 0 0 1px rgba(24, 24, 24, 0.04);
+  --ui-shadow-menu: 0 8px 24px rgba(24, 24, 24, 0.04), 0 1px 3px rgba(24, 24, 24, 0.03);
+  --ui-shadow-thumb: 0 1px 2px rgba(24, 24, 24, 0.2);
+
+  /* State changes of controls (D31): hover, pressed, switches, checkboxes. */
+  --ui-fade: 120ms ease-out;
+  --ui-slide: 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ui-ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  --title-bar-height: 48px;
+}
+
+/* Dark theme (D39): the same neutral grays, inverted. Set on <html> by app.tsx from the "Tema" option. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ui-bg: #181818;
+  --ui-raised: #1F1F1F;
+  --ui-sidebar-bg: #121212;
+  --ui-sidebar-acrylic: rgba(18, 18, 18, 0.8);
+  --ui-acrylic-item: rgba(255, 255, 255, 0.06);
+  --ui-acrylic-ring: 0 0 0 1px rgba(255, 255, 255, 0.05);
+  --ui-acrylic-border: rgba(255, 255, 255, 0.07);
+  --ui-border-window: #262626;
+  --ui-border-soft: #1F1F1F;
+  --ui-hover: #272727;
+  --ui-text: #E4E4E4;
+  --ui-title: #D4D4D4;
+  --ui-icon: #A2A2A2;
+  --ui-label: #BEBEBE;
+  --ui-muted: #8C8C8C;
+  --ui-placeholder: #727272;
+  --ui-switch-off: #404040;
+  --ui-switch-thumb: #181818;
+  --ui-tree: #333333;
+  --ui-selection: rgba(137, 137, 137, 0.32);
+  --ui-row-hover: rgba(255, 255, 255, 0.04);
+  --ui-scrollbar: rgba(255, 255, 255, 0.14);
+  --ui-scrollbar-hover: rgba(255, 255, 255, 0.28);
+
+  --ui-shadow-raised: 0 1px 2px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  --ui-shadow-list-item: 0 1px 2px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.035);
+  --ui-shadow-menu: 0 8px 24px rgba(0, 0, 0, 0.14), 0 1px 3px rgba(0, 0, 0, 0.1);
+  --ui-shadow-thumb: 0 1px 2px rgba(0, 0, 0, 0.4);
+}

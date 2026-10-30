@@ -1,0 +1,912 @@
+/* App shell: base, scrollbars, title bar. */
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  background: var(--ui-bg);
+  color: var(--ui-text);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Acrylic (D40): the page lets the window material through behind the sidebar only. */
+.acrylic body {
+  background: transparent;
+}
+.acrylic .sidebar {
+  background: var(--ui-sidebar-acrylic);
+  border-right-color: var(--ui-acrylic-border);
+}
+.acrylic .sidebar-header {
+  border-bottom-color: var(--ui-acrylic-border);
+}
+/* Solid cards look pasted on the glass: the selected note is a veil with a thin ring instead. */
+.acrylic .note-list-item[aria-current="true"],
+.acrylic .note-list-item-renaming {
+  background: var(--ui-acrylic-item);
+  box-shadow: var(--ui-acrylic-ring);
+}
+.acrylic .main {
+  background: var(--ui-bg);
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--ui-selection);
+}
+
+/* Thin scrollbar, visible only on hover */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner { background: transparent; }
+::-webkit-scrollbar-button { display: none; }
+::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  border-radius: 999px;
+}
+:hover::-webkit-scrollbar-thumb { background-color: var(--ui-scrollbar); }
+::-webkit-scrollbar-thumb:hover { background-color: var(--ui-scrollbar-hover); }
+
+/* ---------- Layout ---------- */
+.app {
+  height: 100%;
+  display: flex;
+}
+
+.main {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* "Salvo" after each save (D37): tiny and faint, in the bottom right corner of the note. */
+.save-indicator {
+  position: absolute;
+  right: 20px;
+  bottom: 12px;
+  font-size: 11px;
+  line-height: 16px;
+  color: var(--ui-muted);
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+  transition: opacity 600ms ease-out;
+}
+.save-indicator-visible {
+  opacity: 0.55;
+  transition-duration: 200ms;
+}
+
+.app-content {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow: auto;
+}
+
+/* ---------- Sidebar ---------- */
+/* Width set inline from the saved value (D38). */
+.sidebar {
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--ui-sidebar-bg);
+  border-right: 1px solid var(--ui-border-soft);
+  user-select: none;
+}
+
+/* The line is inside the 48 px, so the header still lines up with the title bar. */
+.sidebar-header {
+  height: var(--title-bar-height);
+  flex-shrink: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  padding: 0 10px 0 12px;
+  border-bottom: 1px solid var(--ui-border-soft);
+}
+
+.sidebar-title {
+  flex: 1 1 0;
+  min-width: 0;
+  /* The icon button already leaves 10 px of air on the right of the icon. */
+  padding: 4px 4px 4px 0;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* The scrollbar's 10 px are always reserved, so the right edge is 4 + 10 = 14 px, like the left, with or
+   without scrolling, and the items don't change width when the scrollbar shows up. */
+/* Over the right border: 7 px wide, centered on the border's pixel (3 px each side). Shows a slightly
+   darker line there on hover and while dragging. */
+.sidebar-resizer {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: -3px;
+  bottom: 0;
+  width: 7px;
+  cursor: col-resize;
+  -webkit-app-region: no-drag;
+  outline: none;
+}
+.sidebar-resizer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 3px;
+  width: 1px;
+  background: transparent;
+  transition: background-color var(--ui-fade);
+}
+.sidebar-resizer:hover::after,
+.sidebar-resizer:focus-visible::after,
+.is-resizing-sidebar .sidebar-resizer::after {
+  background: var(--ui-border-window);
+}
+.sidebar-resizer:focus-visible::after {
+  width: 2px;
+  left: 2px;
+  background: var(--accent);
+}
+/* While dragging: the resize cursor everywhere, and no text selection under the pointer. */
+.is-resizing-sidebar,
+.is-resizing-sidebar * {
+  cursor: col-resize !important;
+  user-select: none !important;
+}
+
+/* Update ready (D42): a footer at the bottom of the sidebar, like its header line, with a quiet button. */
+.update-notice {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 14px;
+  border-top: 1px solid var(--ui-border-soft);
+}
+.acrylic .update-notice {
+  border-top-color: var(--ui-acrylic-border);
+}
+.update-notice-text {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--ui-label);
+  font-size: 12.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.update-notice-button {
+  flex-shrink: 0;
+  height: 26px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--ui-hover);
+  color: var(--ui-text);
+  font-size: 12.5px;
+  font-weight: 500;
+  transition: background-color var(--ui-fade);
+}
+.update-notice-button:hover {
+  background: var(--ui-border-window);
+}
+
+.sidebar-list {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow: auto;
+  scrollbar-gutter: stable;
+  padding: 0 4px 12px 14px;
+}
+
+/* 4 px between notes, so a selected card and a hovered one never touch. */
+.note-group ul {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.note-group h2 {
+  margin: 0;
+  font: inherit;
+}
+
+.note-group-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  /* A little in from the card edges, well short of its text (10 px). */
+  padding: 18px 4px 6px;
+}
+.note-group:first-child .note-group-header {
+  padding-top: 12px;
+}
+
+.note-group-label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ui-label);
+}
+
+.note-group-detail {
+  font-size: 11.5px;
+  color: var(--ui-muted);
+}
+
+/* border-box: the renaming state is a <div>, which would otherwise add the padding to the 100%. */
+.note-list-item {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--ui-text);
+  text-align: left;
+}
+.note-list-item:hover {
+  background: var(--ui-row-hover);
+}
+.note-list-item[aria-current="true"] {
+  background: var(--ui-raised);
+  box-shadow: var(--ui-shadow-list-item);
+}
+
+.note-list-item-title,
+.note-list-item-preview {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.note-list-item-title {
+  color: var(--ui-title);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 18px;
+}
+
+/* Not rendered when the note has no text yet, so an empty note is a one-line item. */
+.note-list-item-preview {
+  margin-top: 2px;
+  font-size: 12.5px;
+  line-height: 17px;
+  color: var(--ui-muted);
+}
+
+/* Renaming: the field takes the exact place and type of the title; only the selection and the
+   focus ring on the item show that it is editable. */
+.note-list-item-renaming {
+  background: var(--ui-raised);
+  box-shadow: var(--ui-shadow-list-item);
+}
+.note-list-item-renaming:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 0;
+}
+
+.note-list-item-rename {
+  width: 100%;
+  min-width: 0;
+  height: 18px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ui-title);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 18px;
+  caret-color: var(--text-strong);
+}
+.note-list-item-rename:focus,
+.note-list-item-rename:focus-visible {
+  outline: none;
+}
+
+/* ---------- State transitions (D31) ----------
+   Only controls changing state animate; menus and the sidebar still open and close at once. */
+.icon-button,
+.window-control,
+.note-list-item,
+.menu-item,
+.menu-icon-button,
+.menu-switch,
+.menu-cycle {
+  transition:
+    background-color var(--ui-fade),
+    color var(--ui-fade),
+    box-shadow var(--ui-fade);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* ---------- Menus (docs/design.md, "Menus e popovers") ---------- */
+/* Never taller than the window (8 px from each edge): past that, the menu scrolls. */
+.menu {
+  position: fixed;
+  z-index: 10;
+  min-width: 200px;
+  max-height: calc(100vh - 16px);
+  box-sizing: border-box;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--ui-raised);
+  border: 1px solid var(--ui-border-window);
+  border-radius: 14px;
+  box-shadow: var(--ui-shadow-menu);
+  user-select: none;
+}
+/* In a capped column the rows would shrink instead of scrolling. */
+.menu > * {
+  flex-shrink: 0;
+}
+/* A thin scrollbar that stays visible (elsewhere it only shows on hover), clear of the round corners. */
+.menu::-webkit-scrollbar {
+  width: 8px;
+}
+.menu::-webkit-scrollbar-thumb {
+  border-width: 2px;
+  background-color: var(--ui-scrollbar);
+}
+.menu::-webkit-scrollbar-track {
+  margin: 12px 0;
+}
+
+.menu-item {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ui-text);
+  font-size: 13.5px;
+  text-align: left;
+}
+.menu-item:hover,
+.menu-item:focus-visible {
+  background: var(--ui-hover);
+  outline: none;
+}
+.menu-item svg {
+  flex-shrink: 0;
+  color: var(--ui-icon);
+}
+.menu-item-row {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 6 px below, so the label does not stick to the first item of its section. */
+.menu-section-label {
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ui-muted);
+}
+
+/* --ui-border-window, not --ui-border-soft: in the dark theme the soft border is the menu's own color. */
+.menu-separator {
+  height: 1px;
+  margin: 6px 4px;
+  background: var(--ui-border-window);
+}
+
+.menu-input {
+  height: 32px;
+  box-sizing: border-box;
+  padding: 0 10px;
+  border: 1px solid var(--ui-border-window);
+  border-radius: 8px;
+  background: var(--ui-raised);
+  color: var(--ui-text);
+  font: inherit;
+  font-size: 13.5px;
+}
+.menu-input::placeholder {
+  color: var(--ui-placeholder);
+}
+.menu-input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+}
+
+/* ---------- Options menu (screen: menu-options) ---------- */
+/* Opens with a short fade, slide and scale out of the "…" button corner (D31). Closing stays instant. */
+.options-menu {
+  width: 288px;
+  transform-origin: top right;
+  animation: options-menu-in 140ms var(--ui-ease-out);
+}
+@keyframes options-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+}
+/* Aa menu: its items have no icon, so they sit 8 px in from the section label to read as a group.
+   The options menu doesn't need it: the row icons already set the items apart. */
+.format-menu .menu-item {
+  padding-left: 18px;
+}
+/* The marks row follows: the "B" lines up with the item text (6 + ~12 px inside its button). */
+.format-menu .menu-icon-row {
+  padding-left: 6px;
+}
+
+.menu-switch {
+  position: relative;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 10px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  cursor: pointer;
+}
+.menu-switch:hover {
+  background: var(--ui-hover);
+}
+.menu-switch input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.menu-switch-track {
+  position: relative;
+  width: 28px;
+  height: 16px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  border-radius: 999px;
+  background: var(--ui-switch-off);
+  transition: background-color var(--ui-slide);
+}
+.menu-switch-track::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--ui-switch-thumb);
+  box-shadow: var(--ui-shadow-thumb);
+  transition: transform var(--ui-slide);
+}
+.menu-switch input:checked + .menu-switch-track {
+  background: var(--ui-text);
+}
+.menu-switch input:checked + .menu-switch-track::after {
+  transform: translateX(12px);
+}
+/* Keyboard focus lights the whole row, like the hover: the arrow keys move between rows. */
+.menu-switch:has(input:focus-visible) {
+  background: var(--ui-hover);
+}
+
+/* Icon and text on the left of a row (options menu). */
+.menu-row-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.menu-row-label svg {
+  flex-shrink: 0;
+  color: var(--ui-icon);
+}
+
+/* A row that expands its options below it (Tema, Idioma): the whole row is the button, like .menu-switch. */
+.menu-cycle {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ui-text);
+  font: inherit;
+  font-size: 13.5px;
+  text-align: left;
+}
+.menu-cycle:hover,
+.menu-cycle:focus-visible {
+  background: var(--ui-hover);
+  outline: none;
+}
+
+/* The chevron turns down while the options are open. */
+.menu-cycle-value > svg:last-child {
+  transition: transform var(--ui-fade);
+}
+.menu-cycle[aria-expanded="true"] .menu-cycle-value > svg:last-child {
+  transform: rotate(90deg);
+}
+
+/* Options of Tema and Idioma, right below the row, as a branch: a trunk drops from under the row's
+   icon (its center is 10 + 8 = 18 px in) and a rounded branch curves out of it to each option; the
+   trunk stops at the last option, whose curve closes the corner. Indented 36 px (10 + 16 + 10), so
+   the option icons line up with the row text. "Sistema" comes first, set apart by a line. */
+.menu-subitems {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 4px;
+  animation: menu-subitems-in 120ms ease-out;
+}
+.menu-subitems::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  bottom: 32px; /* the top of the last option: 4 px padding + 28 */
+  left: 17px;
+  width: 1px;
+  background: var(--ui-tree);
+}
+@keyframes menu-subitems-in {
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+}
+.menu-subitems .menu-item {
+  position: relative;
+  height: 28px;
+  padding-left: 36px;
+  color: var(--ui-label);
+}
+/* From the top of the option down to its middle, then out to the right: over the trunk it blends in,
+   and on the last option it is the end of the trunk. */
+.menu-subitems .menu-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 17px;
+  width: 9px;
+  height: 50%;
+  box-sizing: border-box;
+  border-left: 1px solid var(--ui-tree);
+  border-bottom: 1px solid var(--ui-tree);
+  border-bottom-left-radius: 6px;
+}
+.menu-subitems .menu-separator {
+  margin: 4px 4px 4px 36px;
+}
+.menu-subitems .menu-item-label {
+  flex: 1 1 auto;
+}
+/* The chosen option stands out from the others: full text color, a bit heavier, with its check. */
+.menu-subitems .menu-item[aria-checked="true"] {
+  color: var(--ui-text);
+  font-weight: 500;
+}
+.menu-subitems .menu-item[aria-checked="true"] > svg:last-child {
+  color: var(--ui-text);
+}
+
+/* Shortcuts footer: read-only information, set apart on a recessed band at the bottom of the menu. */
+.menu-footer {
+  display: flex;
+  flex-direction: column;
+  margin: 6px -6px -6px;
+  padding: 2px 6px 6px;
+  border-top: 1px solid var(--ui-border-soft);
+  border-radius: 0 0 13px 13px;
+  background: var(--ui-sidebar-bg);
+}
+.menu-cycle-value {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--ui-muted);
+}
+
+/* Read-only, on the footer band: no icon, a step lighter than the rows above, no hover. 3 px less on
+   the right: the outlined keycaps looked farther from the edge than the text. */
+.menu-shortcut {
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 7px 0 10px;
+  color: var(--ui-label);
+  font-size: 12.5px;
+  white-space: nowrap;
+  cursor: default;
+}
+
+.menu-shortcut-keys {
+  display: flex;
+  gap: 3px;
+}
+
+/* A keycap: raised off the footer band, with a heavier bottom edge. */
+.menu-shortcut kbd {
+  min-width: 20px;
+  box-sizing: border-box;
+  padding: 0 6px;
+  border: 1px solid var(--ui-border-window);
+  border-radius: 5px;
+  box-shadow: inset 0 -1.5px 0 var(--ui-border-window);
+  background: var(--ui-raised);
+  color: var(--ui-label);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 18px;
+  text-align: center;
+}
+
+/* ---------- Format menu (screen: menu-formatting) ---------- */
+.format-menu {
+  width: 264px;
+}
+
+.format-menu .menu-item[role="menuitemradio"] {
+  justify-content: space-between;
+}
+.format-menu .menu-item[aria-checked="true"] {
+  background: var(--ui-hover);
+}
+.format-menu .menu-item[aria-checked="true"] svg {
+  color: var(--ui-text);
+}
+.format-h1 { font-size: 17px; font-weight: 600; letter-spacing: -0.02em; }
+.format-h2 { font-size: 15.5px; font-weight: 600; letter-spacing: -0.015em; }
+.format-h3 { font-size: 14px; font-weight: 600; }
+.format-h4 { font-size: 13.5px; font-weight: 600; }
+.format-small { font-size: 12.5px; color: var(--ui-muted); }
+
+.menu-icon-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2px;
+}
+
+.menu-icon-button {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ui-label);
+  font-size: 14px;
+}
+.menu-icon-button:hover,
+.menu-icon-button[aria-pressed="true"] {
+  background: var(--ui-hover);
+}
+.menu-icon-button[aria-pressed="true"] {
+  color: var(--ui-text);
+}
+.format-bold { font-weight: 700; }
+.format-italic { font-family: Georgia, serif; font-size: 15px; font-style: italic; }
+.format-underline { text-decoration: underline; text-underline-offset: 3px; }
+.format-strike { text-decoration: line-through; }
+
+/* ---------- Table picker (screen: menu-table) ---------- */
+/* 231 = 2 border + 24 padding + 8 cells of 23 + 7 gaps of 3: the grid fills the width in whole pixels. */
+.table-picker {
+  width: 231px;
+  min-width: 0;
+  padding: 12px;
+}
+
+.table-picker-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 2px 10px;
+}
+.table-picker-header .menu-section-label {
+  padding: 0;
+}
+
+.table-picker-size {
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.table-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 23px);
+  gap: 3px;
+}
+
+.table-picker-cell {
+  width: 23px;
+  height: 23px;
+  padding: 0;
+  box-sizing: border-box;
+  border: 1px solid var(--ui-border-window);
+  border-radius: 4px;
+  background: var(--ui-hover);
+}
+.table-picker-cell-on {
+  border-color: var(--ui-text);
+  background: var(--ui-text);
+}
+
+.table-picker-hint {
+  padding: 10px 2px 0;
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--ui-muted);
+}
+
+/* ---------- Title bar ---------- */
+.title-bar {
+  height: var(--title-bar-height);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-left: 12px;
+  user-select: none;
+}
+
+/* Right after the sidebar toggle (app-all-hidden.html). */
+.title-bar-date {
+  margin-left: 6px;
+  font-size: 12.5px;
+  /* One step above --ui-muted: the tone of the bar icons next to it. */
+  color: var(--ui-icon);
+  white-space: nowrap;
+}
+/* Sidebar open and nothing before the date: a bit more room from the sidebar (12 + 12 = 24 px). */
+.title-bar-sidebar-open > .title-bar-date:first-child {
+  margin-left: 12px;
+}
+
+/* Halfway between the "…" icon and the minimize icon: 9 + 2 + 8 = 19 px on the left, 2 + 17 on the right. */
+.title-bar-divider {
+  width: 1px;
+  height: 16px;
+  margin-left: 8px;
+  background: var(--ui-border-window);
+}
+
+.title-bar-spacer {
+  flex: 1 1 0;
+  align-self: stretch;
+}
+
+/* The minimize icon sits centered in a 46 px button (17 px of padding), so a 2 px margin leaves
+   19 px before it: the same gap as between the "…" icon and the new note button (9 + 2 + 8). */
+.title-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-right: 2px;
+}
+
+.icon-button {
+  width: 36px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--ui-icon);
+}
+.icon-button:hover { background: var(--ui-hover); }
+.icon-button[aria-expanded="true"] {
+  background: var(--ui-hover);
+  color: var(--ui-text);
+}
+
+/* Before the "…": 8 + 2 gap + 9 inside the icon button = 19 px to the dots, like before the swap. */
+.new-note-button {
+  width: 32px;
+  height: 32px;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: var(--ui-text);
+  color: var(--ui-bg);
+}
+
+.window-controls {
+  display: flex;
+  align-self: stretch;
+}
+
+.window-control {
+  width: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ui-text);
+}
+.window-control:hover { background: var(--ui-hover); }
+
+
+/* Window dragging (Electron). `drag` covers the whole box, children and overlays included, and
+   swallows mouse events there, so everything interactive inside or over a drag region opts out. */
+[data-drag-region] {
+  -webkit-app-region: drag;
+}
+/* A menu is open: the title bar takes clicks again, so a click there closes the menu (use-dismiss.ts). */
+.has-open-menu [data-drag-region] {
+  -webkit-app-region: no-drag;
+}
+
+[data-drag-region] *:not([data-drag-region]),
+.menu,
+.context-menu,
+.format-menu,
+.table-picker,
+.options-menu {
+  -webkit-app-region: no-drag;
+}

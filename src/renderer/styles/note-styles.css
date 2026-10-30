@@ -1,0 +1,366 @@
+/* ==========================================================
+   Notes — writing styles (light, with the dark theme at the end: D39)
+   Apply the .note class to the editor container.
+   ========================================================== */
+
+:root {
+  /* Fonts */
+  --font-sans: "Geist", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+
+  /* Colors */
+  --text-strong: #181818;   /* headings, bold */
+  --text: #272727;          /* body */
+  --text-soft: #404040;     /* code, table cells */
+  --text-quote: #535353;    /* blockquote */
+  --text-muted: #6C6C6C;    /* secondary, done items, captions */
+  --marker: #535353;        /* bullet list marker */
+  --marker-num: #535353;    /* ordered list number */
+
+  --surface-subtle: #F7F7F7; /* code block, table header */
+  --surface-chip: #F4F4F4;   /* inline code, attachment icon */
+  --border: #EBEBEB;         /* table, attachment */
+  --border-soft: #EFEFEF;    /* inner rows, divider */
+  --border-quote: #D4D4D4;
+
+  --accent: #6A6A6A;         /* focus outline */
+  --link: #4D4D4D;
+  --link-hover: #3A3A3A;
+  --link-underline: rgba(77, 77, 77, 0.35);
+  --highlight: #F0F0F0;
+
+  /* Checklist box */
+  --check-border: #D4D4D4;
+  --check-border-hover: #A2A2A2;
+  --check-bg: #FFFFFF;
+  --check-mark: #FFFFFF;     /* the tick on the checked box (its fill is --text-strong) */
+  --check-mark-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.2 5 8.5l4.5-5' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+
+  /* Spacing */
+  --note-pad-y: 20px;
+  --note-pad-x: 40px;
+  --block-gap: 8px;          /* between paragraphs and blocks */
+  --list-item-gap: 0;
+  --list-indent: 24px;
+  --check-gap: 2px;          /* between checklist items */
+
+  /* Radii */
+  --radius-inline: 6px;
+  --radius-block: 12px;
+}
+
+/* ---------- Container ---------- */
+.note {
+  padding: var(--note-pad-y) var(--note-pad-x);
+  font-family: var(--font-sans);
+  font-size: 15.5px;
+  line-height: 24px;
+  color: var(--text);
+}
+.note > :first-child { margin-top: 0; }
+.note > :last-child { margin-bottom: 0; }
+
+/* ---------- Paragraph ---------- */
+.note p { margin: 0 0 var(--block-gap); }
+
+.note .text-small {
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--text-muted);
+}
+
+/* ---------- Headings ---------- */
+.note h1,
+.note h2,
+.note h3 {
+  font-weight: 600;
+  color: var(--text-strong);
+}
+.note h1 {
+  margin: 32px 0 26px;
+  font-size: 30px;
+  line-height: 36px;
+  letter-spacing: -0.025em;
+}
+.note h2 {
+  margin: 28px 0 22px;
+  font-size: 22px;
+  line-height: 30px;
+  letter-spacing: -0.02em;
+}
+.note h3 {
+  margin: 22px 0 10px;
+  font-size: 17.5px;
+  line-height: 26px;
+  letter-spacing: -0.01em;
+}
+/* Body size, only heavier. h5 and h6 (from notes edited elsewhere) look the same. */
+.note h4,
+.note h5,
+.note h6 {
+  margin: 18px 0 4px;
+  font-size: 15.5px;
+  line-height: 26px;
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+/* ---------- Inline ---------- */
+.note strong { font-weight: 600; color: var(--text-strong); }
+.note em { font-style: italic; }
+.note u {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.note s { color: var(--text-muted); }
+
+.note code {
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  color: var(--text-soft);
+  background: var(--surface-chip);
+  padding: 2px 6px;
+  border-radius: var(--radius-inline);
+}
+
+.note a {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-color: var(--link-underline);
+  text-underline-offset: 3px;
+}
+.note a:hover {
+  color: var(--link-hover);
+  text-decoration-color: currentColor;
+}
+
+.note mark {
+  background: var(--highlight);
+  color: var(--text-strong);
+  padding: 1px 3px;
+  border-radius: 4px;
+}
+
+/* ---------- Lists ---------- */
+.note ul,
+.note ol {
+  margin: 0 0 var(--block-gap);
+  padding-left: var(--list-indent);
+}
+.note li { margin-bottom: var(--list-item-gap); }
+.note li:last-child { margin-bottom: 0; }
+.note ul > li { padding-left: 2px; }
+.note ol > li { padding-left: 4px; }
+
+.note ul li::marker {
+  color: var(--marker);
+  font-size: 1.2em;
+  line-height: 0;           /* the bigger bullet must not stretch the line */
+}
+.note ol li::marker {
+  color: var(--marker-num);
+  font-variant-numeric: tabular-nums;
+}
+
+/* nested lists */
+.note li > ul,
+.note li > ol { margin: var(--list-item-gap) 0 0; }
+.note ul ul { list-style-type: circle; }
+
+/* ---------- Checklist ----------
+   Markup for each item:
+   <label class="ck">
+     <input type="checkbox">
+     <span class="ck-box" aria-hidden="true">
+       <svg viewBox="0 0 12 12"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg>
+     </span>
+     Item text
+   </label>
+*/
+.note .checklist {
+  display: flex;
+  flex-direction: column;
+  gap: var(--check-gap);
+  margin: 0 0 var(--block-gap);
+}
+.note .ck {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.note .ck input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  pointer-events: none;
+}
+.note .ck-box {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--check-border);
+  border-radius: 5px;
+  background: var(--check-bg);
+  transition: background-color 0.12s, border-color 0.12s;
+}
+.note .ck-box svg {
+  width: 10px;
+  height: 10px;
+  fill: none;
+  stroke: var(--check-mark);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0;
+  transition: opacity 0.12s;
+}
+.note .ck:hover .ck-box { border-color: var(--check-border-hover); }
+.note .ck input:checked + .ck-box {
+  background: var(--text-strong);
+  border-color: var(--text-strong);
+}
+.note .ck input:checked + .ck-box svg { opacity: 1; }
+.note .ck input:focus-visible + .ck-box {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.note .ck:has(input:checked) { color: var(--text-muted); }
+
+/* ---------- Blockquote ---------- */
+.note blockquote {
+  margin: 0 0 var(--block-gap);
+  padding: 2px 0 2px 16px;
+  border-left: 2px solid var(--border-quote);
+  color: var(--text-quote);
+}
+
+/* ---------- Code block ---------- */
+.note pre {
+  margin: 4px 0 16px;
+  padding: 16px 20px;
+  background: var(--surface-subtle);
+  border-radius: var(--radius-block);
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  line-height: 22px;
+  color: var(--text-soft);
+  overflow-x: auto;
+  white-space: pre;
+}
+.note pre code { all: unset; }
+
+/* ---------- Table ---------- */
+.note .table-wrap {
+  margin: 4px 0 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-block);
+  overflow-x: auto;
+}
+.note table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14.5px;
+  line-height: 22px;
+}
+.note th {
+  text-align: left;
+  padding: 10px 14px;
+  background: var(--surface-subtle);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+.note td {
+  padding: 10px 14px;
+  border-top: 1px solid var(--border-soft);
+}
+.note td + td { color: var(--text-soft); }
+
+/* ---------- Attachment (paused — out of v1) ---------- */
+.note .attachment {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 4px 0 var(--block-gap);
+  padding: 10px 16px 10px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-block);
+}
+.note .attachment-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-chip);
+  border-radius: 8px;
+  color: var(--text-quote);
+}
+.note .attachment-name {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--text-strong);
+}
+.note .attachment-meta {
+  font-size: 12.5px;
+  line-height: 18px;
+  color: var(--text-muted);
+}
+
+/* ---------- Image (paused — out of v1) ---------- */
+.note img {
+  display: block;
+  max-width: 100%;
+  margin: 4px 0 var(--block-gap);
+  border-radius: var(--radius-block);
+}
+
+/* ---------- Divider ---------- */
+.note hr {
+  margin: 28px 0;
+  border: 0;
+  border-top: 1px solid var(--border-soft);
+}
+
+/* ---------- Caret ---------- */
+.note { caret-color: var(--text-strong); }
+
+/* ---------- Dark theme (D39) ----------
+   The same neutral grays, inverted. data-theme="dark" goes on <html>. */
+:root[data-theme="dark"] {
+  --text-strong: #F4F4F4;
+  --text: #E4E4E4;
+  --text-soft: #D4D4D4;
+  --text-quote: #A2A2A2;
+  --text-muted: #8C8C8C;
+  --marker: #A2A2A2;
+  --marker-num: #A2A2A2;
+
+  --surface-subtle: #1F1F1F;
+  --surface-chip: #272727;
+  --border: #262626;
+  --border-soft: #1F1F1F;
+  --border-quote: #333333;
+
+  --accent: #898989;
+  --link: #A0A0A0;
+  --link-hover: #BEBEBE;
+  --link-underline: rgba(160, 160, 160, 0.4);
+  --highlight: #303030;
+
+  --check-border: #535353;
+  --check-border-hover: #727272;
+  --check-bg: #181818;
+  --check-mark: #181818;
+  --check-mark-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.2 5 8.5l4.5-5' fill='none' stroke='%23181818' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}

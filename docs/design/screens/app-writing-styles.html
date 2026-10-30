@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Notas — estilos de escrita</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F4F4F5}
+a{color:#1D4FC4;text-decoration:underline;text-decoration-color:rgba(29,79,196,0.35);text-underline-offset:3px}a:hover{color:#163C96;text-decoration-color:currentColor}
+button{font:inherit;cursor:pointer}
+.ck{position:relative;display:flex;align-items:center;gap:10px;cursor:pointer}
+.ck input{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
+.ck-box{width:16px;height:16px;flex-shrink:0;box-sizing:border-box;display:flex;align-items:center;justify-content:center;border:1.5px solid #D4D4D8;border-radius:5px;background:#FFFFFF;transition:background-color .12s,border-color .12s}
+.ck-box svg{width:10px;height:10px;fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:0;transition:opacity .12s}
+.ck:hover .ck-box{border-color:#A1A1AA}
+.ck input:checked+.ck-box{background:#18181B;border-color:#18181B}
+.ck input:checked+.ck-box svg{opacity:1}
+.ck input:focus-visible+.ck-box{outline:2px solid #2F6FEB;outline-offset:2px}
+.ck:has(input:checked){color:#6B6B73}
+ul.n-ul li::marker{color:#52525B;font-size:1.2em}
+ol.n-ol li::marker{color:#52525B;font-variant-numeric:tabular-nums}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track,::-webkit-scrollbar-corner{background:transparent}
+::-webkit-scrollbar-button{display:none}
+::-webkit-scrollbar-thumb{background-color:transparent;border:3px solid transparent;background-clip:padding-box;border-radius:999px}
+:hover::-webkit-scrollbar-thumb{background-color:rgba(24,24,27,0.16)}
+::-webkit-scrollbar-thumb:hover{background-color:rgba(24,24,27,0.3)}
+@supports not selector(::-webkit-scrollbar){*{scrollbar-width:thin;scrollbar-color:transparent transparent}*:hover{scrollbar-color:rgba(24,24,27,0.16) transparent}}
+</style>
+</helmet>
+<div style="width: 100%; height: 2140px; display: flex; flex-direction: column; background: #FFFFFF; color: #18181B; font-family: Geist, 'Segoe UI', system-ui, sans-serif; font-size: 14px; box-sizing: border-box; overflow: hidden; border: 1px solid #E4E4E7; border-radius: 14px">
+
+  <header style="height: 48px; flex-shrink: 0; display: flex; align-items: center; gap: 6px; padding-left: 12px">
+    <button aria-label="Mostrar lista de notas" style="width: 36px; height: 34px; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 10px; background: transparent; color: #52525B">
+      <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="3.5"></rect><path d="M7.5 3.5v13"></path></svg>
+    </button>
+    <div style="display: flex; align-items: center; gap: 2px; padding: 3px; margin-left: 4px; background: #F4F4F5; border-radius: 999px">
+      <button aria-label="Formatação de texto" style="height: 30px; padding: 0 12px; border: 0; border-radius: 999px; background: transparent; color: #52525B; font-size: 14px; font-weight: 500">Aa</button>
+      <button aria-label="Checklist" style="width: 34px; height: 30px; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 999px; background: transparent; color: #52525B"><svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 5 1.5 1.5L7 4"></path><path d="M10 5.5h7"></path><path d="m3 12 1.5 1.5L7 11"></path><path d="M10 12.5h7"></path></svg></button>
+      <button aria-label="Tabela" style="width: 34px; height: 30px; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 999px; background: transparent; color: #52525B"><svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="14" height="12" rx="3"></rect><path d="M3 8.5h14M8 4v12"></path></svg></button>
+      <button aria-label="Anexar" style="width: 34px; height: 30px; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 999px; background: transparent; color: #52525B"><svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15.5 9.5-5.6 5.6a3.5 3.5 0 0 1-5-5L11 4a2.3 2.3 0 0 1 3.3 3.3l-6 6a1.2 1.2 0 0 1-1.7-1.7L12 6.2"></path></svg></button>
+    </div>
+    <span style="font-size: 12.5px; color: #6B6B73; margin-left: 12px; white-space: nowrap">Sex, 30 de outubro · 13:17</span>
+    <div style="flex: 1 1 0"></div>
+    <div style="display: flex; align-items: center; gap: 2px; margin-right: 14px">
+      <button aria-label="Fixar nota" style="width: 36px; height: 34px; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 10px; background: transparent; color: #52525B"><svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h6l-1 5 3 3H5l3-3z"></path><path d="M10 11v6"></path></svg></button>
+      <button aria-label="Mais opções" style="width: 36px; height: 34px; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 10px; background: transparent; color: #52525B"><svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><circle cx="5" cy="10" r="1.3" fill="currentColor"></circle><circle cx="10" cy="10" r="1.3" fill="currentColor"></circle><circle cx="15" cy="10" r="1.3" fill="currentColor"></circle></svg></button>
+      <button aria-label="Nova nota" title="Nova nota (Ctrl T)" style="width: 32px; height: 32px; margin-left: 8px; display: flex; align-items: center; justify-content: center; padding: 0; border: 0; border-radius: 999px; background: #18181B; color: #FFFFFF">
+        <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M10 4.5v11M4.5 10h11"></path></svg>
+      </button>
+    </div>
+    <div style="display: flex; align-self: stretch">
+      <button aria-label="Minimizar" style="width: 46px; border: 0; background: transparent; color: #18181B; display: flex; align-items: center; justify-content: center"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="M3 10h14"></path></svg></button>
+      <button aria-label="Maximizar" style="width: 46px; border: 0; background: transparent; color: #18181B; display: flex; align-items: center; justify-content: center"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="3.5" y="3.5" width="13" height="13" rx="3"></rect></svg></button>
+      <button aria-label="Fechar" style="width: 46px; border: 0; background: transparent; color: #18181B; display: flex; align-items: center; justify-content: center"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="m4 4 12 12M16 4 4 16"></path></svg></button>
+    </div>
+  </header>
+
+  <div style="flex: 1 1 0; min-height: 0; overflow: auto">
+    <article style="padding: 36px 48px; box-sizing: border-box; font-size: 15.5px; line-height: 26px; color: #27272A">
+
+      <h1 style="margin: 0 0 10px; font-size: 30px; line-height: 36px; font-weight: 600; letter-spacing: -0.025em; color: #18181B">Título 1 — guia de estilos</h1>
+      <p style="margin: 0 0 12px">Este é o corpo de texto, o estilo padrão de qualquer nota. Toda nota começa aqui: sem título obrigatório, só escrever. Os blocos ficam separados por 12px, e os títulos ganham mais espaço em cima pra marcar o começo de uma seção.</p>
+      <p style="margin: 0 0 12px">Dentro do texto dá pra usar <strong style="font-weight: 600; color: #18181B">negrito</strong>, <em>itálico</em>, <span style="text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px">sublinhado</span>, <s style="color: #6B6B73">tachado</s>, <code style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 13.5px; color: #3F3F46; background: #F4F4F5; padding: 2px 6px; border-radius: 6px">código inline</code>, <a href="#links">um link</a> e <mark style="background: #EAF1FE; color: #18181B; padding: 1px 3px; border-radius: 4px">um destaque</mark>.</p>
+      <p style="margin: 0 0 12px; font-size: 13px; line-height: 20px; color: #6B6B73">Texto pequeno, pra observações e legendas.</p>
+
+      <h2 style="margin: 28px 0 8px; font-size: 22px; line-height: 30px; font-weight: 600; letter-spacing: -0.02em; color: #18181B">Título 2 — seções</h2>
+      <p style="margin: 0 0 12px">Usado pra dividir uma nota longa em partes.</p>
+
+      <h3 style="margin: 22px 0 6px; font-size: 17.5px; line-height: 26px; font-weight: 600; letter-spacing: -0.01em; color: #18181B">Título 3 — subseções</h3>
+      <p style="margin: 0 0 12px">O menor dos títulos, quase do tamanho do corpo, só que mais pesado.</p>
+
+      <h3 style="margin: 22px 0 6px; font-size: 17.5px; line-height: 26px; font-weight: 600; letter-spacing: -0.01em; color: #18181B">Listas</h3>
+      <ul class="n-ul" style="margin: 0 0 12px; padding-left: 24px">
+        <li style="margin-bottom: 4px; padding-left: 2px">Lista com marcadores</li>
+        <li style="margin-bottom: 4px; padding-left: 2px">Cada item tem 4px de espaço entre si
+          <ul class="n-ul" style="margin: 4px 0 0; padding-left: 24px; list-style-type: circle">
+            <li style="margin-bottom: 4px; padding-left: 2px">Item aninhado, recuo de 24px</li>
+            <li style="padding-left: 2px">Outro item aninhado</li>
+          </ul>
+        </li>
+        <li style="padding-left: 2px">Último item</li>
+      </ul>
+      <ol class="n-ol" style="margin: 0 0 12px; padding-left: 24px">
+        <li style="margin-bottom: 4px; padding-left: 4px">Lista numerada</li>
+        <li style="margin-bottom: 4px; padding-left: 4px">Os números ficam num cinza médio</li>
+        <li style="padding-left: 4px">Terceiro passo</li>
+      </ol>
+
+      <h3 style="margin: 22px 0 6px; font-size: 17.5px; line-height: 26px; font-weight: 600; letter-spacing: -0.01em; color: #18181B">Checklist</h3>
+      <div style="display: flex; flex-direction: column; gap: 2px; margin: 0 0 12px">
+        <label class="ck"><input type="checkbox" checked="{{yes}}"><span class="ck-box" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 6.2 5 8.5l4.5-5"></path></svg></span>Item feito fica em cinza</label>
+        <label class="ck"><input type="checkbox"><span class="ck-box" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 6.2 5 8.5l4.5-5"></path></svg></span>Item pendente</label>
+        <label class="ck"><input type="checkbox"><span class="ck-box" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 6.2 5 8.5l4.5-5"></path></svg></span>Outro item pendente</label>
+      </div>
+
+      <h3 style="margin: 22px 0 6px; font-size: 17.5px; line-height: 26px; font-weight: 600; letter-spacing: -0.01em; color: #18181B">Citação</h3>
+      <blockquote style="margin: 0 0 12px; padding: 2px 0 2px 16px; border-left: 2px solid #D4D4D8; color: #52525B">Uma citação ou trecho copiado de outro lugar. Fica recuada, com uma linha fina à esquerda e o texto um pouco mais claro.</blockquote>
+
+      <h3 style="margin: 22px 0 6px; font-size: 17.5px; line-height: 26px; font-weight: 600; letter-spacing: -0.01em; color: #18181B">Bloco de código</h3>
+      <pre style="margin: 4px 0 16px; padding: 16px 20px; background: #F7F7F8; border-radius: 12px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 13.5px; line-height: 22px; color: #3F3F46; overflow-x: auto; white-space: pre">function tituloDaNota(nota) {
+  const primeiraLinha = nota.texto.split('\n')[0].trim();
+  return primeiraLinha || formatarData(nota.criadaEm);
+}</pre>
+
+      <h3 style="margin: 22px 0 6px; font-size: 17.5px; line-height: 26px; font-weight: 600; letter-spacing: -0.01em; color: #18181B">Tabela</h3>
+      <div style="overflow-x: auto; margin: 4px 0 16px; border: 1px solid #EBEBED; border-radius: 12px">
+        <table style="width: 100%; border-collapse: collapse; font-size: 14.5px; line-height: 22px">
+          <thead>
+            <tr style="background: #F7F7F8">
+              <th style="text-align: left; padding: 10px 14px; font-size: 13px; font-weight: 500; color: #6B6B73">Estilo</th>
+              <th style="text-align: left; padding: 10px 14px; font-size: 13px; font-weight: 500; color: #6B6B73">Tamanho</th>
+              <th style="text-align: left; padding: 10px 14px; font-size: 13px; font-weight: 500; color: #6B6B73">Peso</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: 10px 14px; border-top: 1px solid #EFEFF1">Título 1</td>
+              <td style="padding: 10px 14px; border-top: 1px solid #EFEFF1; color: #3F3F46">30 / 36</td>
+              <td style="padding: 10px 14px; border-top: 1px solid #EFEFF1; color: #3F3F46">600</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 14px; border-top: 1px solid #EFEFF1">Corpo</td>
+              <td style="padding: 10px 14px; border-top: 1px solid #EFEFF1; color: #3F3F46">15,5 / 26</td>
+              <td style="padding: 10px 14px; border-top: 1px solid #EFEFF1; color: #3F3F46">400</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="margin: 22px 0 6px; font-size: 17.5px; line-height: 26px; font-weight: 600; letter-spacing: -0.01em; color: #18181B">Anexos</h3>
+      <div style="display: inline-flex; align-items: center; gap: 12px; margin: 4px 0 12px; padding: 10px 16px 10px 10px; border: 1px solid #EBEBED; border-radius: 12px">
+        <div style="width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; background: #F4F4F5; border-radius: 8px; color: #52525B">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.5 2.5H6A1.5 1.5 0 0 0 4.5 4v12A1.5 1.5 0 0 0 6 17.5h8a1.5 1.5 0 0 0 1.5-1.5V6.5z"></path><path d="M11.5 2.5v4h4"></path></svg>
+        </div>
+        <div style="display: flex; flex-direction: column">
+          <span style="font-size: 14px; line-height: 20px; font-weight: 500; color: #18181B">contrato-aluguel.pdf</span>
+          <span style="font-size: 12.5px; line-height: 18px; color: #6B6B73">PDF · [TAMANHO]</span>
+        </div>
+      </div>
+      <div style="width: 100%; max-width: 560px; height: 220px; margin: 4px 0 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; background: #F7F7F8; border: 1px solid #EFEFF1; border-radius: 12px; color: #6B6B73; font-size: 13px">
+        <svg width="22" height="22" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="3"></rect><circle cx="7.5" cy="8" r="1.5"></circle><path d="m17.5 13-4-4-8 7.5"></path></svg>
+        Imagem colada na nota
+      </div>
+
+      <hr style="margin: 28px 0; border: 0; border-top: 1px solid #EFEFF1">
+
+      <p style="margin: 0">Acima, o divisor: uma linha bem leve com 28px de respiro em cima e embaixo.<span style="display: inline-block; width: 2px; height: 18px; border-radius: 1px; background: #2F6FEB; vertical-align: -3px; margin-left: 2px"></span></p>
+    </article>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":2140}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { yes: true };
+  }
+}
+</script>
+</body>
+</html>

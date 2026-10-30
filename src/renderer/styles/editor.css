@@ -1,0 +1,142 @@
+/* Tiptap markup mapped onto the design (note-styles.css describes the canvas markup). */
+
+.note-editor {
+  min-height: 100%;
+  display: flex;
+}
+
+.note.ProseMirror {
+  flex: 1 1 auto;
+  min-height: 100%;
+  box-sizing: border-box;
+  outline: none;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+/* Paragraphs inside list items and cells follow the item spacing, not the block gap. */
+.note li > p,
+.note li > div > p,
+.note td > p,
+.note th > p {
+  margin: 0;
+}
+
+/* ---------- Checklist (TaskList / TaskItem) ---------- */
+.note ul[data-type="taskList"] {
+  display: flex;
+  flex-direction: column;
+  gap: var(--check-gap);
+  margin: 0 0 var(--block-gap);
+  padding-left: 0;
+  list-style: none;
+}
+.note li > ul[data-type="taskList"] {
+  margin: var(--list-item-gap) 0 0;
+  padding-left: var(--list-indent);
+}
+
+.note ul[data-type="taskList"] > li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 0;
+  padding-left: 0;
+}
+
+.note ul[data-type="taskList"] > li > label {
+  flex-shrink: 0;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.note ul[data-type="taskList"] > li > label > span {
+  display: none;
+}
+
+.note ul[data-type="taskList"] > li > label > input {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  box-sizing: border-box;
+  border: 1.5px solid var(--check-border);
+  border-radius: 5px;
+  /* The check grows from the center when checked (D31). */
+  background: var(--check-bg) no-repeat center / 0 0;
+  cursor: pointer;
+  transition:
+    background-color var(--ui-fade),
+    border-color var(--ui-fade),
+    background-size var(--ui-slide);
+}
+.note ul[data-type="taskList"] > li > label > input:hover {
+  border-color: var(--check-border-hover);
+}
+.note ul[data-type="taskList"] > li > label > input:checked {
+  border-color: var(--text-strong);
+  background-color: var(--text-strong);
+  background-size: 10px 10px;
+  background-image: var(--check-mark-image);
+}
+.note ul[data-type="taskList"] > li > label > input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.note ul[data-type="taskList"] > li > div {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.note ul[data-type="taskList"] > li[data-checked="true"] > div {
+  color: var(--text-muted);
+}
+
+/* ---------- Table ---------- */
+.note .tableWrapper {
+  margin: 4px 0 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-block);
+  overflow-x: auto;
+}
+.note .tableWrapper table {
+  margin: 0;
+}
+.note tr:first-child td {
+  border-top: 0;
+}
+.note .selectedCell {
+  background: var(--ui-selection);
+}
+
+/* ---------- Raw Markdown kept from outside edits ---------- */
+.note .raw-markdown {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.note pre.raw-markdown {
+  margin: 0 0 var(--block-gap);
+  padding: 0;
+  background: none;
+  white-space: pre-wrap;
+}
+
+.note .ProseMirror-selectednode {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Hint under a new table; a decoration, never part of the note (table-behavior.ts). */
+.note .table-hint {
+  margin: -10px 0 12px;
+  font-size: 12.5px;
+  line-height: 20px;
+  color: var(--text-muted);
+  user-select: none;
+  pointer-events: none;
+}

@@ -213,7 +213,7 @@ Não precisa de Rust, de Visual Studio nem do WebView2: o Electron já traz o Ch
 | `npm run dev` | roda o app em modo de desenvolvimento (`scripts/dev.mjs`) |
 | `npm run build` | checa os tipos (`tsc`), gera o frontend (`vite build`) e compila `src/main/`, `src/preload/` e `src/shared/` pra `dist/` |
 | `npm run dist` | `build` mais electron-builder: gera o instalador NSIS em `release/`, sem publicar |
-| `npm run release` | `build` mais `scripts/release.mjs`: gera o instalador e publica numa release do `juanssilveira/noter` (D42). Antes, suba a `version` do `package.json`, faça o commit e o push: o script cria a release (e a tag) no commit atual com o `gh` antes do electron-builder enviar os arquivos, porque, deixando a criação pra ele, um dos dois envios simultâneos falha. O token vem do `GH_TOKEN` ou do `gh auth token` |
+| `npm run release` | `build` mais `scripts/release.mjs`: gera o instalador e publica numa release do `juanssilveira/noter` (D42). Antes, suba a `version` do `package.json` pela regra da D45 (correção, funcionalidade nova ou versão maior), faça o commit e o push: o script cria a release (e a tag) no commit atual com o `gh` antes do electron-builder enviar os arquivos, porque, deixando a criação pra ele, um dos dois envios simultâneos falha. O token vem do `GH_TOKEN` ou do `gh auth token` |
 | `npm test` | roda os testes (Vitest), de todas as pastas da `src/` |
 | `npx tsc --noEmit` | checa os tipos |
 | `npm run lint` | checa formatação, imports e lint de `src/` e `scripts/` (Biome, config em `biome.json`) |

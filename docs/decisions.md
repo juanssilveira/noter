@@ -201,6 +201,15 @@ Formato: **decisão**, depois o motivo e, quando houver, as alternativas descart
 - Só na nota vazia: uma linha vazia no meio de uma nota com conteúdo não mostra nada.
 - É uma decoração do editor (extensão Placeholder do Tiptap), nunca vai pro arquivo.
 
+### D45. Número da versão e mensagens de commit
+- A versão segue `MAIOR.MENOR.CORREÇÃO`, decidida pelo que a release traz desde a anterior:
+  - **CORREÇÃO** (0.2.**1**): só correções e ajustes pequenos, sem nada novo pro usuário;
+  - **MENOR** (0.**3**.0): pelo menos uma funcionalidade nova ou uma mudança visível de comportamento; a CORREÇÃO volta pra 0;
+  - **MAIOR** (**1**.0.0): quando o usuário considerar o app pronto (o 1.0), ou depois numa mudança que quebre algo (formato das notas, preferências). MENOR e CORREÇÃO voltam pra 0.
+- Até a 0.1.2 o número só subia na CORREÇÃO, sem regra; a 0.1.2 já trazia funcionalidades novas e, por esta regra, seria 0.2.0.
+- Mensagens de commit em inglês, como o código. Todo o histórico foi reescrito em inglês a pedido do usuário.
+- **Nunca reescrever uma tag que já tem release:** o push forçado da tag `v0.1.2` fez o GitHub apagar a release dela, que teve de ser recriada com os arquivos da pasta `release/`.
+
 ## Convenções
 
 ### D28. Código e arquivos em inglês; interface em pt-BR e inglês

@@ -46,6 +46,34 @@ export function PlusIcon() {
   );
 }
 
+export function MinusIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 20 20" {...stroke} strokeWidth="2" aria-hidden="true">
+      <path d="M4.5 10h11" />
+    </svg>
+  );
+}
+
+/** A magnifier: the note zoom control. */
+export function ZoomIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 20 20" {...stroke} strokeWidth="1.8" aria-hidden="true">
+      <circle cx="8.75" cy="8.75" r="5.25" />
+      <path d="m12.75 12.75 3.75 3.75" />
+    </svg>
+  );
+}
+
+/** An arrow turning back: reset. */
+export function ResetIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 20 20" {...stroke} strokeWidth="1.8" aria-hidden="true">
+      <path d="M4.5 10a5.5 5.5 0 1 0 1.6-3.9" />
+      <path d="M4 3.5v3.25h3.25" />
+    </svg>
+  );
+}
+
 export function MinimizeIcon() {
   return (
     <svg width="12" height="12" viewBox="0 0 20 20" {...stroke} strokeWidth="1.4" aria-hidden="true">

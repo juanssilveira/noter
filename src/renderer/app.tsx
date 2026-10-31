@@ -4,6 +4,7 @@ import { SaveIndicator } from './components/save-indicator';
 import { Sidebar } from './components/sidebar';
 import { TitleBar } from './components/title-bar';
 import { TooltipLayer } from './components/tooltip-layer';
+import { ZoomControl } from './components/zoom-control';
 import { useDocumentTheme } from './hooks/use-theme';
 import { useLocale } from './i18n/use-strings';
 import { confirmClose, onCloseRequested, setWindowAppearance, showWindow } from './services/app-window';
@@ -18,11 +19,21 @@ function isShortcut(event: KeyboardEvent, key: string): boolean {
   return event.ctrlKey && !event.altKey && !event.shiftKey && !event.metaKey && event.key.toLowerCase() === key;
 }
 
+/** Ctrl with "+" (on "=" or the keypad, with or without Shift), "-" or "0": the note zoom keys. */
+function zoomDirection(event: KeyboardEvent): 1 | -1 | 0 | null {
+  if (!event.ctrlKey || event.altKey || event.metaKey) return null;
+  if (event.key === '=' || event.key === '+') return 1;
+  if (event.key === '-') return -1;
+  if (event.key === '0' && !event.shiftKey) return 0;
+  return null;
+}
+
 export default function App() {
   const status = useAppStore((state) => state.status);
   const init = useAppStore((state) => state.init);
   const toggleSidebar = useAppStore((state) => state.toggleSidebar);
   const newNote = useAppStore((state) => state.newNote);
+  const zoomNote = useAppStore((state) => state.zoomNote);
   const flushPending = useAppStore((state) => state.flushPending);
   const reloadFromDisk = useAppStore((state) => state.reloadFromDisk);
   const entry = useSelectedEntry();
@@ -108,11 +119,16 @@ export default function App() {
       } else if (isShortcut(event, 't')) {
         event.preventDefault();
         newNote();
+      } else {
+        const zoom = zoomDirection(event);
+        if (zoom === null) return;
+        event.preventDefault();
+        zoomNote(zoom);
       }
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [toggleSidebar, newNote]);
+  }, [toggleSidebar, newNote, zoomNote]);
 
   return (
     <div className="app">
@@ -122,6 +138,7 @@ export default function App() {
         <main className="app-content">
           {entry && <NoteEditor key={`${entry.id}:${entry.revision}`} entry={entry} />}
         </main>
+        <ZoomControl />
         <SaveIndicator />
       </div>
       <TooltipLayer />

@@ -91,6 +91,15 @@ const pt = {
   noteContent: 'Conteúdo da nota',
   /** First line of an empty note (D44). */
   notePlaceholder: 'Escreva algo…',
+
+  // Note zoom (Ctrl + / Ctrl -)
+  noteZoom: 'Zoom da nota',
+  zoomOut: 'Diminuir zoom',
+  zoomIn: 'Aumentar zoom',
+  zoomReset: 'Voltar pra 100%',
+  /** Tooltip of zoom out / zoom in at the limits, in place of the action. */
+  zoomMinReached: 'Zoom mínimo atingido',
+  zoomMaxReached: 'Zoom máximo atingido',
   saved: 'Salvo',
 
   // Updates (D42)
@@ -178,6 +187,13 @@ const en: Strings = {
 
   noteContent: 'Note content',
   notePlaceholder: 'Write something…',
+
+  noteZoom: 'Note zoom',
+  zoomOut: 'Zoom out',
+  zoomIn: 'Zoom in',
+  zoomReset: 'Reset to 100%',
+  zoomMinReached: 'Minimum zoom reached',
+  zoomMaxReached: 'Maximum zoom reached',
   saved: 'Saved',
 
   updateReady: (version) => `Version ${version} ready`,

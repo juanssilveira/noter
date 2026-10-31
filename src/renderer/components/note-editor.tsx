@@ -47,6 +47,7 @@ export function NoteEditor({ entry }: NoteEditorProps) {
   const setEditor = useAppStore((state) => state.setEditor);
   const focusToken = useAppStore((state) => state.focusToken);
   const spellcheck = useAppStore((state) => state.spellcheck);
+  const zoom = useAppStore((state) => state.noteZoom);
   const s = useStrings();
   // The table hint reads this when drawn: the editor keeps the extensions it was created with.
   const tableHint = useRef(s.tableHint);
@@ -121,7 +122,9 @@ export function NoteEditor({ entry }: NoteEditorProps) {
 
   return (
     <>
-      <EditorContent editor={editor} className="note-editor" onContextMenu={onContextMenu} />
+      {/* Zoom on the note only (Ctrl + / Ctrl -): the text grows and still wraps in the same width; the
+          menus sit outside it, at normal size. */}
+      <EditorContent editor={editor} className="note-editor" style={{ zoom }} onContextMenu={onContextMenu} />
       {editor && tableMenu && (
         <ContextMenu
           x={tableMenu.x}

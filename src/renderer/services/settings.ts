@@ -2,6 +2,7 @@
 // writes and flushes them before quitting (D09). Window size and position are handled there too.
 
 import type { Language } from '../domain/language';
+import { NOTE_ZOOM_DEFAULT } from '../domain/note-zoom';
 import { SIDEBAR_WIDTH_DEFAULT } from '../domain/sidebar-width';
 import type { Theme } from '../domain/theme';
 import { platform } from './platform';
@@ -16,6 +17,8 @@ export type Settings = {
   sidebarOpen: boolean;
   /** Sidebar width in px (D38), clamped when read. */
   sidebarWidth: number;
+  /** Zoom of the note area (Ctrl + / Ctrl -), clamped when read. */
+  noteZoom: number;
   showNewNoteButton: boolean;
   /** The editor's spell checker. */
   spellcheck: boolean;
@@ -33,6 +36,7 @@ export const DEFAULT_SETTINGS: Settings = {
   cursors: {},
   sidebarOpen: true,
   sidebarWidth: SIDEBAR_WIDTH_DEFAULT,
+  noteZoom: NOTE_ZOOM_DEFAULT,
   showNewNoteButton: true,
   spellcheck: true,
   theme: 'system',

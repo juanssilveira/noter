@@ -167,6 +167,8 @@ Segue a tela `menu-options`. É um menu ancorado à direita, logo abaixo do bot�
 | Ctrl T | Nova nota |
 | Ctrl \ | Mostrar ou esconder a sidebar |
 | Esc | Fecha o menu ou campo aberto |
+| Ctrl + / Ctrl - | Zoom só da área da nota, de 80% a 150%, de 10 em 10%. Fica salvo nas preferências |
+| Ctrl 0 | Volta o zoom da nota pra 100% |
 
 Os atalhos do editor (negrito, itálico e afins) seguem o padrão do Tiptap.
 

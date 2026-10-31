@@ -41,6 +41,10 @@ button {
   font: inherit;
   cursor: pointer;
 }
+/* A disabled button (the zoom ones at the limits) says so under the pointer. */
+button:disabled {
+  cursor: not-allowed;
+}
 
 :focus-visible {
   outline: 2px solid var(--accent);
@@ -95,6 +99,109 @@ button {
 .save-indicator-visible {
   opacity: 0.55;
   transition-duration: 200ms;
+}
+/* With the zoom control in the corner, "Salvo" moves left of its magnifier. */
+.zoom-control ~ .save-indicator {
+  right: 56px;
+}
+
+/* Note zoom (zoom-control.tsx), floating in the bottom right corner, faint until hovered. The magnifier
+   is only a sign, so it sits alone in its circle; the actions (zoom out, the level, zoom in, reset) are
+   a pill of their own that slides out 6 px to its left. */
+.zoom-control {
+  position: absolute;
+  z-index: 2;
+  right: 16px;
+  bottom: 12px;
+  color: var(--ui-muted);
+  opacity: 0.7;
+  transition: opacity var(--ui-fade);
+}
+@starting-style {
+  .zoom-control {
+    opacity: 0;
+  }
+}
+.zoom-control:hover,
+.zoom-control:focus-within {
+  opacity: 1;
+}
+.zoom-control-icon,
+.zoom-control-actions {
+  height: 28px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--ui-border-window);
+  border-radius: 14px;
+  background: var(--ui-raised);
+  box-shadow: var(--ui-shadow-raised);
+}
+.zoom-control-icon {
+  width: 28px;
+  justify-content: center;
+}
+.zoom-control-actions {
+  position: absolute;
+  top: 0;
+  right: calc(100% + 6px);
+  gap: 2px;
+  padding: 0 3px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(6px);
+  transition:
+    opacity 180ms var(--ui-ease-out),
+    transform 180ms var(--ui-ease-out);
+}
+/* Covers the 6 px gap, so the pointer can cross from the magnifier to the pill without closing it. */
+.zoom-control-actions::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 100%;
+  width: 7px;
+}
+.zoom-control:hover .zoom-control-actions,
+.zoom-control:focus-within .zoom-control-actions {
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+}
+.zoom-control-button {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--ui-icon);
+  transition:
+    background-color var(--ui-fade),
+    color var(--ui-fade);
+}
+.zoom-control-button:hover:not(:disabled) {
+  background: var(--ui-hover);
+  color: var(--ui-text);
+}
+.zoom-control-button:disabled {
+  opacity: 0.35;
+}
+.zoom-control-button svg {
+  width: 13px;
+  height: 13px;
+}
+.zoom-control-value {
+  min-width: 34px;
+  color: var(--ui-label);
+  font-size: 11.5px;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
 }
 
 .app-content {

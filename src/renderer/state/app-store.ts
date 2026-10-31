@@ -6,6 +6,7 @@ import { create } from 'zustand';
 import { createDraftNote, type Entry, isBlankDraft, isDraft, neighborAfterRemoval } from '../domain/entries';
 import { isLanguage, type Language } from '../domain/language';
 import { isBlankBody, type Note, type NoteMeta } from '../domain/note';
+import { clampNoteZoom, NOTE_ZOOM_DEFAULT, stepNoteZoom } from '../domain/note-zoom';
 import { pickInitialNote } from '../domain/selection';
 import { clampSidebarWidth, SIDEBAR_WIDTH_DEFAULT } from '../domain/sidebar-width';
 import { isTheme, type Theme } from '../domain/theme';
@@ -37,6 +38,8 @@ type AppState = {
   sidebarOpen: boolean;
   /** Within the limits of D38; the CSS also caps it to leave the note area its minimum. */
   sidebarWidth: number;
+  /** Zoom of the note area only, 0.8 to 1.5. */
+  noteZoom: number;
   /** Title bar buttons the user can hide from the options menu. */
   layout: LayoutOptions;
   /** The editor's spell checker, switched in the options menu. */
@@ -67,6 +70,8 @@ type AppState = {
   /** While dragging: updates the width without saving it. */
   setSidebarWidth: (width: number) => void;
   saveSidebarWidth: () => void;
+  /** One 10% step in (1) or out (-1), or back to 100% (0); saved. */
+  zoomNote: (direction: 1 | -1 | 0) => void;
   setLayoutOption: (option: keyof LayoutOptions, value: boolean) => void;
   setSpellcheck: (value: boolean) => void;
   setTheme: (theme: Theme) => void;
@@ -183,6 +188,7 @@ export const useAppStore = create<AppState>()((set, get) => {
     selectedId: null,
     sidebarOpen: true,
     sidebarWidth: SIDEBAR_WIDTH_DEFAULT,
+    noteZoom: NOTE_ZOOM_DEFAULT,
     layout: {
       showNewNoteButton: DEFAULT_SETTINGS.showNewNoteButton,
     },
@@ -217,6 +223,7 @@ export const useAppStore = create<AppState>()((set, get) => {
           selectedId: selected.id,
           sidebarOpen: settings.sidebarOpen,
           sidebarWidth: clampSidebarWidth(settings.sidebarWidth),
+          noteZoom: clampNoteZoom(settings.noteZoom),
           layout: {
             showNewNoteButton: settings.showNewNoteButton,
           },
@@ -271,6 +278,12 @@ export const useAppStore = create<AppState>()((set, get) => {
 
     saveSidebarWidth: () => {
       void saveSetting('sidebarWidth', get().sidebarWidth);
+    },
+
+    zoomNote: (direction) => {
+      const noteZoom = direction === 0 ? NOTE_ZOOM_DEFAULT : stepNoteZoom(get().noteZoom, direction);
+      set({ noteZoom });
+      void saveSetting('noteZoom', noteZoom);
     },
 
     setLayoutOption: (option, value) => {

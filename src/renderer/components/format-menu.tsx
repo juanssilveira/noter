@@ -5,18 +5,8 @@ import { normalizeUrl } from '../editor/links';
 import { useDismiss } from '../hooks/use-dismiss';
 import { useMenuPosition } from '../hooks/use-menu-position';
 import { useStrings } from '../i18n/use-strings';
-import {
-  BulletListIcon,
-  CheckIcon,
-  CodeBlockIcon,
-  CodeIcon,
-  DividerIcon,
-  HighlightIcon,
-  LinkIcon,
-  OrderedListIcon,
-  QuoteIcon,
-  TableIcon,
-} from './icons';
+import { BulletListIcon, CheckIcon, CodeBlockIcon, DividerIcon, OrderedListIcon, QuoteIcon, TableIcon } from './icons';
+import { MarkButtons } from './mark-buttons';
 
 type FormatMenuProps = {
   editor: Editor;
@@ -29,7 +19,7 @@ type FormatMenuProps = {
 };
 
 // Opened by a right click in the text (D36). Screen: docs/design/screens/menu-formatting.html.
-// Text styles and blocks close the menu; marks keep it open so several can be combined.
+// Every choice closes the menu, marks included (the user found it odd to stay open after one).
 // "Link" swaps the menu for a URL field (D23).
 export function FormatMenu({ editor, x, y, onClose, onInsertTable }: FormatMenuProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -47,13 +37,6 @@ export function FormatMenu({ editor, x, y, onClose, onInsertTable }: FormatMenuP
       h4: editor.isActive('heading', { level: 4 }),
       body: editor.isActive('paragraph'),
       small: editor.isActive('smallText'),
-      bold: editor.isActive('bold'),
-      italic: editor.isActive('italic'),
-      underline: editor.isActive('underline'),
-      strike: editor.isActive('strike'),
-      code: editor.isActive('code'),
-      link: editor.isActive('link'),
-      highlight: editor.isActive('highlight'),
     }),
   });
 
@@ -96,19 +79,6 @@ export function FormatMenu({ editor, x, y, onClose, onInsertTable }: FormatMenuP
     </button>
   );
 
-  const mark = (label: string, isActive: boolean, run: () => void, content: ReactNode, className = '') => (
-    <button
-      type="button"
-      className={`menu-icon-button ${className}`}
-      aria-label={label}
-      data-tooltip={label}
-      aria-pressed={isActive}
-      onClick={run}
-    >
-      {content}
-    </button>
-  );
-
   const block = (label: string, icon: ReactNode, run: () => void) => (
     <button
       type="button"
@@ -137,13 +107,7 @@ export function FormatMenu({ editor, x, y, onClose, onInsertTable }: FormatMenuP
     >
       {/* The marks first: the menu opens at the mouse, so the quick actions are right under it. */}
       <div className="menu-icon-row">
-        {mark(s.bold, active.bold, () => chain().toggleBold().run(), 'B', 'format-bold')}
-        {mark(s.italic, active.italic, () => chain().toggleItalic().run(), 'I', 'format-italic')}
-        {mark(s.underline, active.underline, () => chain().toggleUnderline().run(), 'U', 'format-underline')}
-        {mark(s.strike, active.strike, () => chain().toggleStrike().run(), 'S', 'format-strike')}
-        {mark(s.code, active.code, () => chain().toggleCode().run(), <CodeIcon />)}
-        {mark(s.link, active.link, () => setLinkMode(true), <LinkIcon />)}
-        {mark(s.highlight, active.highlight, () => chain().toggleHighlight().run(), <HighlightIcon />)}
+        <MarkButtons editor={editor} onLink={() => setLinkMode(true)} onDone={onClose} />
       </div>
 
       <div className="menu-separator" role="separator" />

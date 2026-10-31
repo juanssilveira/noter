@@ -26,6 +26,8 @@ export function TitleBar() {
   const newNote = useAppStore((state) => state.newNote);
   const entry = useSelectedEntry();
   const noteCreated = entry?.note.meta.created ?? null;
+  // The note title when it was renamed; otherwise its creation date (D15).
+  const noteTitle = entry?.note.meta.title ?? null;
   const [maximized, setMaximized] = useState(false);
   const locale = useLocale();
   const s = useStrings();
@@ -53,7 +55,7 @@ export function TitleBar() {
 
       {noteCreated && (
         <span className="title-bar-date" data-drag-region>
-          {formatHeaderDate(noteCreated, new Date(), locale)}
+          {noteTitle ?? formatHeaderDate(noteCreated, new Date(), locale)}
         </span>
       )}
 

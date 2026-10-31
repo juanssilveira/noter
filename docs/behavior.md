@@ -136,7 +136,7 @@ Colisão de nome no mesmo segundo: acrescentar um sufixo (`_2`, `_3`…). É rar
 - Com algum menu aberto, a barra para de arrastar: o primeiro clique nela só fecha o menu. Depois ela volta a arrastar.
 - **Ordem, da esquerda pra direita** (sidebar fechada):
   1. botão de lista;
-  2. data de criação da nota, `Sex, 30 de outubro · 12:29`;
+  2. título da nota, se ela foi renomeada; senão, a data de criação, `Sex, 30 de outubro · 12:29` (D15). Um título longo termina em reticências;
   3. espaço flexível;
   4. Nova nota (círculo com +);
   5. Mais opções (três pontos), sempre seguido de uma linha fina antes dos botões de janela;
@@ -204,7 +204,7 @@ Segue a tela `menu-formatting`. Abre com o **clique direito em qualquer ponto do
 - **Texto:** Heading 1, Heading 2, Heading 3, Heading 4, Corpo e Pequeno (os níveis de título se chamam "Heading" no menu, a pedido do usuário; ver D28). Eles aplicam o estilo ao bloco atual, e o estilo ativo aparece com um check e fundo cinza.
 - **Marcas:** Negrito, Itálico, Sublinhado, Tachado, Código, Link e Destaque, que se aplicam à seleção.
 - **Blocos:** Lista com marcadores, Lista numerada, Citação, Bloco de código, Tabela e Divisor. **Tabela** troca o menu pela grade de tabela, no mesmo lugar.
-- O menu fecha depois de aplicar um estilo de texto ou um bloco. Nas marcas, ele continua aberto, pra combinar várias.
+- O menu fecha depois de aplicar qualquer opção, marcas inclusive.
 
 ### Link **D23**
 - Colar uma URL com texto selecionado transforma o texto em link.

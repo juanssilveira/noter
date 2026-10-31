@@ -68,7 +68,8 @@ Formato: **decisão**, depois o motivo e, quando houver, as alternativas descart
 - Renomear: clique direito na lista, **Renomear**, edição inline no item.
 - **Descartado:** título a partir do primeiro Título 1 ou da primeira linha. O usuário quer título só manual.
 
-### D15. O cabeçalho da nota mostra sempre a data de criação, mesmo com título
+### D15. O cabeçalho da nota mostra o título, ou a data de criação sem título
+- Pedido do usuário (antes era sempre a data, mesmo com título). Com título (nota renomeada), a barra mostra o título; sem, a data de criação, como antes.
 
 ### D16. A lista ordena e agrupa por data de criação: Hoje, Ontem, Últimos 7 dias, Últimos 30 dias e meses
 - **Motivo:** a nota não pula de lugar quando é editada, e o título-data sempre bate com o grupo.
@@ -109,6 +110,7 @@ Formato: **decisão**, depois o motivo e, quando houver, as alternativas descart
 - Clique direito em qualquer ponto do texto abre o menu Aa inteiro na posição do mouse. Em Blocos ele tem o item **Tabela**, que troca o menu pela grade de tabela no mesmo lugar.
 - Clique dentro da seleção mantém a seleção. Fora dela, o cursor vai pro ponto clicado antes de o menu abrir.
 - Numa célula de tabela, vale o menu da tabela (D22).
+- Toda opção fecha o menu, marcas inclusive (a pedido do usuário; antes as marcas o deixavam aberto, pra combinar várias).
 - **Motivo:** o usuário achou a grade estranha ancorada na barra e preferiu tirar Aa e Tabela de lá (revoga a D24).
 - **Descartado:** um menu só de marcas, aberto só com seleção (primeira versão desta decisão), dois menus separados (com e sem seleção) e submenus.
 

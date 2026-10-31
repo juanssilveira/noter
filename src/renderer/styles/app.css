@@ -399,7 +399,7 @@ button:disabled {
 }
 
 .note-group-label {
-  font-size: 12.5px;
+  font-size: 14.5px;
   font-weight: 600;
   color: var(--ui-label);
 }
@@ -1116,11 +1116,15 @@ button:disabled {
 
 /* Right after the sidebar toggle (app-all-hidden.html). */
 .title-bar-date {
+  min-width: 0;
   margin-left: 6px;
   font-size: 12.5px;
   /* One step above --ui-muted: the tone of the bar icons next to it. */
   color: var(--ui-icon);
   white-space: nowrap;
+  /* A long title (D15) ends in an ellipsis instead of pushing the buttons. */
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 /* Sidebar open and nothing before the date: a bit more room from the sidebar (12 + 12 = 24 px). */
 .title-bar-sidebar-open > .title-bar-date:first-child {

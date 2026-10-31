@@ -131,6 +131,16 @@
   white-space: pre-wrap;
 }
 
+/* Links open with Ctrl + click (D23): the hand only while Ctrl is down (note-editor.tsx); otherwise the
+   text cursor, since a plain click just places the cursor. */
+.note.ctrl-held a {
+  cursor: pointer;
+}
+/* Without Ctrl the link can't be clicked open, so hovering doesn't light up its underline either. */
+.note:not(.ctrl-held) a:hover {
+  text-decoration-color: var(--link-underline);
+}
+
 .note .ProseMirror-selectednode {
   outline: 2px solid var(--accent);
   outline-offset: 2px;

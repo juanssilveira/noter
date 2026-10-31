@@ -98,6 +98,22 @@ export function NoteEditor({ entry }: NoteEditorProps) {
     if (focusToken > 0) editor?.commands.focus();
   }, [editor, focusToken]);
 
+  // Links open with Ctrl + click (D23): while Ctrl is down, the pointer over them turns into a hand.
+  useEffect(() => {
+    if (!editor) return;
+    const dom = editor.view.dom;
+    const onKey = (event: KeyboardEvent) => dom.classList.toggle('ctrl-held', event.ctrlKey);
+    const onBlur = () => dom.classList.remove('ctrl-held');
+    window.addEventListener('keydown', onKey);
+    window.addEventListener('keyup', onKey);
+    window.addEventListener('blur', onBlur);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      window.removeEventListener('keyup', onKey);
+      window.removeEventListener('blur', onBlur);
+    };
+  }, [editor]);
+
   // Save before the editor goes away (another note selected, app closing).
   useEffect(() => () => void flushPending(), [flushPending]);
 

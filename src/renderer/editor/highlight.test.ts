@@ -26,9 +26,24 @@ function press(editor: Editor, key: string): boolean {
   return editor.view.someProp('handleKeyDown', (handle) => handle(editor.view, event)) ?? false;
 }
 
-/** Text going in where the cursor is, with the stored marks, as typing does. */
+/** Text going in where the cursor is, as typing does: through handleTextInput, else with the stored marks. */
 function type(editor: Editor, text: string) {
-  editor.view.dispatch(editor.state.tr.insertText(text));
+  const { view } = editor;
+  const { from, to } = view.state.selection;
+  const deflt = () => view.state.tr.insertText(text, from, to);
+  if (view.someProp('handleTextInput', (handle) => handle(view, from, to, text, deflt))) return;
+  view.dispatch(view.state.tr.insertText(text));
+}
+
+/** An editor with the cursor right before the first highlighted character. */
+function editorAtHighlightStart(markdown: string): Editor {
+  const editor = editorAtEnd(markdown);
+  let start = 0;
+  editor.state.doc.descendants((node, pos) => {
+    if (!start && node.marks.some((mark) => mark.type.name === 'highlight')) start = pos;
+  });
+  editor.commands.setTextSelection(start);
+  return editor;
 }
 
 /** A key that types: its keydown first, then the text when nothing handled it. */
@@ -92,5 +107,36 @@ describe('highlight', () => {
     key(apart, ' ');
     press(apart, 'Shift');
     expect(press(apart, ' ')).toBe(false);
+  });
+});
+
+describe('highlight start', () => {
+  it('takes text typed right before the first highlighted character', () => {
+    const editor = editorAtHighlightStart('a ==marcado==');
+    key(editor, 'x');
+    expect(markdown(editor)).toBe('a ==xmarcado==');
+  });
+
+  it('lets the left arrow there move out in one press, in the middle of a line', () => {
+    expect(press(editorAtHighlightStart('a ==marcado=='), 'ArrowLeft')).toBe(false);
+  });
+
+  it('does the same at the start of a block, where the left arrow keeps the next text plain', () => {
+    const joined = editorAtHighlightStart('==marcado== b');
+    key(joined, 'x');
+    expect(markdown(joined)).toBe('==xmarcado== b');
+
+    const plain = editorAtHighlightStart('==marcado== b');
+    expect(press(plain, 'ArrowLeft')).toBe(true);
+    key(plain, 'x');
+    expect(markdown(plain)).toBe('x==marcado== b');
+
+    const twice = editorAtHighlightStart('==marcado== b');
+    press(twice, 'ArrowLeft');
+    expect(press(twice, 'ArrowLeft')).toBe(false);
+  });
+
+  it('leaves the left arrow alone elsewhere', () => {
+    expect(press(editorAtEnd('a ==marcado== b'), 'ArrowLeft')).toBe(false);
   });
 });

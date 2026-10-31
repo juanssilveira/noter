@@ -40,7 +40,7 @@ export function TitleBar() {
       {!sidebarOpen && (
         <button
           type="button"
-          className="icon-button"
+          className="icon-button icon-button-plain"
           aria-label={s.showList}
           data-tooltip={s.showListTitle}
           onClick={toggleSidebar}
@@ -48,6 +48,8 @@ export function TitleBar() {
           <SidebarIcon />
         </button>
       )}
+      {/* Between the list button and the date, like a breadcrumb separator. */}
+      {!sidebarOpen && noteCreated && <span className="title-bar-slash" aria-hidden="true" data-drag-region />}
 
       {noteCreated && (
         <span className="title-bar-date" data-drag-region>

@@ -129,8 +129,8 @@ button {
 .sidebar-title {
   flex: 1 1 0;
   min-width: 0;
-  /* The icon button already leaves 10 px of air on the right of the icon. */
-  padding: 4px 4px 4px 0;
+  /* 6 px clear of the icon button, whose hover background reaches 10 px past the icon. */
+  padding: 4px 4px 4px 6px;
   font-size: 13.5px;
   font-weight: 600;
   letter-spacing: -0.01em;
@@ -1012,6 +1012,19 @@ button {
   margin-left: 8px;
   background: var(--ui-border-window);
 }
+/* The same line, slanted like a "/": between the list button and the date, with the sidebar closed.
+   Centered between them: the button already leaves 10 px right of its icon, so 10 px to the date too. */
+.title-bar-slash {
+  flex-shrink: 0;
+  width: 1px;
+  height: 16px;
+  /* Slanted and thin, it reads fainter than the upright one: a step stronger. */
+  background: color-mix(in srgb, var(--ui-muted) 22%, var(--ui-border-window));
+  transform: rotate(20deg);
+}
+.title-bar-slash + .title-bar-date {
+  margin-left: 10px;
+}
 
 .title-bar-spacer {
   flex: 1 1 0;
@@ -1040,6 +1053,12 @@ button {
   color: var(--ui-icon);
 }
 .icon-button:hover { background: var(--ui-hover); }
+/* Same size and click area, but no background on hover: only the icon lights up (the list button at the
+   start of the title bar, next to the date). */
+.icon-button-plain:hover {
+  background: transparent;
+  color: var(--ui-text);
+}
 .icon-button[aria-expanded="true"] {
   background: var(--ui-hover);
   color: var(--ui-text);

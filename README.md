@@ -21,7 +21,7 @@ Depois disso, o app atualiza sozinho.
 **Lista**
 
 - Agrupada por data: Hoje, Ontem, Últimos 7 dias, Últimos 30 dias e meses
-- Dá pra esconder (`Ctrl` `\`) e ajustar a largura arrastando a borda
+- Dá pra esconder (`Ctrl` `]`) e ajustar a largura arrastando a borda
 
 **Editor**
 

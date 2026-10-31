@@ -43,7 +43,7 @@ type Option<T extends string> = { value: T; label: string; icon: ReactNode };
 
 const SHORTCUTS: { label: keyof Strings; keys: string[] }[] = [
   { label: 'newNote', keys: ['Ctrl', 'T'] },
-  { label: 'toggleSidebar', keys: ['Ctrl', '\\'] },
+  { label: 'toggleSidebar', keys: ['Ctrl', ']'] },
 ];
 
 const THEME_ICONS: Record<Theme, () => ReactNode> = { system: MonitorIcon, light: SunIcon, dark: MoonIcon };

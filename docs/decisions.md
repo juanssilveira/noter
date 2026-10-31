@@ -210,6 +210,11 @@ Formato: **decisão**, depois o motivo e, quando houver, as alternativas descart
 - Mensagens de commit em inglês, como o código. Todo o histórico foi reescrito em inglês a pedido do usuário.
 - **Nunca reescrever uma tag que já tem release:** o push forçado da tag `v0.1.2` fez o GitHub apagar a release dela, que teve de ser recriada com os arquivos da pasta `release/`.
 
+### D46. Ctrl ] mostra e esconde a sidebar
+- Pedido do usuário. Era Ctrl \, que não dá pra usar em teclados compactos (75%) sem a tecla `\`.
+- Ctrl B foi descartado porque já é o negrito do editor (Tiptap).
+- A tecla é lida pelo caractere (`event.key`), então funciona no ABNT2 e no layout americano.
+
 ## Convenções
 
 ### D28. Código e arquivos em inglês; interface em pt-BR e inglês

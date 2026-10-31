@@ -132,7 +132,7 @@ export default function App() {
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
-      if (isShortcut(event, '\\')) {
+      if (isShortcut(event, ']')) {
         event.preventDefault();
         toggleSidebar();
       } else if (isShortcut(event, 't')) {

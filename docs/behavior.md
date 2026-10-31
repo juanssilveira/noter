@@ -105,7 +105,7 @@ Colisão de nome no mesmo segundo: acrescentar um sufixo (`_2`, `_3`…). É rar
 - **Clique direito:** abre o menu de contexto com **Renomear** e **Apagar**.
 
 ### Mostrar e esconder
-- Ctrl \ ou o botão de lista alterna a sidebar.
+- Ctrl ] ou o botão de lista alterna a sidebar (D46).
 - O estado fica salvo nas preferências.
 - Com a sidebar fechada, o botão de lista vai pro começo da barra principal (tela `app-sidebar-closed`).
 
@@ -157,7 +157,7 @@ Segue a tela `menu-options`. É um menu ancorado à direita, logo abaixo do bot�
   - Só uma das duas fica aberta por vez; abrir uma fecha a outra. Clicar de novo na linha fecha.
   - Interruptor **Efeito acrílico** (D40), desligado por padrão: deixa a sidebar translúcida, com o borrado do que está atrás da janela. A barra e a nota continuam sólidas.
 - **Layout:** o interruptor **Mostrar botão nova nota**, com efeito imediato e salvo nas preferências.
-- **Atalhos:** num rodapé, só de leitura, com Nova nota (`Ctrl` `T`) e Mostrar / esconder lista (`Ctrl` `\`).
+- **Atalhos:** num rodapé, só de leitura, com Nova nota (`Ctrl` `T`) e Mostrar / esconder lista (`Ctrl` `]`).
 - **Teclado:** o menu abre com o foco na primeira linha. Setas pra cima e pra baixo andam pelas linhas (e pelas opções abertas), Home e End vão pro começo e pro fim, Enter e Espaço ativam. Seta pra direita abre as opções do Tema ou do Idioma, com o foco na atual; seta pra esquerda ou Esc fecham só elas.
 - Fecha com Esc, com um clique fora (inclusive na barra do topo) ou clicando de novo no botão.
 
@@ -166,7 +166,7 @@ Segue a tela `menu-options`. É um menu ancorado à direita, logo abaixo do bot�
 | Atalho | Ação |
 |---|---|
 | Ctrl T | Nova nota |
-| Ctrl \ | Mostrar ou esconder a sidebar |
+| Ctrl ] | Mostrar ou esconder a sidebar (D46) |
 | Esc | Fecha o menu ou campo aberto |
 | Ctrl + / Ctrl - | Zoom só da área da nota, de 80% a 150%, de 10 em 10%. Fica salvo nas preferências |
 | Ctrl 0 | Volta o zoom da nota pra 100% |

@@ -1,4 +1,4 @@
-import { type KeyboardEvent, useCallback, useRef, useState } from 'react';
+import { type CSSProperties, type KeyboardEvent, useCallback, useRef, useState } from 'react';
 import { type Entry, isDraft } from '../domain/entries';
 import { noteListItemText } from '../domain/list-item';
 import { groupNotes } from '../domain/note-groups';
@@ -14,7 +14,11 @@ import { UpdateNotice } from './update-notice';
 type MenuState = { id: string; x: number; y: number } | null;
 
 // Layout: docs/design/screens/app-sidebar-open.html. "Todas as notas" is plain text (D18).
-export function Sidebar() {
+/**
+ * `animated`: slides in when it appears and out when `closing` (after the sidebar was hidden; it no
+ * longer takes clicks then). Off at startup, where the saved state just applies.
+ */
+export function Sidebar({ closing = false, animated = false }: { closing?: boolean; animated?: boolean }) {
   const entries = useAppStore((state) => state.entries);
   const selectedId = useAppStore((state) => state.selectedId);
   const renamingId = useAppStore((state) => state.renamingId);
@@ -81,7 +85,11 @@ export function Sidebar() {
 
   return (
     // In a narrow window the sidebar gives way, so the note area keeps its minimum (D38).
-    <aside className="sidebar" style={{ width: `min(${width}px, calc(100vw - ${NOTE_AREA_MIN}px))` }}>
+    <aside
+      className={['sidebar', animated && 'sidebar-animated', closing && 'sidebar-closing'].filter(Boolean).join(' ')}
+      inert={closing}
+      style={{ '--sidebar-width': `min(${width}px, calc(100vw - ${NOTE_AREA_MIN}px))` } as CSSProperties}
+    >
       <div className="sidebar-header" data-drag-region>
         <button
           type="button"

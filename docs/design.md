@@ -167,4 +167,4 @@ Se algum desses ficar estranho rodando, pergunte ao usuário antes de mudar.
 - `--ui-fade` (120 ms, ease-out): fundo, cor e sombra no hover e no estado ativo de itens de menu, botões da barra e itens da lista; fundo e borda da caixa da checklist.
 - `--ui-slide` (180 ms, `cubic-bezier(.2,.8,.2,1)`): a bolinha e o trilho do interruptor, e o check da checklist, que cresce do centro.
 - Menu de opções: abre em 140 ms (`--ui-ease-out`), de opacidade 0, 4 px acima e 98% do tamanho até o normal, a partir do canto de cima à direita. Fecha sem animação.
-- Os outros menus e a sidebar abrem e fecham sem animação. Com `prefers-reduced-motion`, nada anima.
+- A sidebar desliza pra dentro e pra fora pela borda esquerda, com um leve fade (`--ui-slide`, 180 ms), a pedido do usuário. Os outros menus abrem e fecham sem animação. Com `prefers-reduced-motion`, nada anima.

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { NoteEditor } from './components/note-editor';
 import { SaveIndicator } from './components/save-indicator';
 import { Sidebar } from './components/sidebar';
@@ -28,6 +28,9 @@ function zoomDirection(event: KeyboardEvent): 1 | -1 | 0 | null {
   return null;
 }
 
+/** The sidebar slide (--ui-slide in tokens.css): how long a closing sidebar stays on screen. */
+const SIDEBAR_SLIDE_MS = 180;
+
 export default function App() {
   const status = useAppStore((state) => state.status);
   const init = useAppStore((state) => state.init);
@@ -38,6 +41,22 @@ export default function App() {
   const reloadFromDisk = useAppStore((state) => state.reloadFromDisk);
   const entry = useSelectedEntry();
   const sidebarOpen = useAppStore((state) => state.sidebarOpen);
+  // The sidebar slides in and out only once the app has loaded: at startup the saved state just applies
+  // (it arrives with the notes, while the window is still hidden).
+  const [settled, setSettled] = useState(false);
+  // Still on screen while it slides out after closing.
+  const [sidebarShown, setSidebarShown] = useState(sidebarOpen);
+  useEffect(() => {
+    if (sidebarOpen || !settled) {
+      setSidebarShown(sidebarOpen);
+      return;
+    }
+    const timer = window.setTimeout(() => setSidebarShown(false), SIDEBAR_SLIDE_MS);
+    return () => window.clearTimeout(timer);
+  }, [sidebarOpen, settled]);
+  useEffect(() => {
+    if (status !== 'loading') setSettled(true);
+  }, [status]);
   const theme = useAppStore((state) => state.theme);
   const acrylic = useAppStore((state) => state.acrylic);
   const locale = useLocale();
@@ -132,7 +151,8 @@ export default function App() {
 
   return (
     <div className="app">
-      {sidebarOpen && <Sidebar />}
+      {/* Open: at once, in the same render; closed: kept until it has slid out. */}
+      {(sidebarOpen || sidebarShown) && <Sidebar closing={!sidebarOpen} animated={settled} />}
       <div className="main">
         <TitleBar />
         <main className="app-content">

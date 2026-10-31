@@ -36,6 +36,7 @@ const pt = {
 
   // Options menu
   options: 'Opções',
+  general: 'Geral',
   appearance: 'Aparência',
   theme: 'Tema',
   system: 'Sistema',
@@ -47,7 +48,6 @@ const pt = {
   acrylicNeedsTransparency: 'Ative a transparência do Windows',
   layout: 'Layout',
   showNewNoteButton: 'Mostrar botão nova nota',
-  editor: 'Editor',
   spellcheck: 'Corretor ortográfico',
   shortcuts: 'Atalhos',
   toggleSidebar: 'Mostrar / esconder lista',
@@ -137,6 +137,7 @@ const en: Strings = {
   close: 'Close',
 
   options: 'Options',
+  general: 'General',
   appearance: 'Appearance',
   theme: 'Theme',
   system: 'System',
@@ -147,7 +148,6 @@ const en: Strings = {
   acrylicNeedsTransparency: 'Turn on transparency in Windows',
   layout: 'Layout',
   showNewNoteButton: 'Show new note button',
-  editor: 'Editor',
   spellcheck: 'Spell check',
   shortcuts: 'Shortcuts',
   toggleSidebar: 'Show / hide list',

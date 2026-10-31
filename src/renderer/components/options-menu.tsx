@@ -136,6 +136,25 @@ export function OptionsMenu({ anchor, onClose }: OptionsMenuProps) {
       style={{ top, right, maxHeight }}
       onKeyDown={onKeyDown}
     >
+      <div className="menu-section-label">{s.general}</div>
+      <ExpandableItem
+        {...sectionProps('language')}
+        icon={<GlobeIcon />}
+        label={s.language}
+        value={languageName(language, s)}
+        system={{ value: 'system', label: s.system, icon: <MonitorIcon /> }}
+        options={(['pt', 'en'] as const).map((value) => ({
+          value,
+          label: LANGUAGE_NAMES[value],
+          icon: LANGUAGE_ICONS[value](),
+        }))}
+        selected={language}
+        onSelect={setLanguage}
+      />
+      <Switch icon={<SpellcheckIcon />} label={s.spellcheck} checked={spellcheck} onChange={setSpellcheck} />
+
+      <div className="menu-separator" role="separator" />
+
       <div className="menu-section-label">{s.appearance}</div>
       <ExpandableItem
         {...sectionProps('theme')}
@@ -150,20 +169,6 @@ export function OptionsMenu({ anchor, onClose }: OptionsMenuProps) {
         }))}
         selected={theme}
         onSelect={setTheme}
-      />
-      <ExpandableItem
-        {...sectionProps('language')}
-        icon={<GlobeIcon />}
-        label={s.language}
-        value={languageName(language, s)}
-        system={{ value: 'system', label: s.system, icon: <MonitorIcon /> }}
-        options={(['pt', 'en'] as const).map((value) => ({
-          value,
-          label: LANGUAGE_NAMES[value],
-          icon: LANGUAGE_ICONS[value](),
-        }))}
-        selected={language}
-        onSelect={setLanguage}
       />
       <Switch
         icon={<AcrylicIcon />}
@@ -197,11 +202,6 @@ export function OptionsMenu({ anchor, onClose }: OptionsMenuProps) {
         onChange={(checked) => setLayoutOption('showNewNoteButton', checked)}
       />
 
-      <div className="menu-separator" role="separator" />
-
-      <div className="menu-section-label">{s.editor}</div>
-      <Switch icon={<SpellcheckIcon />} label={s.spellcheck} checked={spellcheck} onChange={setSpellcheck} />
-
       <div className="menu-footer">
         <div className="menu-section-label">{s.shortcuts}</div>
         {SHORTCUTS.map(({ label, keys }) => (
@@ -228,7 +228,7 @@ type ExpandableItemProps<T extends string> = {
   focus: boolean;
   onOpen: (focus: boolean) => void;
   onClose: () => void;
-  /** "Sistema", set apart from the real options by a line. */
+  /** "Sistema", first, before the real options. */
   system: Option<T>;
   options: Option<T>[];
   selected: T;
@@ -330,7 +330,6 @@ function ExpandableItem<T extends string>({
         onKeyDown={onListKeyDown}
       >
         {optionButton(system)}
-        <div className="menu-separator" role="separator" />
         {options.map(optionButton)}
       </div>
     </>

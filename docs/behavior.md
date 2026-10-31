@@ -149,13 +149,14 @@ Colisão de nome no mesmo segundo: acrescentar um sufixo (`_2`, `_3`…). É rar
 ## Menu de opções (três pontos)
 
 Segue a tela `menu-options`. É um menu ancorado à direita, logo abaixo do botão. Cada linha tem um ícone à esquerda.
+- **Geral:**
+  - **Idioma** (D41): igual ao Tema, com Sistema, Português (bandeira do Brasil) e English (bandeira dos EUA). Sistema segue o idioma do Windows (português pra `pt-*`, inglês pro resto).
+  - Interruptor **Corretor ortográfico**, ligado por padrão. Desligado, o editor para de sublinhar palavras. Tem efeito imediato e é salvo nas preferências.
 - **Aparência:**
-  - **Tema** (D39): a linha mostra o tema atual. O clique abre as opções logo abaixo dela, dentro do menu, ligadas à linha por traços em árvore: Sistema, uma linha separadora, Claro e Escuro, com um check na atual. Escolher aplica na hora, salva nas preferências e fecha as opções. Sistema é o padrão e acompanha o Windows, inclusive quando ele troca com o app aberto. O ícone da linha muda com o tema (monitor, sol ou lua).
-  - **Idioma** (D41): igual ao Tema, com Sistema, separador, Português (bandeira do Brasil) e English (bandeira dos EUA). Sistema segue o idioma do Windows (português pra `pt-*`, inglês pro resto).
+  - **Tema** (D39): a linha mostra o tema atual. O clique abre as opções logo abaixo dela, dentro do menu, ligadas à linha por traços em árvore: Sistema, Claro e Escuro, com um check na atual. Escolher aplica na hora, salva nas preferências e fecha as opções. Sistema é o padrão e acompanha o Windows, inclusive quando ele troca com o app aberto. O ícone da linha muda com o tema (monitor, sol ou lua).
   - Só uma das duas fica aberta por vez; abrir uma fecha a outra. Clicar de novo na linha fecha.
   - Interruptor **Efeito acrílico** (D40), desligado por padrão: deixa a sidebar translúcida, com o borrado do que está atrás da janela. A barra e a nota continuam sólidas.
 - **Layout:** o interruptor **Mostrar botão nova nota**, com efeito imediato e salvo nas preferências.
-- **Editor:** o interruptor **Corretor ortográfico**, ligado por padrão. Desligado, o editor para de sublinhar palavras. Também tem efeito imediato e é salvo nas preferências.
 - **Atalhos:** num rodapé, só de leitura, com Nova nota (`Ctrl` `T`) e Mostrar / esconder lista (`Ctrl` `\`).
 - **Teclado:** o menu abre com o foco na primeira linha. Setas pra cima e pra baixo andam pelas linhas (e pelas opções abertas), Home e End vão pro começo e pro fim, Enter e Espaço ativam. Seta pra direita abre as opções do Tema ou do Idioma, com o foco na atual; seta pra esquerda ou Esc fecham só elas.
 - Fecha com Esc, com um clique fora (inclusive na barra do topo) ou clicando de novo no botão.

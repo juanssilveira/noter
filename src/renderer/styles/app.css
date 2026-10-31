@@ -215,11 +215,29 @@ button:disabled {
 .sidebar {
   position: relative;
   flex-shrink: 0;
+  width: var(--sidebar-width);
   display: flex;
   flex-direction: column;
   background: var(--ui-sidebar-bg);
   border-right: 1px solid var(--ui-border-soft);
   user-select: none;
+}
+/* Showing and hiding (after startup) slide it in and out past the window edge, with a light fade: the
+   note area widens or narrows along, and the list keeps its width (no text squeezed while it moves). */
+.sidebar-animated {
+  transition:
+    margin-left var(--ui-slide),
+    opacity var(--ui-slide);
+}
+@starting-style {
+  .sidebar-animated {
+    margin-left: calc(-1 * var(--sidebar-width));
+    opacity: 0;
+  }
+}
+.sidebar-closing {
+  margin-left: calc(-1 * var(--sidebar-width));
+  opacity: 0;
 }
 
 /* The line is inside the 48 px, so the header still lines up with the title bar. */
@@ -789,7 +807,7 @@ button:disabled {
 /* Options of Tema and Idioma, right below the row, as a branch: a trunk drops from under the row's
    icon (its center is 10 + 8 = 18 px in) and a rounded branch curves out of it to each option; the
    trunk stops at the last option, whose curve closes the corner. Indented 36 px (10 + 16 + 10), so
-   the option icons line up with the row text. "Sistema" comes first, set apart by a line. */
+   the option icons line up with the row text. "Sistema" comes first. */
 .menu-subitems {
   position: relative;
   display: flex;
@@ -864,9 +882,6 @@ button:disabled {
   height: calc(50% + 999px);
   border-color: color-mix(in srgb, var(--ui-muted) 45%, var(--ui-tree));
 }
-.menu-subitems .menu-separator {
-  margin: 4px 4px 4px 36px;
-}
 .menu-subitems .menu-item-label {
   flex: 1 1 auto;
 }
@@ -929,10 +944,10 @@ button:disabled {
   border-bottom: 1px solid color-mix(in srgb, var(--ui-tree) 60%, transparent);
   border-bottom-left-radius: 5px;
 }
-/* The first one starts right under the label. */
+/* The first one starts just under the label, with a little air below the word. */
 .menu-section-label + .menu-shortcut::before {
-  top: -4px;
-  height: calc(50% + 4px);
+  top: -1px;
+  height: calc(50% + 1px);
 }
 .menu-shortcut:not(:last-child)::after {
   top: 50%;

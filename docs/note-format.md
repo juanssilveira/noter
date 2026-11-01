@@ -111,3 +111,4 @@ Em português e em inglês (D41). O inglês segue o padrão americano (mês ante
 - **Dias:** Seg, Ter, Qua, Qui, Sex, Sáb, Dom / Mon, Tue, Wed, Thu, Fri, Sat, Sun.
 - **Meses abreviados:** jan, fev, mar, abr, mai, jun, jul, ago, set, out, nov, dez / Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec.
 - **Ano:** só aparece quando não é o ano atual (suposição; ver [decisions.md](decisions.md#pontos-em-aberto)).
+- O cabeçalho do grupo não mostra mais o dia nem o intervalo (D48). Os formatadores continuam no domínio.

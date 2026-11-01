@@ -196,6 +196,14 @@ export function ChevronRightIcon() {
   );
 }
 
+export function ChevronDownIcon() {
+  return (
+    <svg width="12" height="12" viewBox="0 0 20 20" {...stroke} strokeWidth="1.8" aria-hidden="true">
+      <path d="M5 7.5l5 5 5-5" />
+    </svg>
+  );
+}
+
 // Options menu (16 px, like the block icons of the Aa menu).
 
 export function MonitorIcon() {

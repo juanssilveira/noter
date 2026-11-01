@@ -74,8 +74,7 @@ Formato: **decisão**, depois o motivo e, quando houver, as alternativas descart
 ### D16. A lista ordena e agrupa por data de criação: Hoje, Ontem, Últimos 7 dias, Últimos 30 dias e meses
 - **Motivo:** a nota não pula de lugar quando é editada, e o título-data sempre bate com o grupo.
 - Os grupos não se sobrepõem e contam dias do calendário no fuso local. Depois de 30 dias, um grupo por mês.
-- À direita do cabeçalho, o dia ou o intervalo que o grupo cobre. Nos meses, nada.
-- **Descartado:** semanas de segunda a domingo (primeira versão), um grupo único "Mais antigas", grupos por ano e a contagem de notas à direita.
+- **Descartado:** semanas de segunda a domingo (primeira versão), um grupo único "Mais antigas", grupos por ano, a contagem de notas à direita e a data/intervalo à direita do cabeçalho (saiu na D48).
 
 ### D17. Apagar = mandar o arquivo pra Lixeira do Windows, sem confirmação
 - Só pelo clique direito na lista.
@@ -222,6 +221,11 @@ Formato: **decisão**, depois o motivo e, quando houver, as alternativas descart
 - **Esc:** fora do campo, com uma consulta, limpa a busca (a lista volta ao normal). Menus e renomear continuam fechando no Esc. No campo: com texto, limpa; vazio, devolve o foco ao editor.
 - **Sem resultado:** "Nenhum resultado" / "No results" no lugar da lista, no tom da prévia.
 - **Descartado:** Ctrl K (era o texto fictício do canvas); busca só no título.
+
+### D48. Grupos da lista recolhíveis
+- Pedido do usuário, no lugar da data à direita do cabeçalho (D16).
+- O cabeçalho inteiro é o botão. À direita, uma seta pra baixo; recolhido, ela aponta pra direita. As notas somem na hora (D31: só a seta gira).
+- O estado não vai pras preferências: fecha o app, os grupos voltam abertos. Fechar a sidebar não esquece, porque o painel desmonta.
 
 ## Convenções
 

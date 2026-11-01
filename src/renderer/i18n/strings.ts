@@ -25,6 +25,8 @@ const pt = {
   yesterday: 'Ontem',
   last7Days: 'Últimos 7 dias',
   last30Days: 'Últimos 30 dias',
+  collapseGroup: 'Recolher',
+  expandGroup: 'Expandir',
 
   // Title bar
   moreOptions: 'Mais opções',
@@ -130,6 +132,8 @@ const en: Strings = {
   yesterday: 'Yesterday',
   last7Days: 'Last 7 days',
   last30Days: 'Last 30 days',
+  collapseGroup: 'Collapse',
+  expandGroup: 'Expand',
 
   moreOptions: 'More options',
   newNote: 'New note',

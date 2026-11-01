@@ -74,7 +74,7 @@ Colisão de nome no mesmo segundo: acrescentar um sufixo (`_2`, `_3`…). É rar
 ### Estrutura (de cima pra baixo)
 1. Linha do topo (48 px), que faz parte da barra arrastável: botão de esconder a lista e o texto fixo **"Todas as notas"**, sem seta e sem menu. **D18**
 2. Campo de busca. **D47**
-3. Grupos por data de criação, do mais recente pro mais antigo. **D16**
+3. Grupos por data de criação, do mais recente pro mais antigo. **D16**, **D48**
 
 ### Busca **D47**
 - O campo filtra a lista ao vivo pelo título mostrado, pela prévia e pelo corpo. Maiúsculas não importam. Vazio, a lista volta ao normal.
@@ -88,18 +88,21 @@ Colisão de nome no mesmo segundo: acrescentar um sufixo (`_2`, `_3`…). É rar
 - Em inglês (D41): `Today`, `Yesterday`, `Last 7 days`, `Last 30 days` e os meses (`September`, `December 2025`), com as datas em inglês (ver [note-format.md](note-format.md#formatos-de-data-na-interface)).
 - Exemplos com hoje = sexta, 30 de outubro:
 
-  | Grupo | Notas criadas | Texto à direita |
-  |---|---|---|
-  | `Hoje` | hoje (ou com data à frente do relógio) | o dia, ex.: `30 out` |
-  | `Ontem` | ontem | o dia, ex.: `29 out` |
-  | `Últimos 7 dias` | de 2 a 6 dias atrás | intervalo, ex.: `24 – 28 out` |
-  | `Últimos 30 dias` | de 7 a 29 dias atrás | intervalo, ex.: `1 – 23 out` |
-  | o mês, ex.: `Setembro`, `Dezembro de 2025` | 30 dias atrás ou mais, um grupo por mês | nada |
+  | Grupo | Notas criadas |
+  |---|---|
+  | `Hoje` | hoje (ou com data à frente do relógio) |
+  | `Ontem` | ontem |
+  | `Últimos 7 dias` | de 2 a 6 dias atrás |
+  | `Últimos 30 dias` | de 7 a 29 dias atrás |
+  | o mês, ex.: `Setembro`, `Dezembro de 2025` | 30 dias atrás ou mais, um grupo por mês |
 
-- **Intervalo:** quando os dois dias são do mesmo mês, o mês aparece uma vez só (`24 – 28 out`). Quando são de meses diferentes, cada dia leva o seu mês (`26 out – 1 nov`). O ano só aparece quando não é o atual.
-- O intervalo é o período fixo do grupo, não o das notas dentro dele.
 - Grupos sem notas não aparecem.
 - Dentro do grupo, as notas vão da criação mais nova pra mais antiga.
+
+### Recolher grupo **D48**
+- O cabeçalho do grupo é um botão. Clique recolhe ou expande as notas daquele período.
+- À direita, uma seta pra baixo. Recolhido, a seta aponta pra direita e a lista daquele grupo some. Sem animação de altura.
+- Não é salvo. Recolher um grupo cancela um rename que estiver aberto.
 
 ### Item da lista
 - **Linha 1 (título):**

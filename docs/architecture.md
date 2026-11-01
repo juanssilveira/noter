@@ -87,7 +87,7 @@ Os canais de nota validam que `file` é um nome simples dentro da pasta de notas
    - título exibido, prévia, agrupamento da lista e formatação de datas em pt-BR;
    - regras de rascunho.
 2. **Serviços:** wrappers do `window.noter` (notas, preferências, janela, fechar e links). É o único ponto do renderer que toca nele.
-3. **Estado:** a lista de notas, a nota aberta, o rascunho, a busca, a edição pendente e as preferências. Usa uma store Zustand (`src/renderer/state/app-store.ts`), lida pela barra, pela sidebar e pela área da nota.
+3. **Estado:** a lista de notas, a nota aberta, o rascunho, a busca, os grupos recolhidos, a edição pendente e as preferências. Usa uma store Zustand (`src/renderer/state/app-store.ts`), lida pela barra, pela sidebar e pela área da nota.
 4. **UI:** os componentes React e o editor Tiptap.
 
 ### Editor (Tiptap v3)

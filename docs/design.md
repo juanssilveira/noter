@@ -131,7 +131,7 @@ Fina, invisível até o hover. Copie o bloco `::-webkit-scrollbar` de qualquer t
 6. **Canto da janela:** usar o canto nativo do Windows 11, e não o raio de 14 do mockup.
 7. **Texto mais compacto:** altura de linha de 24 px na nota (no canvas, 26) e 8 px entre parágrafos e blocos (`--block-gap`, no canvas 12). Parágrafos ficam com passo de 32 px (no canvas, 38).
 8. **Listas mais compactas:** sem espaço entre itens (`--list-item-gap: 0`) e o bullet com `line-height: 0` pra não esticar a linha. O passo das listas com bullet e numeradas fica em 24 px (no canvas, 32). A caixa da checklist acompanha a linha de 24 px.
-9. **Grupos da lista:** no lugar de "Esta semana", "Semana passada" e das semanas do canvas, os grupos são Hoje, Ontem, Últimos 7 dias, Últimos 30 dias e os meses (D16). O cabeçalho mantém o mesmo visual.
+9. **Grupos da lista:** no lugar de "Esta semana", "Semana passada" e das semanas do canvas, os grupos são Hoje, Ontem, Últimos 7 dias, Últimos 30 dias e os meses (D16). Sem a data à direita: o cabeçalho é um botão, com seta de 12 px pra baixo em `--ui-muted` (hover `--ui-text`). Recolhido, a seta gira −90° (aponta pra direita) em 120 ms e as notas somem na hora (D31, D48).
 10. **Títulos com mais espaço embaixo:** Heading 1 com 26 px (no canvas, 10), Heading 2 com 22 (8) e Heading 3 com 10 (6). O espaço de cima e o Heading 4 não mudaram.
 
 ## Elementos que não estão no canvas

@@ -58,6 +58,8 @@ type AppState = {
   searchQuery: string;
   /** Bumped by Ctrl F to focus the search field (and open the sidebar if it is closed). */
   searchFocusToken: number;
+  /** Group keys the user folded in the sidebar (D48). Not saved. */
+  collapsedGroups: string[];
   /** A downloaded version waiting for a restart (D42), or null. */
   updateVersion: string | null;
   /** Windows transparency effects: off, the acrylic shows solid and the options menu warns (D40). */
@@ -74,6 +76,7 @@ type AppState = {
   /** Opens the sidebar if needed and focuses the search field. */
   openSearch: () => void;
   setSearchQuery: (query: string) => void;
+  toggleGroup: (key: string) => void;
   /** Bumps `focusToken` so the editor takes the caret. */
   focusEditor: () => void;
   /** While dragging: updates the width without saving it. */
@@ -209,6 +212,7 @@ export const useAppStore = create<AppState>()((set, get) => {
     focusToken: 0,
     searchQuery: '',
     searchFocusToken: 0,
+    collapsedGroups: [],
     saveCount: 0,
     updateVersion: null,
     transparencyEnabled: true,
@@ -291,6 +295,15 @@ export const useAppStore = create<AppState>()((set, get) => {
 
     setSearchQuery: (searchQuery) => {
       set({ searchQuery });
+    },
+
+    toggleGroup: (key) => {
+      const collapsed = get().collapsedGroups;
+      const folding = !collapsed.includes(key);
+      set({
+        collapsedGroups: folding ? [...collapsed, key] : collapsed.filter((item) => item !== key),
+        ...(folding ? { renamingId: null } : {}),
+      });
     },
 
     focusEditor: () => {

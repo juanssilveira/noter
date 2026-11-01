@@ -36,6 +36,8 @@ Cada etapa termina com o app rodando (`npm run dev`) e com os testes passando. F
   - Interruptores, lista de atalhos e persistência em `config.json`.
 - [x] **Busca na sidebar** (Ctrl F, D47)
   - Campo no topo da lista; abre a sidebar se ela estiver fechada.
+- [x] **Grupos recolhíveis** (D48)
+  - Seta no cabeçalho no lugar da data; o estado não é salvo.
 - [ ] **9. Acabamento**
   - Comparar cada tela com `docs/design/screens/`.
   - Estados de hover e foco.

@@ -7,7 +7,7 @@ import { NOTE_AREA_MIN } from '../domain/sidebar-width';
 import { useLocale, useStrings } from '../i18n/use-strings';
 import { useAppStore } from '../state/app-store';
 import { ContextMenu, type ContextMenuItem } from './context-menu';
-import { SidebarIcon } from './icons';
+import { ChevronDownIcon, SidebarIcon } from './icons';
 import { SidebarResizer } from './sidebar-resizer';
 import { UpdateNotice } from './update-notice';
 
@@ -29,6 +29,8 @@ export function Sidebar({ closing = false, animated = false }: { closing?: boole
   const width = useAppStore((state) => state.sidebarWidth);
   const updateVersion = useAppStore((state) => state.updateVersion);
   const searchQuery = useAppStore((state) => state.searchQuery);
+  const collapsedGroups = useAppStore((state) => state.collapsedGroups);
+  const toggleGroup = useAppStore((state) => state.toggleGroup);
   const locale = useLocale();
   const s = useStrings();
   const [menu, setMenu] = useState<MenuState>(null);
@@ -115,15 +117,26 @@ export function Sidebar({ closing = false, animated = false }: { closing?: boole
         {noResults ? (
           <p className="sidebar-search-empty">{s.noSearchResults}</p>
         ) : (
-          groups.map((group) => (
-            <section className="note-group" key={group.key} aria-label={group.label}>
-              <h2 className="note-group-header">
-                <span className="note-group-label">{group.label}</span>
-                <span className="note-group-detail">{group.detail}</span>
-              </h2>
-              <ul>{group.notes.map((note) => renderItem(byNote.get(note)!))}</ul>
-            </section>
-          ))
+          groups.map((group) => {
+            const collapsed = collapsedGroups.includes(group.key);
+            return (
+              <section className="note-group" key={group.key} aria-label={group.label}>
+                <h2>
+                  <button
+                    type="button"
+                    className="note-group-header"
+                    aria-expanded={!collapsed}
+                    aria-label={`${collapsed ? s.expandGroup : s.collapseGroup} ${group.label}`}
+                    onClick={() => toggleGroup(group.key)}
+                  >
+                    <span className="note-group-label">{group.label}</span>
+                    <ChevronDownIcon />
+                  </button>
+                </h2>
+                {!collapsed && <ul>{group.notes.map((note) => renderItem(byNote.get(note)!))}</ul>}
+              </section>
+            );
+          })
         )}
       </nav>
 

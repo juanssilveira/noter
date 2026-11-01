@@ -16,6 +16,7 @@ Um app de notas pessoal pra Windows, inspirado no Notes do Mac. Serve tanto pra 
 
 - Janela sem moldura nativa, com uma barra única no topo: área de arrastar mais botões de janela próprios.
 - Lista lateral (sidebar) agrupada por data (Hoje, Ontem, Últimos 7 dias, Últimos 30 dias e meses), que pode ser mostrada ou escondida e ter a largura ajustada.
+- Busca na sidebar (Ctrl F), no título, na prévia e no corpo (D47).
 - Editor rico (Tiptap) com os estilos de escrita do design e atalhos de Markdown ao digitar.
 - Nova nota e menu de opções (três pontos), com o interruptor do corretor ortográfico.
 - Renomear e apagar pelo clique direito na lista.
@@ -29,7 +30,6 @@ Um app de notas pessoal pra Windows, inspirado no Notes do Mac. Serve tanto pra 
 
 Não implementar, nem deixar "preparado" com código morto:
 
-- busca (Ctrl K ou qualquer outra);
 - captura rápida global (atalho com o app em segundo plano);
 - mini nota sempre no topo;
 - anexos e imagens;

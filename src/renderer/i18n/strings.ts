@@ -6,6 +6,9 @@ import type { Locale } from '../domain/language';
 const pt = {
   // Sidebar
   allNotes: 'Todas as notas',
+  searchPlaceholder: 'Buscar',
+  search: 'Buscar',
+  noSearchResults: 'Nenhum resultado',
   notesList: 'Notas',
   hideList: 'Esconder lista',
   /** Sidebar footer hint (D43), after the Ctrl and T keycaps. */
@@ -111,6 +114,9 @@ export type Strings = typeof pt;
 
 const en: Strings = {
   allNotes: 'All notes',
+  searchPlaceholder: 'Search',
+  search: 'Search',
+  noSearchResults: 'No results',
   notesList: 'Notes',
   hideList: 'Hide list',
   newNoteHint: 'for a new note',

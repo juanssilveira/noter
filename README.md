@@ -22,6 +22,7 @@ Depois disso, o app atualiza sozinho.
 
 - Agrupada por data: Hoje, Ontem, Últimos 7 dias, Últimos 30 dias e meses
 - Dá pra esconder (`Ctrl` `]`) e ajustar a largura arrastando a borda
+- Busca (`Ctrl` `F`) no título, na prévia e no corpo
 
 **Editor**
 

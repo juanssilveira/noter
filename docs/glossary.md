@@ -14,6 +14,7 @@ Termos do projeto. Use o **termo** na interface, nas conversas e na documentaç�
 | **prévia** | `preview` | a segunda linha do item da lista: o primeiro texto do corpo |
 | **corpo** | `body` | o conteúdo Markdown depois do front matter |
 | **lista** ou **sidebar** | `sidebar` | o painel lateral com as notas agrupadas por data de criação |
+| **busca** | `sidebarSearch` | o campo no topo da sidebar, abaixo de "Todas as notas". Filtra a lista (D47) |
 | **item da lista** | `noteListItem` | uma nota na sidebar (título e prévia) |
 | **grupo** | `noteGroup` | o bloco da lista com as notas de um período: Hoje, Ontem, Últimos 7 dias, Últimos 30 dias ou um mês |
 | **barra** | `titleBar` | a faixa única de 48 px no topo, que serve de área de arrastar e tem todos os botões |

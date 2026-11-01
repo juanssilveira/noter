@@ -1,7 +1,8 @@
-import { type CSSProperties, type KeyboardEvent, useCallback, useRef, useState } from 'react';
+import { type CSSProperties, type KeyboardEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { type Entry, isDraft } from '../domain/entries';
 import { noteListItemText } from '../domain/list-item';
 import { groupNotes } from '../domain/note-groups';
+import { filterNotesByQuery } from '../domain/search-notes';
 import { NOTE_AREA_MIN } from '../domain/sidebar-width';
 import { useLocale, useStrings } from '../i18n/use-strings';
 import { useAppStore } from '../state/app-store';
@@ -28,6 +29,7 @@ export function Sidebar({ closing = false, animated = false }: { closing?: boole
   const deleteNote = useAppStore((state) => state.deleteNote);
   const width = useAppStore((state) => state.sidebarWidth);
   const updateVersion = useAppStore((state) => state.updateVersion);
+  const searchQuery = useAppStore((state) => state.searchQuery);
   const locale = useLocale();
   const s = useStrings();
   const [menu, setMenu] = useState<MenuState>(null);
@@ -35,11 +37,14 @@ export function Sidebar({ closing = false, animated = false }: { closing?: boole
 
   const now = new Date();
   const byNote = new Map(entries.map((entry) => [entry.note, entry]));
-  const groups = groupNotes(
+  const matched = filterNotesByQuery(
     entries.map((entry) => entry.note),
+    searchQuery,
     now,
     locale,
   );
+  const groups = groupNotes(matched, now, locale);
+  const noResults = searchQuery.trim() !== '' && groups.length === 0;
 
   const menuItems = (entry: Entry): ContextMenuItem[] => [
     { label: s.rename, onSelect: () => startRename(entry.id) },
@@ -105,16 +110,22 @@ export function Sidebar({ closing = false, animated = false }: { closing?: boole
         </span>
       </div>
 
+      <SearchInput />
+
       <nav className="sidebar-list" aria-label={s.notesList}>
-        {groups.map((group) => (
-          <section className="note-group" key={group.key} aria-label={group.label}>
-            <h2 className="note-group-header">
-              <span className="note-group-label">{group.label}</span>
-              <span className="note-group-detail">{group.detail}</span>
-            </h2>
-            <ul>{group.notes.map((note) => renderItem(byNote.get(note)!))}</ul>
-          </section>
-        ))}
+        {noResults ? (
+          <p className="sidebar-search-empty">{s.noSearchResults}</p>
+        ) : (
+          groups.map((group) => (
+            <section className="note-group" key={group.key} aria-label={group.label}>
+              <h2 className="note-group-header">
+                <span className="note-group-label">{group.label}</span>
+                <span className="note-group-detail">{group.detail}</span>
+              </h2>
+              <ul>{group.notes.map((note) => renderItem(byNote.get(note)!))}</ul>
+            </section>
+          ))
+        )}
       </nav>
 
       {menu && menuEntry && (
@@ -124,6 +135,58 @@ export function Sidebar({ closing = false, animated = false }: { closing?: boole
       {updateVersion ? <UpdateNotice /> : <SidebarHint />}
       <SidebarResizer />
     </aside>
+  );
+}
+
+function SearchInput() {
+  const query = useAppStore((state) => state.searchQuery);
+  const setSearchQuery = useAppStore((state) => state.setSearchQuery);
+  const searchFocusToken = useAppStore((state) => state.searchFocusToken);
+  const focusEditor = useAppStore((state) => state.focusEditor);
+  const s = useStrings();
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (searchFocusToken === 0) return;
+    const input = inputRef.current;
+    if (!input) return;
+    input.focus();
+    input.select();
+  }, [searchFocusToken]);
+
+  const onKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key !== 'Escape') return;
+    event.preventDefault();
+    event.stopPropagation();
+    if (query.trim() !== '') {
+      setSearchQuery('');
+      return;
+    }
+    event.currentTarget.blur();
+    focusEditor();
+  };
+
+  return (
+    <div className="sidebar-search-row">
+      <div className="sidebar-search-field">
+        <input
+          ref={inputRef}
+          className="sidebar-search"
+          type="text"
+          value={query}
+          placeholder={s.searchPlaceholder}
+          aria-label={s.search}
+          spellCheck={false}
+          autoComplete="off"
+          onChange={(event) => setSearchQuery(event.target.value)}
+          onKeyDown={onKeyDown}
+        />
+        <span className="sidebar-search-keys" aria-hidden="true">
+          <kbd>Ctrl</kbd>
+          <kbd>F</kbd>
+        </span>
+      </div>
+    </div>
   );
 }
 

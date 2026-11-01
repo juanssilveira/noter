@@ -73,7 +73,15 @@ Colisão de nome no mesmo segundo: acrescentar um sufixo (`_2`, `_3`…). É rar
 
 ### Estrutura (de cima pra baixo)
 1. Linha do topo (48 px), que faz parte da barra arrastável: botão de esconder a lista e o texto fixo **"Todas as notas"**, sem seta e sem menu. **D18**
-2. Grupos por data de criação, do mais recente pro mais antigo. **D16**
+2. Campo de busca. **D47**
+3. Grupos por data de criação, do mais recente pro mais antigo. **D16**
+
+### Busca **D47**
+- O campo filtra a lista ao vivo pelo título mostrado, pela prévia e pelo corpo. Maiúsculas não importam. Vazio, a lista volta ao normal.
+- Ctrl F foca o campo. Se a sidebar estiver fechada, abre ela primeiro, foca e seleciona o texto.
+- Esc **fora** do campo, com uma consulta: limpa a busca e a lista volta ao normal. Menus, renomear e o próprio campo continuam com o Esc deles. Esc **no** campo: se houver texto, limpa; se já estiver vazio, devolve o foco ao editor.
+- Sem nenhuma nota, a lista mostra "Nenhum resultado". Os grupos sem notas continuam ocultos.
+- A consulta não vai pras preferências. Fechar a sidebar não apaga o que está escrito.
 
 ### Agrupamento
 - Pela **data de criação**, contando dias do calendário no fuso local (uma nota de ontem às 23:59 é de "Ontem"). Os grupos não se sobrepõem.
@@ -157,7 +165,7 @@ Segue a tela `menu-options`. É um menu ancorado à direita, logo abaixo do bot�
   - Só uma das duas fica aberta por vez; abrir uma fecha a outra. Clicar de novo na linha fecha.
   - Interruptor **Efeito acrílico** (D40), desligado por padrão: deixa a sidebar translúcida, com o borrado do que está atrás da janela. A barra e a nota continuam sólidas.
 - **Layout:** o interruptor **Mostrar botão nova nota**, com efeito imediato e salvo nas preferências.
-- **Atalhos:** num rodapé, só de leitura, com Nova nota (`Ctrl` `T`) e Mostrar / esconder lista (`Ctrl` `]`).
+- **Atalhos:** num rodapé, só de leitura, com Nova nota (`Ctrl` `T`), Buscar (`Ctrl` `F`) e Mostrar / esconder lista (`Ctrl` `]`).
 - **Teclado:** o menu abre com o foco na primeira linha. Setas pra cima e pra baixo andam pelas linhas (e pelas opções abertas), Home e End vão pro começo e pro fim, Enter e Espaço ativam. Seta pra direita abre as opções do Tema ou do Idioma, com o foco na atual; seta pra esquerda ou Esc fecham só elas.
 - Fecha com Esc, com um clique fora (inclusive na barra do topo) ou clicando de novo no botão.
 
@@ -166,8 +174,9 @@ Segue a tela `menu-options`. É um menu ancorado à direita, logo abaixo do bot�
 | Atalho | Ação |
 |---|---|
 | Ctrl T | Nova nota |
+| Ctrl F | Buscar na lista (D47). Abre a sidebar se ela estiver fechada |
 | Ctrl ] | Mostrar ou esconder a sidebar (D46) |
-| Esc | Fecha o menu ou campo aberto |
+| Esc | Fecha o menu ou campo aberto. Com uma busca e sem menu, limpa a busca |
 | Ctrl + / Ctrl - | Zoom só da área da nota, de 80% a 150%, de 10 em 10%. Fica salvo nas preferências |
 | Ctrl 0 | Volta o zoom da nota pra 100% |
 

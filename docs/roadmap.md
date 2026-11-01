@@ -34,6 +34,8 @@ Cada etapa termina com o app rodando (`npm run dev`) e com os testes passando. F
   - Depois, Aa e Tabela saíram da barra e foram pro clique direito no texto (D36).
 - [x] **8. Menu de opções e preferências**
   - Interruptores, lista de atalhos e persistência em `config.json`.
+- [x] **Busca na sidebar** (Ctrl F, D47)
+  - Campo no topo da lista; abre a sidebar se ela estiver fechada.
 - [ ] **9. Acabamento**
   - Comparar cada tela com `docs/design/screens/`.
   - Estados de hover e foco.
@@ -49,7 +51,6 @@ Cada etapa termina com o app rodando (`npm run dev`) e com os testes passando. F
 
 Sem ordem e sem compromisso. Não implementar sem pedido do usuário.
 
-- Busca (Ctrl K)
 - Captura rápida global
 - Mini nota sempre no topo
 - Anexos e imagens

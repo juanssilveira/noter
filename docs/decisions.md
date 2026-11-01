@@ -83,7 +83,8 @@ Formato: **decisão**, depois o motivo e, quando houver, as alternativas descart
 
 ### D18. "Todas as notas" no topo da sidebar é texto fixo, sem seta e sem menu
 
-### D19. Sem busca no v1
+### D19. ~~Sem busca no v1~~
+- Revogada pela D47: a busca entrou no v1, na sidebar, com Ctrl F.
 
 ## Editor
 
@@ -214,6 +215,15 @@ Formato: **decisão**, depois o motivo e, quando houver, as alternativas descart
 - Pedido do usuário. Era Ctrl \, que não dá pra usar em teclados compactos (75%) sem a tecla `\`.
 - Ctrl B foi descartado porque já é o negrito do editor (Tiptap).
 - A tecla é lida pelo caractere (`event.key`), então funciona no ABNT2 e no layout americano.
+
+### D47. Busca na sidebar (Ctrl F)
+- Pedido do usuário. Revoga a D19.
+- **Onde:** o campo no topo da sidebar, abaixo de "Todas as notas".
+- **Atalho:** Ctrl F. Com a sidebar fechada, abre ela, foca o campo e seleciona o que já estiver escrito. Com ela aberta, só foca e seleciona. O atalho aparece no menu de opções.
+- **O que entra:** o título como aparece na lista (a data, se a nota não foi renomeada), a prévia e o corpo. Sem diferenciar maiúsculas. Campo vazio mostra a lista inteira. A consulta não é salva.
+- **Esc:** fora do campo, com uma consulta, limpa a busca (a lista volta ao normal). Menus e renomear continuam fechando no Esc. No campo: com texto, limpa; vazio, devolve o foco ao editor.
+- **Sem resultado:** "Nenhum resultado" / "No results" no lugar da lista, no tom da prévia.
+- **Descartado:** Ctrl K (era o texto fictício do canvas); busca só no título.
 
 ## Convenções
 

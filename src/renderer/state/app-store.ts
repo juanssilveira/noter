@@ -54,6 +54,10 @@ type AppState = {
   renamingId: string | null;
   /** Bumped to ask the editor for focus (Ctrl T on an empty draft). */
   focusToken: number;
+  /** Text in the sidebar search field. Not saved. */
+  searchQuery: string;
+  /** Bumped by Ctrl F to focus the search field (and open the sidebar if it is closed). */
+  searchFocusToken: number;
   /** A downloaded version waiting for a restart (D42), or null. */
   updateVersion: string | null;
   /** Windows transparency effects: off, the acrylic shows solid and the options menu warns (D40). */
@@ -67,6 +71,11 @@ type AppState = {
   selectNote: (id: string) => void;
   newNote: () => void;
   toggleSidebar: () => void;
+  /** Opens the sidebar if needed and focuses the search field. */
+  openSearch: () => void;
+  setSearchQuery: (query: string) => void;
+  /** Bumps `focusToken` so the editor takes the caret. */
+  focusEditor: () => void;
   /** While dragging: updates the width without saving it. */
   setSidebarWidth: (width: number) => void;
   saveSidebarWidth: () => void;
@@ -198,6 +207,8 @@ export const useAppStore = create<AppState>()((set, get) => {
     language: DEFAULT_SETTINGS.language,
     renamingId: null,
     focusToken: 0,
+    searchQuery: '',
+    searchFocusToken: 0,
     saveCount: 0,
     updateVersion: null,
     transparencyEnabled: true,
@@ -270,6 +281,20 @@ export const useAppStore = create<AppState>()((set, get) => {
       const sidebarOpen = !get().sidebarOpen;
       set({ sidebarOpen });
       void saveSetting('sidebarOpen', sidebarOpen);
+    },
+
+    openSearch: () => {
+      const sidebarOpen = get().sidebarOpen;
+      set({ sidebarOpen: true, searchFocusToken: get().searchFocusToken + 1 });
+      if (!sidebarOpen) void saveSetting('sidebarOpen', true);
+    },
+
+    setSearchQuery: (searchQuery) => {
+      set({ searchQuery });
+    },
+
+    focusEditor: () => {
+      set({ focusToken: get().focusToken + 1 });
     },
 
     setSidebarWidth: (width) => {

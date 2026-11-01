@@ -11,8 +11,8 @@
 └───────────────────────────────▲─────────────────────────────────────────────┘
                                 │ IPC (canais tipados) via preload: window.noter
 ┌───────────────────────────────┴── Renderer (src/renderer/ · React + TS) ────┐
-│  Domínio de notas (TS puro): parse/serialize .md, título, prévia, grupos     │
-│  Estado do app: lista, nota aberta, rascunho, preferências                   │
+│  Domínio de notas (TS puro): parse/serialize .md, título, prévia, grupos, busca │
+│  Estado do app: lista, nota aberta, rascunho, busca, preferências             │
 │  UI: barra, sidebar, menus, editor Tiptap                                     │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -87,7 +87,7 @@ Os canais de nota validam que `file` é um nome simples dentro da pasta de notas
    - título exibido, prévia, agrupamento da lista e formatação de datas em pt-BR;
    - regras de rascunho.
 2. **Serviços:** wrappers do `window.noter` (notas, preferências, janela, fechar e links). É o único ponto do renderer que toca nele.
-3. **Estado:** a lista de notas, a nota aberta, o rascunho, a edição pendente e as preferências. Usa uma store Zustand (`src/renderer/state/app-store.ts`), lida pela barra, pela sidebar e pela área da nota.
+3. **Estado:** a lista de notas, a nota aberta, o rascunho, a busca, a edição pendente e as preferências. Usa uma store Zustand (`src/renderer/state/app-store.ts`), lida pela barra, pela sidebar e pela área da nota.
 4. **UI:** os componentes React e o editor Tiptap.
 
 ### Editor (Tiptap v3)
@@ -163,7 +163,7 @@ noter/
 │     ├─ main.tsx         entrada: importa os estilos e monta o App
 │     ├─ app.tsx          casca: mostra a janela, escuta app:close-requested
 │     ├─ domain/          TS puro + testes: note (front matter), file-name, dates,
-│     │                   preview, list-item, note-groups, sidebar-width, theme, language,
+│     │                   preview, list-item, note-groups, search-notes, sidebar-width, theme, language,
 │     │                   entries, selection
 │     ├─ services/        wrappers do window.noter (notas, preferências, janela, fechar, links, atualização);
 │     │                   o único lugar que o toca

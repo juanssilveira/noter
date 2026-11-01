@@ -43,6 +43,7 @@ type Option<T extends string> = { value: T; label: string; icon: ReactNode };
 
 const SHORTCUTS: { label: keyof Strings; keys: string[] }[] = [
   { label: 'newNote', keys: ['Ctrl', 'T'] },
+  { label: 'search', keys: ['Ctrl', 'F'] },
   { label: 'toggleSidebar', keys: ['Ctrl', ']'] },
 ];
 

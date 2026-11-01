@@ -35,6 +35,9 @@ export default function App() {
   const status = useAppStore((state) => state.status);
   const init = useAppStore((state) => state.init);
   const toggleSidebar = useAppStore((state) => state.toggleSidebar);
+  const openSearch = useAppStore((state) => state.openSearch);
+  const setSearchQuery = useAppStore((state) => state.setSearchQuery);
+  const searchQuery = useAppStore((state) => state.searchQuery);
   const newNote = useAppStore((state) => state.newNote);
   const zoomNote = useAppStore((state) => state.zoomNote);
   const flushPending = useAppStore((state) => state.flushPending);
@@ -132,9 +135,22 @@ export default function App() {
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        // Menus, rename and the search field handle Esc themselves.
+        if (document.documentElement.classList.contains('has-open-menu')) return;
+        const target = event.target;
+        if (target instanceof Element && target.closest('.sidebar-search, .note-list-item-rename')) return;
+        if (searchQuery.trim() === '') return;
+        event.preventDefault();
+        setSearchQuery('');
+        return;
+      }
       if (isShortcut(event, ']')) {
         event.preventDefault();
         toggleSidebar();
+      } else if (isShortcut(event, 'f')) {
+        event.preventDefault();
+        openSearch();
       } else if (isShortcut(event, 't')) {
         event.preventDefault();
         newNote();
@@ -147,7 +163,7 @@ export default function App() {
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [toggleSidebar, newNote, zoomNote]);
+  }, [toggleSidebar, openSearch, setSearchQuery, searchQuery, newNote, zoomNote]);
 
   return (
     <div className="app">

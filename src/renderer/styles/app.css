@@ -24,9 +24,6 @@ body {
   background: var(--ui-sidebar-acrylic);
   border-right-color: var(--ui-acrylic-border);
 }
-.acrylic .sidebar-header {
-  border-bottom-color: var(--ui-acrylic-border);
-}
 /* Solid cards look pasted on the glass: the selected note is a veil with a thin ring instead. */
 .acrylic .note-list-item[aria-current="true"],
 .acrylic .note-list-item-renaming {
@@ -248,7 +245,6 @@ button:disabled {
   display: flex;
   align-items: center;
   padding: 0 10px 0 12px;
-  border-bottom: 1px solid var(--ui-border-soft);
 }
 
 .sidebar-title {
@@ -259,6 +255,65 @@ button:disabled {
   font-size: 13.5px;
   font-weight: 600;
   letter-spacing: -0.01em;
+}
+
+/* Search field under the header. 14 px at the sides lines it up with the note cards.
+   The field is the separator; the header has no line. */
+.sidebar-search-row {
+  flex-shrink: 0;
+  padding: 4px 14px 4px;
+}
+.sidebar-search-field {
+  position: relative;
+}
+.sidebar-search {
+  display: block;
+  width: 100%;
+  height: 40px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 11px 80px 11px 20px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--ui-search);
+  color: var(--ui-text);
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 18px;
+  user-select: text;
+  -webkit-app-region: no-drag;
+  outline: none;
+  box-shadow: inset 0 0 0 1px transparent;
+  transition: box-shadow 180ms var(--ui-ease-out);
+}
+.sidebar-search:focus,
+.sidebar-search:focus-visible {
+  box-shadow: inset 0 0 0 1px var(--ui-search-ring);
+}
+.sidebar-search::placeholder {
+  color: var(--ui-muted);
+  opacity: 0.55;
+  font-weight: 400;
+}
+.acrylic .sidebar-search {
+  background: var(--ui-search-acrylic);
+}
+/* Ctrl F flush right. Keycaps share the footer hint's kbd rules; this class is only position. */
+.sidebar-search-keys {
+  position: absolute;
+  top: 0;
+  right: 16px;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+}
+.sidebar-search:not(:placeholder-shown) ~ .sidebar-search-keys {
+  display: none;
 }
 
 /* The scrollbar's 10 px are always reserved, so the right edge is 4 + 10 = 14 px, like the left, with or
@@ -371,6 +426,14 @@ button:disabled {
   padding: 0 4px 12px 14px;
 }
 
+.sidebar-search-empty {
+  margin: 0;
+  padding: 18px 4px 12px;
+  color: var(--ui-muted);
+  font-size: 13px;
+  line-height: 18px;
+}
+
 /* 4 px between notes, so a selected card and a hovered one never touch. */
 .note-group ul {
   display: flex;
@@ -395,7 +458,7 @@ button:disabled {
   padding: 18px 4px 6px;
 }
 .note-group:first-child .note-group-header {
-  padding-top: 12px;
+  padding-top: 10px;
 }
 
 .note-group-label {
@@ -961,7 +1024,8 @@ button:disabled {
 
 /* A keycap: raised off the footer band, with a heavier bottom edge. */
 .menu-shortcut kbd,
-.sidebar-hint kbd {
+.sidebar-hint kbd,
+.sidebar-search-keys kbd {
   min-width: 20px;
   box-sizing: border-box;
   padding: 0 6px;
@@ -976,12 +1040,15 @@ button:disabled {
   line-height: 18px;
   text-align: center;
 }
-.sidebar-hint kbd {
+.sidebar-hint kbd,
+.sidebar-search-keys kbd {
   min-width: 18px;
   padding: 0 5px;
   color: var(--ui-muted);
   font-size: 10.5px;
   line-height: 16px;
+}
+.sidebar-hint kbd {
   transition:
     color var(--ui-fade),
     border-color var(--ui-fade),

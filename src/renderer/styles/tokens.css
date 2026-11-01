@@ -6,6 +6,10 @@
   --ui-bg: #FFFFFF;
   --ui-raised: #FFFFFF;   /* menus, keycaps, the selected note in the list: one step above --ui-bg */
   --ui-sidebar-bg: #F7F7F7;
+  /* Search field: note color in light; one step above it in dark, so it reads on the sidebar. */
+  --ui-search: #FFFFFF;
+  --ui-search-acrylic: rgba(255, 255, 255, 0.55);
+  --ui-search-ring: rgba(24, 24, 24, 0.16);
   /* Over the acrylic material (D40): everything in the sidebar is translucent, like the glass. */
   --ui-sidebar-acrylic: rgba(247, 247, 247, 0.82);
   --ui-acrylic-item: rgba(255, 255, 255, 0.55);   /* selected note */
@@ -49,6 +53,9 @@
   --ui-bg: #181818;
   --ui-raised: #1F1F1F;
   --ui-sidebar-bg: #121212;
+  --ui-search: #1B1B1B;
+  --ui-search-acrylic: rgba(255, 255, 255, 0.07);
+  --ui-search-ring: rgba(255, 255, 255, 0.16);
   --ui-sidebar-acrylic: rgba(18, 18, 18, 0.8);
   --ui-acrylic-item: rgba(255, 255, 255, 0.06);
   --ui-acrylic-ring: 0 0 0 1px rgba(255, 255, 255, 0.05);

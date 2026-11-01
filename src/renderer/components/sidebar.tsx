@@ -8,7 +8,6 @@ import { useLocale, useStrings } from '../i18n/use-strings';
 import { useAppStore } from '../state/app-store';
 import { ContextMenu, type ContextMenuItem } from './context-menu';
 import { SidebarIcon } from './icons';
-import { SidebarHint } from './sidebar-hint';
 import { SidebarResizer } from './sidebar-resizer';
 import { UpdateNotice } from './update-notice';
 
@@ -98,7 +97,7 @@ export function Sidebar({ closing = false, animated = false }: { closing?: boole
       <div className="sidebar-header" data-drag-region>
         <button
           type="button"
-          className="icon-button"
+          className="icon-button icon-button-plain"
           aria-label={s.hideList}
           data-tooltip={s.hideListTitle}
           onClick={toggleSidebar}
@@ -131,8 +130,7 @@ export function Sidebar({ closing = false, animated = false }: { closing?: boole
       {menu && menuEntry && (
         <ContextMenu x={menu.x} y={menu.y} label={s.noteActions} items={menuItems(menuEntry)} onClose={closeMenu} />
       )}
-      {/* The footer: a shortcut hint, or the update notice in its place (D43). */}
-      {updateVersion ? <UpdateNotice /> : <SidebarHint />}
+      {updateVersion && <UpdateNotice />}
       <SidebarResizer />
     </aside>
   );

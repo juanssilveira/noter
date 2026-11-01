@@ -38,7 +38,8 @@
 
   /* Spacing */
   --note-pad-y: 20px;
-  --note-pad-x: 40px;
+  --note-pad-x: 36px;
+  --note-pad-bottom: 32px;
   --block-gap: 8px;          /* between paragraphs and blocks */
   --list-item-gap: 0;
   --list-indent: 24px;
@@ -51,7 +52,7 @@
 
 /* ---------- Container ---------- */
 .note {
-  padding: var(--note-pad-y) var(--note-pad-x);
+  padding: var(--note-pad-y) var(--note-pad-x) var(--note-pad-bottom);
   font-family: var(--font-sans);
   font-size: 15.5px;
   line-height: 155%;

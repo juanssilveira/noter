@@ -124,14 +124,9 @@ Colisão de nome no mesmo segundo: acrescentar um sufixo (`_2`, `_3`…). É rar
 - A largura fica salva nas preferências ao soltar o mouse (ou a cada seta).
 - Se a janela ficar estreita, a sidebar encolhe sozinha pra área da nota manter pelo menos 560 px, sem passar do mínimo de 240. A largura salva não muda: ela volta quando a janela crescer.
 
-### Dica do atalho **D43**
-- O rodapé da sidebar mostra as teclas Ctrl + T e "para nova nota". É só texto, sem clique.
-- Enquanto o Ctrl está pressionado, a tecla Ctrl acende. Com o Ctrl seguro, o T acende enquanto estiver pressionado. Soltar a tecla, ou a janela perder o foco, apaga.
-- Com uma versão pronta pra instalar, o aviso de atualização aparece no lugar dela.
-
 ### Aviso de atualização **D42**
 - Só no app instalado. Ao abrir e a cada 6 h, o app procura uma versão nova nas releases do GitHub e baixa em segundo plano, sem aviso.
-- Baixada, o rodapé da sidebar mostra **Versão X pronta** e o botão **Reiniciar**, no lugar da dica do atalho (D43).
+- Baixada, o rodapé da sidebar mostra **Versão X pronta** e o botão **Reiniciar**.
 - **Reiniciar:** grava o que estiver pendente, fecha, instala sem perguntar nada e abre o app de novo.
 - Sem o clique, a versão nova é instalada quando o app fechar, e já abre atualizada da próxima vez.
 - Sem internet ou com o GitHub fora do ar, nada aparece. O app tenta de novo na próxima busca.

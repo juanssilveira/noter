@@ -247,10 +247,14 @@ button:disabled {
   padding: 0 10px 0 12px;
 }
 
+.sidebar-header .icon-button {
+  width: 24px;
+  height: 24px;
+}
+
 .sidebar-title {
   flex: 1 1 0;
   min-width: 0;
-  /* 6 px clear of the icon button, whose hover background reaches 10 px past the icon. */
   padding: 4px 4px 4px 6px;
   font-size: 13.5px;
   font-weight: 600;
@@ -358,29 +362,6 @@ button:disabled {
   user-select: none !important;
 }
 
-/* Shortcut hint in the sidebar footer (D43): small and quiet, lined up with the group labels. The
-   keycaps are the options menu ones (.menu-shortcut kbd), a size down. */
-.sidebar-hint {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  margin: 0;
-  padding: 8px 18px 12px;
-  color: var(--ui-muted);
-  font-size: 11.5px;
-  line-height: 18px;
-  opacity: 0.8;
-  white-space: nowrap;
-  overflow: hidden;
-}
-.sidebar-hint-text {
-  min-width: 0;
-  margin-left: 2px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 /* Update ready (D42): a footer at the bottom of the sidebar, like its header line, with a quiet button. */
 .update-notice {
   flex-shrink: 0;
@@ -434,11 +415,11 @@ button:disabled {
   line-height: 18px;
 }
 
-/* 4 px between notes, so a selected card and a hovered one never touch. */
+/* 6 px between notes, so a selected card and a hovered one never touch. */
 .note-group ul {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -455,7 +436,7 @@ button:disabled {
   justify-content: space-between;
   gap: 8px;
   /* A little in from the card edges, well short of its text (10 px). */
-  padding: 18px 4px 6px;
+  padding: 18px 4px 8px;
 }
 .note-group:first-child .note-group-header {
   padding-top: 10px;
@@ -505,6 +486,9 @@ button:disabled {
   font-size: 13px;
   font-weight: 600;
   line-height: 18px;
+}
+.note-list-item:not([aria-current="true"]) .note-list-item-title {
+  color: var(--ui-icon);
 }
 
 /* Not rendered when the note has no text yet, so an empty note is a one-line item. */
@@ -1024,7 +1008,6 @@ button:disabled {
 
 /* A keycap: raised off the footer band, with a heavier bottom edge. */
 .menu-shortcut kbd,
-.sidebar-hint kbd,
 .sidebar-search-keys kbd {
   min-width: 20px;
   box-sizing: border-box;
@@ -1040,27 +1023,12 @@ button:disabled {
   line-height: 18px;
   text-align: center;
 }
-.sidebar-hint kbd,
 .sidebar-search-keys kbd {
   min-width: 18px;
   padding: 0 5px;
   color: var(--ui-muted);
   font-size: 10.5px;
   line-height: 16px;
-}
-.sidebar-hint kbd {
-  transition:
-    color var(--ui-fade),
-    border-color var(--ui-fade),
-    box-shadow var(--ui-fade),
-    transform var(--ui-fade);
-}
-/* Held down (sidebar-hint.tsx): a little brighter, and pressed into the band. */
-.sidebar-hint kbd.is-held {
-  border-color: color-mix(in srgb, var(--ui-muted) 45%, var(--ui-border-window));
-  box-shadow: inset 0 -0.5px 0 var(--ui-border-window);
-  color: var(--ui-text);
-  transform: translateY(1px);
 }
 
 /* ---------- Format menu (screen: menu-formatting) ---------- */
@@ -1246,8 +1214,10 @@ button:disabled {
   color: var(--ui-icon);
 }
 .icon-button:hover { background: var(--ui-hover); }
-/* Same size and click area, but no background on hover: only the icon lights up (the list button at the
-   start of the title bar, next to the date). */
+/* No hover tile: only the icon color changes (list button in the title bar, and hide-list in the sidebar). */
+.icon-button-plain {
+  transition: color var(--ui-fade);
+}
 .icon-button-plain:hover {
   background: transparent;
   color: var(--ui-text);

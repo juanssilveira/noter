@@ -173,7 +173,7 @@ noter/
 │     │                   links.ts (normalizar endereço do link)
 │     │                   table-behavior.ts (Enter na tabela, dica de clique direito)
 │     ├─ components/      title-bar, sidebar, note-editor, context-menu, format-menu,
-│     │                   table-picker, options-menu, save-indicator, sidebar-resizer, sidebar-hint, update-notice, icons
+│     │                   table-picker, options-menu, save-indicator, sidebar-resizer, update-notice, icons
 │     ├─ i18n/            strings.ts (todo texto da interface em português e inglês, D41),
 │     │                   use-strings.ts (useLocale e useStrings: o idioma em uso e os textos dele)
 │     ├─ hooks/           use-dismiss.ts (fechar menus), use-menu-position.ts (menu na posição do mouse),

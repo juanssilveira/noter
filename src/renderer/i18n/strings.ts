@@ -11,8 +11,6 @@ const pt = {
   noSearchResults: 'Nenhum resultado',
   notesList: 'Notas',
   hideList: 'Esconder lista',
-  /** Sidebar footer hint (D43), after the Ctrl and T keycaps. */
-  newNoteHint: 'para nova nota',
   hideListTitle: 'Esconder lista (Ctrl ])',
   showList: 'Mostrar lista de notas',
   showListTitle: 'Mostrar lista (Ctrl ])',
@@ -119,7 +117,6 @@ const en: Strings = {
   noSearchResults: 'No results',
   notesList: 'Notes',
   hideList: 'Hide list',
-  newNoteHint: 'for a new note',
   hideListTitle: 'Hide list (Ctrl ])',
   showList: 'Show notes list',
   showListTitle: 'Show list (Ctrl ])',
